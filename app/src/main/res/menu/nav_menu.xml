@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/recommendations"
+        android:enabled="false"
+        android:icon="@drawable/ic_recommendations"
+        android:title="@string/recommendations"/>
+
+    <item android:id="@+id/announcements"
+        android:icon="@drawable/ic_announcements"
+        android:title="@string/announcements"/>
+
+    <item android:id="@+id/chat"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/chat"/>
+
+    <item android:id="@+id/consultant"
+        android:icon="@drawable/ic_consultant"
+        android:title="@string/consultant"/>
+
+    <item android:id="@+id/questionnaire"
+        android:icon="@drawable/ic_questionnaire"
+        android:title="@string/questionnaire"/>
+
+    <item android:id="@+id/prevention_inspector"
+        android:icon="@drawable/ic_prevention_inspector"
+        android:title="@string/prevention_inspector"/>
+
+    <item android:id="@+id/appeals"
+        android:icon="@drawable/ic_appeals"
+        android:title="@string/appeals"/>
+
+    <item android:id="@+id/about_us"
+        android:icon="@drawable/ic_about_us"
+        android:title="@string/about_us"/>
+
+    <item android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout"/>
+</menu>

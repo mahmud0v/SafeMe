@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.screen.main.ProfileScreen">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/padding_standard">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_small"
+                android:src="@drawable/ic_arrow_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAppBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium_title"
+                android:paddingHorizontal="@dimen/padding_middle"
+                android:text="@string/my_profile"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_title_size" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_standard"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_standard">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="80dp"
+                android:layout_height="96dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/RoundedCorner4r" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="Mardon Shonazarov"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintStart_toEndOf="@+id/ivProfile"
+                app:layout_constraintTop_toTopOf="@+id/ivProfile" />
+
+            <TextView
+                android:id="@+id/tvChildRelativeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/child_s"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <TextView
+                android:id="@+id/tvChildRelative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="Otasi"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvChildRelativeTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvChildRelativeTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvChildRelativeTitle" />
+
+            <TextView
+                android:id="@+id/tvDateOfBirthTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/date_of_birth_title"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvChildRelativeTitle" />
+
+            <TextView
+                android:id="@+id/tvDateOfBirth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="12.02.1993"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDateOfBirthTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvDateOfBirthTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvDateOfBirthTitle" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:background="@color/line_gray_color"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
+
+            <TextView
+                android:id="@+id/tvEducationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/education_title"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line" />
+
+            <TextView
+                android:id="@+id/tvEducation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="Toshkent Arxitektura Qurilish Instituti"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvEducationTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvEducationTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvEducationTitle" />
+
+            <TextView
+                android:id="@+id/tvRegionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/region_title"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEducation" />
+
+            <TextView
+                android:id="@+id/tvRegion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="Toshkent shaxar"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRegionTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvRegionTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvRegionTitle" />
+
+            <TextView
+                android:id="@+id/tvDistrictTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/district_title"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegion" />
+
+            <TextView
+                android:id="@+id/tvDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="Chilonzor"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDistrictTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvDistrictTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvDistrictTitle" />
+
+            <TextView
+                android:id="@+id/tvNeighborhoodTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/neighborhood"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDistrict" />
+
+            <TextView
+                android:id="@+id/tvNeighborhood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="Obod MFY"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvNeighborhoodTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvNeighborhoodTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvNeighborhoodTitle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:background="@drawable/bg_border_enable"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/edit_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/main_green_color"
+                android:textSize="@dimen/text_small_size"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toTopOf="@+id/btnEditPassword" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:background="@drawable/bg_border_enable"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/edit_password"
+                android:textAllCaps="false"
+                android:textColor="@color/main_green_color"
+                android:textSize="@dimen/text_small_size"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

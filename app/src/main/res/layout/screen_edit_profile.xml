@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.screen.main.EditProfileScreen">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/padding_standard">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_small"
+                android:src="@drawable/ic_arrow_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAppBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium_title"
+                android:paddingHorizontal="@dimen/padding_middle"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_title_size" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_standard"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_standard">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDateOfBirthTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/date_of_birth"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etDateOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:drawableEnd="@drawable/ic_calendar"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:hint="@string/enter_date_of_birth"
+                        android:inputType="date"
+                        android:padding="@dimen/padding_standard"
+                        android:textColor="@color/text_regular_color"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="@dimen/text_small_size" />
+
+                    <TextView
+                        android:id="@+id/tvWhoTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/who_are_you_this_baby"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etWho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:drawableEnd="@drawable/ic_expand_more"
+                        android:inputType="text"
+                        android:padding="@dimen/padding_standard"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_small_size" />
+
+                    <TextView
+                        android:id="@+id/tvFIO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/first_name"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etFIO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:hint="@string/first_name"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/padding_standard"
+                        android:textColor="@color/text_regular_color"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="@dimen/text_small_size" />
+
+                    <TextView
+                        android:id="@+id/tvEducation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/gender"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etEducation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/padding_standard"
+                        android:textColor="@color/text_regular_color"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="@dimen/text_small_size" />
+
+
+                    <TextView
+                        android:id="@+id/tvRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/region"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etRegion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/padding_standard"
+                        android:textColor="@color/text_regular_color"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="@dimen/text_small_size"/>
+
+                    <TextView
+                        android:id="@+id/tvDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:textSize="@dimen/text_regular_size"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/district"
+                        android:textColor="@color/text_regular_color" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:inputType="textPersonName"
+                        android:textSize="@dimen/text_small_size"
+                        android:textColor="@color/text_regular_color"
+                        android:padding="@dimen/padding_standard"
+                        android:textColorHint="@color/hint_color"/>
+
+                    <TextView
+                        android:id="@+id/tvMFY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/mfy"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etMFY"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_disable"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/padding_standard"
+                        android:textColor="@color/text_regular_color"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="@dimen/text_small_size" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:background="@drawable/bg_button"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_small_size"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

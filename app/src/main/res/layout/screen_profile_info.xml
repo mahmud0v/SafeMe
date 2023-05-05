@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:padding="@dimen/padding_standard"
+    tools:context=".presentation.ui.screen.ProfileInfoScreen">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_standard">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvFIO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/first_name"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etFirstNameLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_border_disable"
+                            android:hint="@string/first_name"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvLastName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/last_name"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etLastNameLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_border_disable"
+                            android:hint="@string/last_name"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvDateOfBirth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/date_of_birth"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etDateOfBirthLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etDateOfBirth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_border_disable"
+                            android:drawableEnd="@drawable/ic_calendar"
+                            android:focusable="false"
+                            android:hint="@string/enter_date_of_birth"
+                            android:inputType="date"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEducation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="start"
+                            android:text="@string/gender"
+                            android:textColor="@color/text_regular_color"
+                            android:textSize="@dimen/text_regular_size" />
+
+                        <LinearLayout
+                            android:id="@+id/llMan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big">
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:id="@+id/isMan"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:checked="true"
+                                android:clickable="false" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/man"
+                                android:textColor="@color/text_regular_dark_color"
+                                android:textSize="@dimen/text_regular_size" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llWoman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:id="@+id/isWoman"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:clickable="false" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/woman"
+                                android:textColor="@color/text_regular_dark_color"
+                                android:textSize="@dimen/text_regular_size" />
+
+                        </LinearLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <TextView
+                        android:id="@+id/tvRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/region"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etRegionLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etRegion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_border_disable"
+                            android:drawableEnd="@drawable/ic_location"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/district"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etDistrictLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:visibility="gone"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etDistrict"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_border_disable"
+                            android:drawableEnd="@drawable/ic_location"
+                            android:focusable="false"
+                            android:hint="@string/select"
+                            android:inputType="text"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvMFY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/mfy"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etMFYLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:visibility="gone"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etMFY"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_border_disable"
+                            android:drawableEnd="@drawable/ic_location"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/address"
+                        android:textColor="@color/text_regular_color"
+                        android:textSize="@dimen/text_regular_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etAddressLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        app:hintEnabled="false">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_standard"
+                            android:background="@drawable/bg_border_disable"
+                            android:hint="@string/streen_and_house_number"
+                            android:inputType="text"
+                            android:padding="@dimen/padding_standard"
+                            android:textColor="@color/text_regular_color"
+                            android:textColorHint="@color/hint_color"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/vlImageContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="100dp"
+                            android:layout_height="116dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher_background"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/RoundedCorner4r" />
+
+                        <LinearLayout
+                            android:id="@+id/llCloseImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_very_small"
+                            android:background="@drawable/bg_circle_close"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:padding="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_close" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:background="@drawable/bg_border_enable"
+                        android:fontFamily="@font/roboto_regular"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@string/add_image"
+                        android:textAllCaps="false"
+                        android:textColor="@color/main_green_color"
+                        android:textSize="@dimen/text_small_size"
+                        app:backgroundTint="@null" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:background="@drawable/bg_button"
+                        android:fontFamily="@font/roboto_regular"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@string/continuee"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_small_size"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_big"
+    tools:context=".presentation.ui.dialog.GetImgDialog">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_open_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_border_enable"
+        android:fontFamily="@font/roboto_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/open_gallery"
+        android:textAllCaps="false"
+        android:textColor="@color/main_green_color"
+        android:textSize="@dimen/text_small_size"
+        app:backgroundTint="@null" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_open_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_big"
+        android:background="@drawable/bg_border_enable"
+        android:fontFamily="@font/roboto_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/open_camera"
+        android:textAllCaps="false"
+        android:textColor="@color/main_green_color"
+        android:textSize="@dimen/text_small_size"
+        app:backgroundTint="@null" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/bg_button"
+        android:fontFamily="@font/roboto_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/close"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_small_size"
+        app:backgroundTint="@null" />
+
+</LinearLayout>

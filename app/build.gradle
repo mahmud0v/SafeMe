@@ -1,0 +1,120 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
+}
+apply plugin: 'kotlin-kapt'
+
+android {
+    namespace 'safeme.uz'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "safeme.uz"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        buildConfigField('String', 'BASE_URL', '"http://cyberpolice.uz/"')
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    // Allow references to generated code
+    kapt {
+        correctErrorTypes = true
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // In-App update
+    implementation 'com.google.android.play:core:1.10.3'
+
+    // kotlinx.coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // HttpLoggingInterceptor
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha01"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.6.0-alpha01"
+
+    //  viewbinding
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.6'
+
+    // jetpack navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.5.3"
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
+
+    //todo Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    //Dagger Hilt
+    implementation "com.google.dagger:hilt-android:2.42"
+    kapt "com.google.dagger:hilt-android-compiler:2.42"
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
+
+    // swipe refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    //MuskedEdittext
+    implementation "io.github.vicmikhailau:MaskedEditText:4.0.7"
+
+
+
+    //Chucker Interception
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+}

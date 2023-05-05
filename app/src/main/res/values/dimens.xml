@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_very_small">4dp</dimen>
+    <dimen name="margin_very_small2">6dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_middle">12dp</dimen>
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="margin_big">24dp</dimen>
+
+    <dimen name="padding_very_small">4dp</dimen>
+    <dimen name="padding_very_small2">6dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_middle">12dp</dimen>
+    <dimen name="padding_middle2">14dp</dimen>
+    <dimen name="padding_standard">16dp</dimen>
+    <dimen name="padding_big">24dp</dimen>
+
+    <dimen name="text_title_size">20sp</dimen>
+    <dimen name="text_small_size">12sp</dimen>
+    <dimen name="text_regular_size">14sp</dimen>
+    <dimen name="text_regular_big_size">16sp</dimen>
+
+</resources>
