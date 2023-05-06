@@ -52,6 +52,8 @@ class NetworkModule {
     ): OkHttpClient {
       //  val loggingInterceptor = HttpLoggingInterceptor()
       //  loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+
         return OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS).callTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(tokenInterceptor(sharedPreference)).addInterceptor(ChuckerInterceptor.Builder(context).build())
