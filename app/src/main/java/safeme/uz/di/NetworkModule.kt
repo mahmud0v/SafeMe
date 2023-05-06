@@ -9,7 +9,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import safeme.uz.BuildConfig
@@ -52,8 +51,6 @@ class NetworkModule {
     ): OkHttpClient {
       //  val loggingInterceptor = HttpLoggingInterceptor()
       //  loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
-
         return OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS).callTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(tokenInterceptor(sharedPreference)).addInterceptor(ChuckerInterceptor.Builder(context).build())
