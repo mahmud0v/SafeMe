@@ -28,7 +28,6 @@ class ResetPasswordScreen : Fragment(R.layout.screen_reset_password) {
     private var checkConfirmPassword: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initViews()
         initObservers()
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_main"
     android:orientation="vertical"
     tools:context=".presentation.ui.screen.main.AnnouncementScreen">
@@ -20,30 +20,17 @@
             app:tabIndicatorColor="@color/white"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white74">
+            app:tabTextColor="@color/white74"
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/announcements" />
+            />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/choices" />
-
-
-        </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:padding="@dimen/padding_standard"
-        android:layout_marginTop="@dimen/margin_small"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_announcements"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>

@@ -34,5 +34,7 @@
     <color name="hint_color">#AFB6C0</color>
     <color name="line_gray_color">#D3E2EC</color>
     <color name="color_success">#63D586</color>
+    <color name="small_card_color">#E1F8F7</color>
+    <color name="date_text_color">#7B7D81</color>
 
 </resources>

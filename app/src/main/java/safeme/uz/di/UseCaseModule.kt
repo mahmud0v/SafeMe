@@ -66,4 +66,7 @@ interface UseCaseModule {
 
     @[Binds Singleton]
     fun getLogOutUseCase(impl: LogOutUseCaseImpl): LogOutUseCase
+
+    @[Binds Singleton]
+    fun getAllCategories(impl: GetAllCategoriesUseCaseImpl): GetAllCategoriesUseCase
 }

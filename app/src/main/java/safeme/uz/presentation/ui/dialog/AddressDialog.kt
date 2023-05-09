@@ -32,7 +32,6 @@ class AddressDialog(val address: Address) : DialogFragment(R.layout.dialog_addre
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initObserver()
         initViews()
     }

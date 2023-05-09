@@ -13,9 +13,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import safeme.uz.BuildConfig
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
-import safeme.uz.data.remote.AppApiService
-import safeme.uz.data.remote.AuthApiService
-import safeme.uz.data.remote.AuthAuthenticator
+import safeme.uz.data.remote.api.AnnouncementApiService
+import safeme.uz.data.remote.api.AppApiService
+import safeme.uz.data.remote.api.AuthApiService
+import safeme.uz.data.remote.api.AuthAuthenticator
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -49,8 +50,6 @@ class NetworkModule {
         sharedPreference: AppSharedPreference,
         @ApplicationContext context:Context
     ): OkHttpClient {
-      //  val loggingInterceptor = HttpLoggingInterceptor()
-      //  loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS).callTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(tokenInterceptor(sharedPreference)).addInterceptor(ChuckerInterceptor.Builder(context).build())
@@ -58,11 +57,19 @@ class NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit =
+    fun provideGsonGsonConvertorFactory():GsonConverterFactory {
+        return GsonConverterFactory.create()
+    }
+
+    @[Provides Singleton]
+    fun provideRetrofitBuilder(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(gsonConverterFactory)
             .build()
 
     @[Provides Singleton]
@@ -74,4 +81,11 @@ class NetworkModule {
     fun provideMainAPIService(
         retrofit: Retrofit
     ): AppApiService = retrofit.create(AppApiService::class.java)
+
+    @[Provides Singleton]
+    fun provideAnnouncementApiService(
+        retrofit: Retrofit
+    ):AnnouncementApiService = retrofit.create(AnnouncementApiService::class.java)
+
+
 }

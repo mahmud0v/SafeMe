@@ -2,7 +2,7 @@ package safeme.uz.data.repository.app
 
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.Response
-import safeme.uz.data.remote.AppApiService
+import safeme.uz.data.remote.api.AppApiService
 import javax.inject.Inject
 
 

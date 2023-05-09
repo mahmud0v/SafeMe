@@ -17,7 +17,6 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
     private val binding by viewBinding(ScreenAppealsBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         initViews()
         initLoads()

@@ -3,7 +3,7 @@ package safeme.uz.data.repository.auth
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.Response
 import safeme.uz.data.model.VerifyModel
-import safeme.uz.data.remote.AuthApiService
+import safeme.uz.data.remote.api.AuthApiService
 import safeme.uz.data.remote.request.*
 import safeme.uz.data.remote.response.*
 import javax.inject.Inject

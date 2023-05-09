@@ -153,9 +153,11 @@
     <string name="select_file">Rasm tanlang</string>
     <string name="you_cannot_upload_large_file">Siz %s mb dan katta faylni yuklay olmaysiz</string>
     <string name="file_not_exist">Fayl mavjud emas</string>
-    <!--under-->
-
-
+    <string name="videopodkat">Videopodkat</string>
+    <string name="videopd_desc">Бухоро вилояти ёшлари итирокида “Кибержиноятлардан химояланиш буйича очик мулокот”</string>
+    <string name="date_sample">12.03.2023</string>
+    <string name="viewed_count">152</string>
+    <string name="children_rules">Bola huquqlari</string>
 
 
 </resources>

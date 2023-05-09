@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import safeme.uz.data.repository.announcement.AnnouncementRepository
+import safeme.uz.data.repository.announcement.AnnouncementRepositoryImpl
 import safeme.uz.data.repository.app.AppRepository
 import safeme.uz.data.repository.app.AppRepositoryImpl
 import safeme.uz.data.repository.auth.AuthRepository
@@ -19,4 +21,9 @@ interface RepositoryModule {
 
     @[Binds Singleton]
     fun getAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+
+    @[Binds Singleton]
+    fun getAnnouncementRepository(impl: AnnouncementRepositoryImpl): AnnouncementRepository
+
+
 }

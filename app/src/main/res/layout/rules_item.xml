@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/rule_back_width"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rules_item_back"
+    android:orientation="vertical"
+    android:layout_height="@dimen/rule_back_height">
+
+   
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/rule_img_width"
+        android:layout_height="@dimen/rule_img_height"
+        app:cardCornerRadius="@dimen/small_card_corner"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_small"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:id="@+id/rule_img"
+            android:src="@drawable/cyber"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TitleTextViewStyle.RulesText"
+        android:layout_gravity="center"
+        android:text="@string/children_rules"
+        android:layout_marginTop="@dimen/margin_very_small2"
+        />
+    
+    
+
+
+
+
+
+
+</LinearLayout>

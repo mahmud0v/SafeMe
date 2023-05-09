@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/announcements_item"
+        android:layout_width="@dimen/announcement_width"
+        android:layout_height="@dimen/announcement_height"
+        android:layout_marginTop="@dimen/margin_middle"
+        app:cardCornerRadius="@dimen/main_card_corner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/announcement_card_back">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/image_card"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_marginTop="@dimen/margin_standard"
+                app:cardCornerRadius="@dimen/margin_very_small2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                >
+
+                <ImageView
+                    android:id="@+id/announcements_img"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cyber"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/videopodkat_text"
+                style="@style/TitleTextViewStyle"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:text="@string/videopodkat"
+                app:layout_constraintLeft_toLeftOf="@id/image_card"
+                app:layout_constraintTop_toBottomOf="@id/image_card" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/videopd_desc"
+                style="@style/TitleTextViewStyle.DescTextViewStyle"
+                android:layout_marginTop="@dimen/margin_middle"
+                android:text="@string/videopd_desc"
+                app:layout_constraintLeft_toLeftOf="@id/videopodkat_text"
+                app:layout_constraintTop_toBottomOf="@id/videopodkat_text" />
+
+            <LinearLayout
+                android:id="@+id/date_layout"
+                android:layout_width="@dimen/date_card_width"
+                android:layout_height="@dimen/date_card_height"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:background="@drawable/small_card_back"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/videopd_desc">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/date_card_margin"
+                    android:src="@drawable/calendar"
+
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/date_text"
+                    style="@style/NumberTextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:text="@string/date_sample" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewed_layout"
+                android:layout_width="@dimen/viewed_card_width"
+                android:layout_height="@dimen/viewed_card_height"
+                android:layout_marginStart="@dimen/margin_middle"
+                android:background="@drawable/small_card_back"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/date_layout"
+                app:layout_constraintLeft_toRightOf="@id/date_layout"
+                app:layout_constraintTop_toTopOf="@id/date_layout">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/viewed_card_margin"
+                    android:src="@drawable/viewed_icon" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewed_text"
+                    style="@style/NumberTextViewStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/viewed_count_margin"
+                    android:text="@string/viewed_count" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
