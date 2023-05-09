@@ -59,6 +59,7 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
         holder.bind(position)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(differ.currentList[position])
+
         }
 
     }
