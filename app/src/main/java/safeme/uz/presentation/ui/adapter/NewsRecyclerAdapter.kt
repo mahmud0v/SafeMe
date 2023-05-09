@@ -50,6 +50,9 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_announcement, parent, false)
         return ViewHolder(view)
+
+        /// add smt code
+
     }
 
     override fun getItemCount() = differ.currentList.size
