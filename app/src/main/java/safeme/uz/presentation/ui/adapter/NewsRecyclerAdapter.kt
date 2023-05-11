@@ -14,7 +14,7 @@ import safeme.uz.data.model.NewsData
 
 class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>() {
 
-    private val onItemClick: ((NewsData) -> Unit)? = null
+    var onItemClick: ((NewsData) -> Unit)? = null
 
     private val diffUtilItemCallBack = object : DiffUtil.ItemCallback<NewsData>() {
         override fun areItemsTheSame(oldItem: NewsData, newItem: NewsData) =
@@ -51,7 +51,6 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
             LayoutInflater.from(parent.context).inflate(R.layout.item_announcement, parent, false)
         return ViewHolder(view)
 
-        /// add smt code
 
     }
 

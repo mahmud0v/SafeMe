@@ -1,9 +1,14 @@
 package safeme.uz.presentation.ui.screen.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -17,6 +22,7 @@ import safeme.uz.databinding.ScreenAnnouncementBinding
 import safeme.uz.presentation.ui.adapter.ViewPagerAdapter
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementViewModel
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.gone
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -24,11 +30,13 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
 
     private val binding: ScreenAnnouncementBinding by viewBinding()
     private val viewModel: AnnouncementViewModel by viewModels()
-    private var categoryList = ArrayList<CategoriesData>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         initLoadData()
+//        val mainScreenLayout = requireActivity().supportFragmentManager.findFragmentById(R.id.mainScreen)
+//        val view = mainScreenLayout?.view?.findViewById<LinearLayoutCompat>(R.id.action_bar)
+//        view?.gone()
 
     }
 
@@ -59,7 +67,6 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
     private fun initViews(listCategory: ArrayList<CategoriesData>) {
         val adapter = ViewPagerAdapter(this,listCategory)
         binding.viewPager2.adapter = adapter
-        categoryList = listCategory
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = listCategory[position].title
         }.attach()

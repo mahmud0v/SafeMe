@@ -112,5 +112,8 @@ fun dateParseToString(date: Date, format: String): String {
     return formatter.format(date)
 }
 
+fun Fragment.enableBackToolbar(){
+
+}
 
 

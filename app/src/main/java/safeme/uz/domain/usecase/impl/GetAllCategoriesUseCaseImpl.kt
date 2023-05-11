@@ -28,10 +28,11 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
 
     override fun getAllNewsByCategory(categoryId: String): Flow<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>> {
         return flow {
+            emit(AnnouncementResult.Loading())
             val response = announcementRepository.getAllNewsByCategory(categoryId)
-            if (response.code() == 200){
+            if (response.code() == 200) {
                 emit(AnnouncementResult.Success(response.body()!!))
-            }else {
+            } else {
                 emit(AnnouncementResult.Error(response.message()))
             }
         }
@@ -40,6 +41,7 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
 
     override fun getNewsById(id: Int): Flow<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>> {
         return flow {
+            emit(AnnouncementResult.Loading())
             val response = announcementRepository.getNewsById(id)
             if (response.code() == 200) {
                 emit(AnnouncementResult.Success(response.body()!!))

@@ -37,6 +37,10 @@ class AnnouncementViewModel @Inject constructor(
     val getNewsByIdLiveData: LiveData<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>> =
         getNewsByIdMutableLiveData
 
+
+
+
+
     fun getAllCategories() = viewModelScope.launch {
         getAllCategoriesUseCase.getAllCategories().collect {
             getAllCategoriesMutableLiveData.value = it

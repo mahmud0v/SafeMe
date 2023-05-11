@@ -115,7 +115,6 @@ dependencies {
     implementation "io.github.vicmikhailau:MaskedEditText:4.0.7"
 
 
-
     //Chucker Interception
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"

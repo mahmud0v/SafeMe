@@ -6,6 +6,7 @@
     <dimen name="margin_middle">12dp</dimen>
     <dimen name="margin_standard">16dp</dimen>
     <dimen name="margin_big">24dp</dimen>
+    <dimen name="margin_huge">40dp</dimen>
 
     <dimen name="padding_very_small">4dp</dimen>
     <dimen name="padding_very_small2">6dp</dimen>
@@ -18,6 +19,7 @@
     <dimen name="text_title_size">20sp</dimen>
     <dimen name="text_small_size">12sp</dimen>
     <dimen name="text_regular_size">14sp</dimen>
+    <dimen name="text_big_title">24sp</dimen>
     <dimen name="text_regular_big_size">16sp</dimen>
     
     <dimen name="announcement_width">328dp</dimen>
@@ -48,6 +50,7 @@
     <dimen name="rule_back_height">123dp</dimen>
     <dimen name="rule_img_width">184dp</dimen>
     <dimen name="rule_img_height">76dp</dimen>
+    <dimen name="news_img_height">248dp</dimen>
 
     
 

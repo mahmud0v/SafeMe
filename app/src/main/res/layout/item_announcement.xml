@@ -2,14 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/announcements_item"
-        android:layout_width="@dimen/announcement_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/announcement_height"
         android:layout_marginTop="@dimen/margin_middle"
         app:cardCornerRadius="@dimen/main_card_corner"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,9 +24,11 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image_card"
-                android:layout_width="@dimen/image_width"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height"
                 android:layout_marginTop="@dimen/margin_standard"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_marginEnd="@dimen/margin_standard"
                 app:cardCornerRadius="@dimen/margin_very_small2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -33,10 +38,10 @@
 
                 <ImageView
                     android:id="@+id/announcements_img"
-                    android:layout_width="@dimen/image_width"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/image_height"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/cyber"
+                    tools:src="@drawable/cyber"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +61,7 @@
                 android:id="@+id/videopd_desc"
                 style="@style/TitleTextViewStyle.DescTextViewStyle"
                 android:layout_marginTop="@dimen/margin_middle"
+                android:maxLines="5"
                 android:text="@string/videopd_desc"
                 app:layout_constraintLeft_toLeftOf="@id/videopodkat_text"
                 app:layout_constraintTop_toBottomOf="@id/videopodkat_text" />
