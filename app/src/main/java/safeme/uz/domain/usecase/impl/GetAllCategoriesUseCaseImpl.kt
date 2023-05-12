@@ -8,6 +8,9 @@ import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.data.repository.announcement.AnnouncementRepository
 import safeme.uz.domain.usecase.GetAllCategoriesUseCase
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.Keys
+import safeme.uz.utils.isConnected
+import java.security.Key
 import javax.inject.Inject
 
 class GetAllCategoriesUseCaseImpl @Inject constructor(
@@ -25,6 +28,7 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
             }
         }
     }
+
 
     override fun getAllNewsByCategory(categoryId: String): Flow<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>> {
         return flow {
@@ -50,5 +54,4 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
             }
         }
     }
-
 }

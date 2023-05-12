@@ -13,7 +13,8 @@
         <item name="android:textColor">@color/text_regular_color</item>
         <item name="android:textSize">@dimen/text_small_size</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:layout_width">296dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="paddingEnd">@dimen/padding_standard</item>
         <item name="android:letterSpacing">0.005</item>
     </style>
     
@@ -39,5 +40,8 @@
     
     <style name="TitleTextViewStyle.TitleInfo">
         <item name="android:textSize">@dimen/text_big_title</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="paddingEnd">@dimen/padding_standard</item>
+
     </style>
 </resources>

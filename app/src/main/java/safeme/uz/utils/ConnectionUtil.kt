@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import safeme.uz.app.App
 
 fun isConnected(): Boolean = App.instance.isAvailableNetwork()
@@ -34,3 +36,5 @@ private fun Context.isAvailableNetwork(): Boolean {
     }
     return result
 }
+
+

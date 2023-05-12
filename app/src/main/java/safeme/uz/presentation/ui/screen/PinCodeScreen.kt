@@ -1,6 +1,7 @@
 package safeme.uz.presentation.ui.screen
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.SecondaryActivity
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.response.ResetPinCodeResponse
 import safeme.uz.databinding.ScreenPinCodeBinding
@@ -118,7 +120,10 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
 
             override fun onFinish() {
                 if (createAfterLogin) {
-                    findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
+                    startActivity(Intent(requireContext(), SecondaryActivity::class.java))
+                    requireActivity().finish()
+
+//                    findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
                 } else findNavController().popBackStack()
             }
         }
@@ -206,7 +211,9 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
 
     private fun checkIsOpened(pin: String) {
         if (pin == currentPin) {
-            findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
+            startActivity(Intent(requireContext(), SecondaryActivity::class.java))
+            requireActivity().finish()
+//            findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
         } else {
             setShakeAnimation(binding.llPinContainer)
             binding.tvError.text = resources.getString(R.string.error_pin)
@@ -257,7 +264,9 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
                     skipButton.disable()
                     viewModel.resetPinCode()
                 } else {
-                    findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
+                    startActivity(Intent(requireContext(), SecondaryActivity::class.java))
+                    requireActivity().finish()
+//                    findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
                 }
             }
 
@@ -296,12 +305,14 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
                     border1.disable()
                     inner1.disable()
                 }
+
                 2 -> {
                     border1.disable()
                     inner1.disable()
                     border2.disable()
                     inner2.disable()
                 }
+
                 3 -> {
                     border1.disable()
                     inner1.disable()
@@ -310,6 +321,7 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
                     border3.disable()
                     inner3.disable()
                 }
+
                 4 -> {
                     border1.disable()
                     inner1.disable()

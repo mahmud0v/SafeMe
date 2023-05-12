@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/second_nav_graph"
+    app:startDestination="@id/recommendations">
+
+    <fragment
+        android:id="@+id/announcements"
+        android:name="safeme.uz.presentation.ui.screen.main.AnnouncementScreen"
+        android:label="screen_announcement"
+        tools:layout="@layout/screen_announcement" >
+        <action
+            android:id="@+id/action_announcementScreen_to_announcementInfoScreen"
+            app:destination="@id/announcementInfoScreen" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/announcementInfoScreen"
+        tools:layout="@layout/screen_announcements_info"
+        android:name="safeme.uz.presentation.ui.screen.AnnouncementInfoScreen"
+        android:label="AnnouncementInfoScreen" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/recommendations"
+        tools:layout="@layout/screen_recommendation"
+        android:name="safeme.uz.presentation.ui.screen.main.RecommendationsScreen"
+        android:label="RecommendationsScreen" >
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/about_us"
+        android:name="safeme.uz.presentation.ui.screen.main.AboutUsScreen"
+        android:label="screen_about_us"
+        tools:layout="@layout/screen_about_us" />
+    <fragment
+        android:id="@+id/chat"
+        android:name="safeme.uz.presentation.ui.screen.main.ChatScreen"
+        android:label="screen_chat"
+        tools:layout="@layout/screen_chat" />
+
+
+</navigation>

@@ -72,4 +72,7 @@ object Keys {
 
     const val FILTER_BUNDLE_KEY = "FILTER_BUNDLE_KEY"
     const val FILTER_REQUEST_KEY = "FILTER_REQUEST_KEY"
+
+
+    const val INTERNET_FAIL = "Internet mavjud emas"
 }
