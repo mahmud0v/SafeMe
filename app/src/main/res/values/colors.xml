@@ -8,7 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white74">#BDFFFFFF</color>
-
     <color name="color_snack_default">#50555C</color>
     <color name="app_status_blue_color">#0A8CA5</color>
     <color name="appbar_blue_color">#1AA2CC</color>
@@ -36,7 +35,8 @@
     <color name="color_success">#63D586</color>
     <color name="small_card_color">#E1F8F7</color>
     <color name="date_text_color">#7B7D81</color>
-    <color name="ripple_color">#403E3E</color>
+    <color name="ripple_color">#0C927D</color>
+    <color name="ripple_color1">#403E3E</color>
     <color name="table_layout_tr_bottom">#1999BC</color>
     <color name="table_layout_tr_top">#147289</color>
     <color name="table_layout_tr_center">#147994</color>

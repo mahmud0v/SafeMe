@@ -59,4 +59,8 @@
         <item name="android:letterSpacing">0.125</item>
 
     </style>
+    
+    <style name="RippleColorTheme" parent="Widget.AppCompat.ActionButton">
+        <item name="colorControlHighlight">@color/ripple_color</item>
+    </style>
 </resources>

@@ -58,6 +58,8 @@ class NetworkModule {
             .authenticator(authAuthenticator).build()
 
 
+
+
     }
 
     @[Provides Singleton]
