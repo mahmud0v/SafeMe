@@ -1,28 +1,33 @@
 package safeme.uz.data.repository.auth
 
-import safeme.uz.data.model.Response
+import retrofit2.Response
+import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.request.*
 import safeme.uz.data.remote.response.*
 
+
 interface AuthRepository {
-    suspend fun register(registerRequest: VerifyModel): Response<RegisterResponse>
-    suspend fun login(loginRequest: LoginRequest): Response<LoginResponse>
-    suspend fun verifyRegister(verifyRegisterRequest: VerifyRegisterRequest): Response<VerifyRegisterResponse>
+    suspend fun register(registerRequest: VerifyModel): ApiResponse<RegisterResponse>
+    suspend fun login(loginRequest: LoginRequest): ApiResponse<LoginResponse>
+    suspend fun verifyRegister(verifyRegisterRequest: VerifyRegisterRequest): ApiResponse<VerifyRegisterResponse>
     fun hasPinCode(): Boolean
     fun saveNewPin(pin: String): Boolean
     fun getCurrentPin(): String
     fun getToken(): Boolean
-    suspend fun getVerificationCodeForPassword(username: String?): Response<RegisterResponse>
-    suspend fun sendUserData(userDataRequest: UserDataRequest): Response<UserDataResponse>
-    suspend fun addingChildData(addingChildDataRequest: AddingChildDataRequest): Response<AddingChildDataResponse>
-    suspend fun verifyCodeForPassword(verification_code: String): Response<VerifyResetPasswordResponse>
-    suspend fun resetPinCode(): Response<ResetPinCodeResponse>
-    suspend fun verifyPinCode(verificationCode: String): Response<Unit>
-    suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): Response<String>
-    suspend fun getRegions(): Response<AddressResponse>
-    suspend fun getDistrictsById(regionId: Int): Response<List<Address>>
-    suspend fun getMFYById(districtId: Int): Response<List<Address>>
-    suspend fun getDistricts(): Response<AddressResponse>
-    suspend fun getMFYs(): Response<AddressResponse>
+    suspend fun getVerificationCodeForPassword(username: String?): ApiResponse<RegisterResponse>
+    suspend fun sendUserData(userDataRequest: UserDataRequest): ApiResponse<UserDataResponse>
+    suspend fun addingChildData(addingChildDataRequest: AddingChildDataRequest): ApiResponse<AddingChildDataResponse>
+    suspend fun verifyCodeForPassword(verification_code: String): ApiResponse<VerifyResetPasswordResponse>
+    suspend fun resetPinCode(): ApiResponse<ResetPinCodeResponse>
+    suspend fun verifyPinCode(verificationCode: String): ApiResponse<Unit>
+    suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ApiResponse<String>
+    suspend fun getRegions(): ApiResponse<AddressResponse>
+    suspend fun getDistrictsById(regionId: Int): ApiResponse<List<Address>>
+    suspend fun getMFYById(districtId: Int): ApiResponse<List<Address>>
+    suspend fun getDistricts(): ApiResponse<AddressResponse>
+    suspend fun getMFYs(): ApiResponse<AddressResponse>
+    suspend fun getUserInfo(): Response<UserResponse>
+    suspend fun userUpdate(userUpdateRequest: UserUpdateRequest):Response<ApiResponse<UserUpdateResponse>>
+
 }

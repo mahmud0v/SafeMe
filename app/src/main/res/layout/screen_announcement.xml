@@ -116,10 +116,15 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar_blue_color"
         app:tabIndicatorColor="@color/white"
-        app:tabMode="fixed"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/white74"
+        />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/table_layout_bottom_trs"
         />
 
     <androidx.viewpager2.widget.ViewPager2

@@ -36,5 +36,13 @@
     <color name="color_success">#63D586</color>
     <color name="small_card_color">#E1F8F7</color>
     <color name="date_text_color">#7B7D81</color>
+    <color name="ripple_color">#403E3E</color>
+    <color name="table_layout_tr_bottom">#1999BC</color>
+    <color name="table_layout_tr_top">#147289</color>
+    <color name="table_layout_tr_center">#147994</color>
+    <color name="edit_text_color">#212121</color>
+    <color name="button_shadow_color">#1AD6D6D6</color>
+
+
 
 </resources>

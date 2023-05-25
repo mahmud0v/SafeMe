@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ripple_color">
     <item>
         <shape>
             <corners android:radius="@dimen/card_corner" />
             <solid android:color="@color/white" />
         </shape>
     </item>
-</selector>
+</ripple>

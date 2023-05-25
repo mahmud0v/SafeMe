@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/rule_back_width"
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/rules_item_back"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginTop="@dimen/margin_big"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:id="@+id/rules_layout"
     android:layout_height="@dimen/rule_back_height">
 
    
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/rule_img_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/rule_img_height"
+        android:layout_marginEnd="@dimen/margin_small"
         app:cardCornerRadius="@dimen/small_card_corner"
-        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_small"
         >
 
@@ -27,15 +34,12 @@
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/TitleTextViewStyle.RulesText"
-        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:text="@string/children_rules"
-        android:layout_marginTop="@dimen/margin_very_small2"
+        android:layout_gravity="center"
+        android:id="@+id/rules_text"
+        android:layout_marginTop="@dimen/margin_small_3"
         />
-    
-    
-
-
-
 
 
 

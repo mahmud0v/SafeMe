@@ -2,6 +2,8 @@ package safeme.uz.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -11,7 +13,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import safeme.uz.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 fun Fragment.snackMessage(message: String) {
     Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).apply {
@@ -112,8 +115,18 @@ fun dateParseToString(date: Date, format: String): String {
     return formatter.format(date)
 }
 
-fun Fragment.enableBackToolbar(){
+fun Fragment.enableBackToolbar() {
 
+}
+
+fun Number.dpToPx(): Int {
+    val dp = this.toFloat()
+    val px = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        Resources.getSystem().displayMetrics
+    )
+    return px.toInt()
 }
 
 

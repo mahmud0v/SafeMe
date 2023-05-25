@@ -35,7 +35,7 @@ object Util {
             } else {
                 day.toString()
             }
-            val dateOfBirth = "$year.$monthString.$dayString"
+            val dateOfBirth = "$dayString.$monthString.$year"
             etDateOfBirth.setText(dateOfBirth)
         }
 

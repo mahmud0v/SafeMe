@@ -15,6 +15,7 @@ import safeme.uz.BuildConfig
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.remote.api.AnnouncementApiService
 import safeme.uz.data.remote.api.AppApiService
+import safeme.uz.data.remote.api.AppealsApiService
 import safeme.uz.data.remote.api.AuthApiService
 import safeme.uz.data.remote.api.AuthAuthenticator
 import java.util.concurrent.TimeUnit
@@ -48,16 +49,19 @@ class NetworkModule {
     fun getOkHTTP(
         authAuthenticator: AuthAuthenticator,
         sharedPreference: AppSharedPreference,
-        @ApplicationContext context:Context
+        @ApplicationContext context: Context
     ): OkHttpClient {
         return OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS).callTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(tokenInterceptor(sharedPreference)).addInterceptor(ChuckerInterceptor.Builder(context).build())
+            .addInterceptor(tokenInterceptor(sharedPreference))
+            .addInterceptor(ChuckerInterceptor.Builder(context).build())
             .authenticator(authAuthenticator).build()
+
+
     }
 
     @[Provides Singleton]
-    fun provideGsonGsonConvertorFactory():GsonConverterFactory {
+    fun provideGsonGsonConvertorFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
@@ -85,7 +89,12 @@ class NetworkModule {
     @[Provides Singleton]
     fun provideAnnouncementApiService(
         retrofit: Retrofit
-    ):AnnouncementApiService = retrofit.create(AnnouncementApiService::class.java)
+    ): AnnouncementApiService = retrofit.create(AnnouncementApiService::class.java)
+
+    @[Provides Singleton]
+    fun provideAppealApiService(
+        retrofit: Retrofit
+    ): AppealsApiService = retrofit.create(AppealsApiService::class.java)
 
 
 }

@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.DestinationArguments
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.databinding.ScreenAnnouncementPagerBinding
 import safeme.uz.presentation.ui.adapter.NewsRecyclerAdapter
 import safeme.uz.presentation.ui.screen.main.AnnouncementScreenDirections
+import safeme.uz.presentation.viewmodel.announcement.AnnouncementPagerViewModel
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementViewModel
 import safeme.uz.utils.AnnouncementResult
 import safeme.uz.utils.Keys
@@ -27,7 +29,7 @@ import java.security.Key
 @AndroidEntryPoint
 class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
     private val binding: ScreenAnnouncementPagerBinding by viewBinding()
-    private val viewModel: AnnouncementViewModel by viewModels()
+    private val viewModel: AnnouncementPagerViewModel by viewModels()
     private val newsAdapter: NewsRecyclerAdapter by lazy { NewsRecyclerAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +56,7 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
     private val newsObserver =
         Observer<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>> {
             when (it) {
-                is AnnouncementResult.Success -> initRecyclerView(it.data?.body!!)
+                is AnnouncementResult.Success -> initRecyclerView(it.data?.body)
                 is AnnouncementResult.Error -> snackMessage(it.message!!)
                 is AnnouncementResult.Loading -> binding.progress.visible()
                 else -> {}
@@ -62,7 +64,7 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
         }
 
 
-    private fun initRecyclerView(newsList: ArrayList<NewsData>) {
+    private fun initRecyclerView(newsList: ArrayList<NewsData>?) {
         binding.progress.gone()
         newsAdapter.differ.submitList(newsList)
         binding.announcementsRv.adapter = newsAdapter
@@ -73,7 +75,7 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
         newsAdapter.onItemClick = {
             findNavController().navigate(
                 AnnouncementScreenDirections.actionAnnouncementScreenToAnnouncementInfoScreen(
-                    it.id
+                    DestinationArguments(it.id, Keys.ANNOUNCEMENTS)
                 )
             )
         }

@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.databinding.ActivitySecondaryBinding
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
@@ -26,17 +25,15 @@ class SecondaryActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navHostFragment.navController)
 
         remindViewModel.remindListenerLiveData.observe(this, Observer {
-            if (it && !binding.drawerLayout.isOpen){
+            if (it && !binding.drawerLayout.isOpen) {
                 binding.drawerLayout.open()
-            }else {
+            } else {
                 binding.drawerLayout.close()
             }
         })
 
 
     }
-
-
 
 
 }

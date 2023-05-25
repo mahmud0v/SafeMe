@@ -17,15 +17,16 @@
         <item name="paddingEnd">@dimen/padding_standard</item>
         <item name="android:letterSpacing">0.005</item>
     </style>
-    
+
     <style name="NumberTextViewStyle">
         <item name="android:textColor">@color/date_text_color</item>
         <item name="android:fontFamily">@font/roboto_medium_title</item>
         <item name="android:textSize">@dimen/text_small_size</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        
+
     </style>
+
     <style name="TitleTextViewStyle.RecommendText">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_small_size</item>
@@ -36,12 +37,26 @@
     <style name="TitleTextViewStyle.RulesText">
         <item name="android:textSize">@dimen/text_regular_size</item>
     </style>
-    
-    
+
+
     <style name="TitleTextViewStyle.TitleInfo">
         <item name="android:textSize">@dimen/text_big_title</item>
         <item name="android:layout_width">0dp</item>
         <item name="paddingEnd">@dimen/padding_standard</item>
+
+    </style>
+
+    <style name="SpinnerTheme" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="background">@drawable/bg_border_disable</item>
+    </style>
+    
+    
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textAllCaps">false</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">@font/roboto_medium_title</item>
+        <item name="fontFamily">@font/roboto_medium_title</item>
+        <item name="android:letterSpacing">0.125</item>
 
     </style>
 </resources>

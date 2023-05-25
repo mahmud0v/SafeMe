@@ -1,5 +1,7 @@
 package safeme.uz.utils
 
+import safeme.uz.data.remote.request.AnnouncementNewsRequest
+
 object Keys {
     const val PARENT = 0
     const val CHILD = 1
@@ -75,4 +77,7 @@ object Keys {
 
 
     const val INTERNET_FAIL = "Internet mavjud emas"
+    const val NEWS = "news"
+    const val RECOMMENDATION = "recomendation"
+    const val ANNOUNCEMENTS = "announcement"
 }

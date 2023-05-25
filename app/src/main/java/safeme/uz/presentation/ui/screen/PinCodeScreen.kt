@@ -123,7 +123,6 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
                     startActivity(Intent(requireContext(), SecondaryActivity::class.java))
                     requireActivity().finish()
 
-//                    findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
                 } else findNavController().popBackStack()
             }
         }
@@ -213,7 +212,6 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
         if (pin == currentPin) {
             startActivity(Intent(requireContext(), SecondaryActivity::class.java))
             requireActivity().finish()
-//            findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
         } else {
             setShakeAnimation(binding.llPinContainer)
             binding.tvError.text = resources.getString(R.string.error_pin)
@@ -266,7 +264,6 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
                 } else {
                     startActivity(Intent(requireContext(), SecondaryActivity::class.java))
                     requireActivity().finish()
-//                    findNavController().navigate(R.id.action_pinCodeScreen_to_mainScreen)
                 }
             }
 

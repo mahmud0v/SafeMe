@@ -3,18 +3,30 @@ package safeme.uz.data.repository.announcement
 import retrofit2.Response
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.model.NewsData
+import safeme.uz.data.remote.request.AgeCategoryRequest
+import safeme.uz.data.remote.request.AnnouncementCategoryRequest
+import safeme.uz.data.remote.request.AnnouncementNewsRequest
+import safeme.uz.data.remote.request.RecommendationRequest
+import safeme.uz.data.remote.response.AgeCategoryInfo
+import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.RecommendationInfo
+import safeme.uz.data.remote.response.RecommendationInfoResponse
+import safeme.uz.data.remote.response.RecommendationResponse
 
 interface AnnouncementRepository {
 
-    suspend fun getAllCategories() : Response<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>
+    suspend fun getAllCategories(announcementCategoryRequest: AnnouncementCategoryRequest): Response<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>
 
-    suspend fun getAllNewsByCategory(categoryId:String):Response<AnnouncementCategoryResponse<ArrayList<NewsData>>>
+    suspend fun getAllNewsByCategory(categoryId: String): Response<AnnouncementCategoryResponse<ArrayList<NewsData>>>
 
-    suspend fun getNewsById(id:Int):Response<AnnouncementCategoryResponse<NewsData>>
+    suspend fun getNewsById(id: Int): Response<AnnouncementCategoryResponse<NewsData>>
 
+    suspend fun getAgeCategory(): Response<AgeCategoryResponse<AgeCategoryInfo>>
 
+    suspend fun getRecommendationByCategory(recommendationRequest: RecommendationRequest): Response<AgeCategoryResponse<RecommendationInfo>>
 
+    suspend fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest):Response<RecommendationInfoResponse>
 
-
+    suspend fun getRecommendationById(id:Int):Response<RecommendationResponse>
 }

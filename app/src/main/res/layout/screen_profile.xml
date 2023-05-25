@@ -65,11 +65,11 @@
 
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/profile_name_width"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
                 android:fontFamily="@font/roboto_medium_title"
-                android:text="Mardon Shonazarov"
+                tools:text="Satoralijonov Salimroziquljon"
                 android:textColor="@color/text_title_color"
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintStart_toEndOf="@+id/ivProfile"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
                 android:fontFamily="@font/roboto_medium_title"
-                android:text="Otasi"
+                tools:text="Otasi"
                 android:textColor="@color/text_title_color"
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintBottom_toBottomOf="@+id/tvChildRelativeTitle"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
                 android:fontFamily="@font/roboto_medium_title"
-                android:text="12.02.1993"
+                tools:text="12.02.1993"
                 android:textColor="@color/text_title_color"
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintBottom_toBottomOf="@+id/tvDateOfBirthTitle"
@@ -133,30 +133,6 @@
                 android:background="@color/line_gray_color"
                 app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
 
-            <TextView
-                android:id="@+id/tvEducationTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_standard"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/education_title"
-                android:textColor="@color/text_regular_color"
-                android:textSize="@dimen/text_small_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line" />
-
-            <TextView
-                android:id="@+id/tvEducation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_standard"
-                android:fontFamily="@font/roboto_medium_title"
-                android:text="Toshkent Arxitektura Qurilish Instituti"
-                android:textColor="@color/text_title_color"
-                android:textSize="@dimen/text_regular_big_size"
-                app:layout_constraintBottom_toBottomOf="@+id/tvEducationTitle"
-                app:layout_constraintStart_toEndOf="@+id/tvEducationTitle"
-                app:layout_constraintTop_toTopOf="@+id/tvEducationTitle" />
 
             <TextView
                 android:id="@+id/tvRegionTitle"
@@ -168,7 +144,7 @@
                 android:textColor="@color/text_regular_color"
                 android:textSize="@dimen/text_small_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvEducation" />
+                app:layout_constraintTop_toBottomOf="@+id/line" />
 
             <TextView
                 android:id="@+id/tvRegion"
@@ -176,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
                 android:fontFamily="@font/roboto_medium_title"
-                android:text="Toshkent shaxar"
+                tools:text="Toshkent shaxar"
                 android:textColor="@color/text_title_color"
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintBottom_toBottomOf="@+id/tvRegionTitle"
@@ -201,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
                 android:fontFamily="@font/roboto_medium_title"
-                android:text="Chilonzor"
+                tools:text="Chilonzor"
                 android:textColor="@color/text_title_color"
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintBottom_toBottomOf="@+id/tvDistrictTitle"
@@ -226,12 +202,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
                 android:fontFamily="@font/roboto_medium_title"
-                android:text="Obod MFY"
+                tools:text="Obod MFY"
                 android:textColor="@color/text_title_color"
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintBottom_toBottomOf="@+id/tvNeighborhoodTitle"
                 app:layout_constraintStart_toEndOf="@+id/tvNeighborhoodTitle"
                 app:layout_constraintTop_toTopOf="@+id/tvNeighborhoodTitle" />
+
+            <TextView
+                android:id="@+id/tvGenderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/gender_text"
+                android:textColor="@color/text_regular_color"
+                android:textSize="@dimen/text_small_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNeighborhoodTitle" />
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium_title"
+                tools:text="@string/man"
+                android:textColor="@color/text_title_color"
+                android:textSize="@dimen/text_regular_big_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tvGenderTitle"
+                app:layout_constraintLeft_toLeftOf="@+id/tvNeighborhood"
+                app:layout_constraintTop_toTopOf="@+id/tvGenderTitle" />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEditProfile"
@@ -262,8 +263,19 @@
                 app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progress"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="?android:attr/progressBarStyleLarge"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -69,4 +69,14 @@ interface UseCaseModule {
 
     @[Binds Singleton]
     fun getAllCategories(impl: GetAllCategoriesUseCaseImpl): GetAllCategoriesUseCase
+
+    @[Binds Singleton]
+    fun getUserData(impl: ProfileUseCaseImpl): ProfileUseCase
+
+    @[Binds Singleton]
+    fun userUpdate(impl: UserUpdateUseCaseImpl): UserUpdateUseCase
+
+    @[Binds Singleton]
+    fun getInspectorData(impl:GetInspectorDataUseCaseImpl):GetInspectorDataUseCase
+
 }

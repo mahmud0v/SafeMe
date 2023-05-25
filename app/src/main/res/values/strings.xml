@@ -158,6 +158,20 @@
     <string name="date_sample">12.03.2023</string>
     <string name="viewed_count">152</string>
     <string name="children_rules">Bola huquqlari</string>
+    <string name="gender_text">Jinsi:</string>
+    <string name="hint_mask">dd.mm.yyyy</string>
+    <string name="select_name">Tanlang</string>
+    <string name="man_lower_case">erkak</string>
+    <string name="woman_lower_case">ayol</string>
+    <string name="nothing">hechkim</string>
+
+
+    <string-array name="parent_array">
+        <item>Tanlang</item>
+        <item>Otasi</item>
+        <item>Onasi</item>
+    </string-array>
+
 
 
 </resources>

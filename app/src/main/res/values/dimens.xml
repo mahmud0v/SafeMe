@@ -7,6 +7,12 @@
     <dimen name="margin_standard">16dp</dimen>
     <dimen name="margin_big">24dp</dimen>
     <dimen name="margin_huge">40dp</dimen>
+    <dimen name="margin_scroll_view">110dp</dimen>
+    <dimen name="margin_huge_top">80dp</dimen>
+    <dimen name="margin_middle_2">14dp</dimen>
+    <dimen name="margin_big_2">33dp</dimen>
+    <dimen name="margin_big_3">73dp</dimen>
+    <dimen name="margin_small_3">7dp</dimen>
 
     <dimen name="padding_very_small">4dp</dimen>
     <dimen name="padding_very_small2">6dp</dimen>
@@ -45,6 +51,8 @@
     <dimen name="rec_item_height">58dp</dimen>
     <dimen name="rec_text_width">56dp</dimen>
     <dimen name="rec_text_height">16dp</dimen>
+    <dimen name="rec_width">24dp</dimen>
+    <dimen name="rec_height">24dp</dimen>
 
     <dimen name="rule_back_width">200dp</dimen>
     <dimen name="rule_back_height">123dp</dimen>
@@ -52,9 +60,13 @@
     <dimen name="rule_img_height">76dp</dimen>
     <dimen name="news_img_height">248dp</dimen>
 
-    
-
-
+    <dimen name="edit_text_height">48dp</dimen>
+    <dimen name="margin_huge_text">56dp</dimen>
+    <dimen name="ins_name_width">185dp</dimen>
+    <dimen name="ins_position_txt">192dp</dimen>
+    <dimen name="profile_name_width">250dp</dimen>
+    <dimen name="profile_text_margin">9dp</dimen>
+    <dimen name="rec_icon_end">18dp</dimen>
 
 
 </resources>

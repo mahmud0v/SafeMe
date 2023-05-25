@@ -435,18 +435,6 @@
                       <LayoutPositions />
                     </value>
                   </entry>
-                  <entry key="editProfileScreen">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="1720" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="expandedProfileImageScreen">
                     <value>
                       <LayoutPositions>
@@ -579,32 +567,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="profileScreen">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="1476" />
-                            <option name="y" value="54" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_profileScreen_to_editProfileScreen">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_profileScreen_to_pinCodeScreen">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="registrationScreen">
                     <value>
                       <LayoutPositions>
@@ -631,8 +593,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="988" />
-                            <option name="y" value="1126" />
+                            <option name="x" value="344" />
+                            <option name="y" value="1278" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -740,8 +702,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2058" />
-                            <option name="y" value="627" />
+                            <option name="x" value="-2542" />
+                            <option name="y" value="18" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -752,8 +714,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2398" />
-                            <option name="y" value="858" />
+                            <option name="x" value="-3719" />
+                            <option name="y" value="789" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -764,8 +726,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-3292" />
-                            <option name="y" value="251" />
+                            <option name="x" value="-3776" />
+                            <option name="y" value="11" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -775,7 +737,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_announcements_to_announcementPagerScreen">
+                            <entry key="action_announcements_to_profileScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -790,9 +752,54 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2229" />
-                            <option name="y" value="-23" />
+                            <option name="x" value="-2948" />
+                            <option name="y" value="17" />
                           </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="editProfileScreen">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-2624" />
+                            <option name="y" value="762" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="inspectorScreen">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-2186" />
+                            <option name="y" value="31" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="profileScreen">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-3145" />
+                            <option name="y" value="785" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_profileScreen_to_editProfileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -802,9 +809,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2790" />
-                            <option name="y" value="-223" />
+                            <option name="x" value="-3370" />
+                            <option name="y" value="11" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_recommendations_to_announcementInfoScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_recommendations_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

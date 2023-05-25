@@ -13,6 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.RecommendationInfo
+import safeme.uz.data.remote.response.RecommendationResponse
 import safeme.uz.databinding.ScreenAnnouncementsInfoBinding
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementInfoViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
@@ -32,7 +34,6 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         observeData()
         backClickEvent()
     }
@@ -46,27 +47,44 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
 
     private fun observeData() {
         remindViewModel.remindInFragment(true)
-        val id = mySafeArgs.id
+        val destinationArguments = mySafeArgs.desArg
         if (isConnected()) {
-            viewModel.getNewsById(id)
-            viewModel.getNewsByIdLiveData.observe(viewLifecycleOwner, newsObserver)
+            when (destinationArguments.key) {
+                Keys.ANNOUNCEMENTS -> {
+                    viewModel.getNewsById(destinationArguments.id)
+                    viewModel.getNewsByIdLiveData.observe(viewLifecycleOwner, newsObserver)
+                }
+
+                Keys.RECOMMENDATION -> {
+                    viewModel.getRecommendationById(destinationArguments.id)
+                    viewModel.getRecommendationLiveData.observe(viewLifecycleOwner,recommendationObserver)
+                }
+            }
+
         } else {
             snackMessage(Keys.INTERNET_FAIL)
         }
-
 
     }
 
     private val newsObserver =
         Observer<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>>() {
             when (it) {
-                is AnnouncementResult.Success -> loadData(it.data?.body!!)
+                is AnnouncementResult.Success -> loadNews(it.data?.body!!)
                 is AnnouncementResult.Error -> snackMessage(it.message!!)
                 is AnnouncementResult.Loading -> binding.progress.visible()
             }
         }
 
-    private fun loadData(newsData: NewsData) {
+    private val recommendationObserver = Observer<AnnouncementResult<RecommendationResponse>> {
+        when(it){
+            is AnnouncementResult.Success ->loadRecommendation(it.data?.body!!)
+            is AnnouncementResult.Loading -> binding.progress.visible()
+            is AnnouncementResult.Error -> snackMessage(it.message!!)
+        }
+    }
+
+    private fun loadNews(newsData: NewsData) {
         binding.progress.gone()
         binding.apply {
             Glide.with(root).load(newsData.image).into(imageId)
@@ -78,8 +96,18 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
 
     }
 
-    private fun trimDate(date: String): String {
-        return date.substring(0, 10)
+    private fun loadRecommendation(recommendationInfo: RecommendationInfo){
+        binding.progress.gone()
+        binding.apply {
+            Glide.with(root).load(recommendationInfo.image).into(imageId)
+            newsTitle.text = recommendationInfo.title?:""
+            newsDesc.text = recommendationInfo.text?:""
+            dateText.text = trimDate(recommendationInfo.created_date)?:""
+        }
+    }
+
+    private fun trimDate(date: String?): String? {
+        return date?.substring(0, 10)
     }
 
 

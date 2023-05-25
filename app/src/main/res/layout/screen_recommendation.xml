@@ -6,28 +6,24 @@
     android:background="@drawable/bg_main">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/action_bar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="top"
-        android:visibility="visible"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/appbar_blue_color"
-            >
+            android:background="@color/appbar_blue_color">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_very_small"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/padding_very_small"
                 android:src="@drawable/ic_menu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium_title"
                 android:paddingHorizontal="@dimen/padding_standard"
-                android:text="@string/safe_me"
+                android:text="@string/recommendations"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_title_size"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -50,11 +46,11 @@
                 android:id="@+id/ivSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_middle"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginEnd="@dimen/margin_middle"
                 android:padding="@dimen/padding_very_small"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivSOS"
@@ -65,10 +61,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_middle"
-                android:padding="@dimen/padding_very_small"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/padding_very_small"
                 android:src="@drawable/ic_sos"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivNotification"
@@ -79,10 +75,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_middle"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/padding_very_small"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_notifications"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivProfile"
@@ -92,11 +88,11 @@
                 android:id="@+id/ivProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_standard"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/padding_very_small"
-                android:layout_margin="@dimen/margin_standard"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,25 +101,35 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     </androidx.appcompat.widget.Toolbar>
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tabLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:backgroundTint="@color/appbar_blue_color"-->
-<!--        app:tabIndicatorColor="@color/white"-->
-<!--        app:tabMode="fixed"-->
-<!--        app:tabSelectedTextColor="@color/white"-->
-<!--        app:tabTextColor="@color/white74"-->
-<!--        />-->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/appbar_blue_color"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:tabIndicatorColor="@color/white"
+        app:tabMode="scrollable"
+        android:paddingStart="@dimen/padding_very_small2"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white74" />
+
+
+    <View
+        android:id="@+id/shadow_view"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/table_layout_bottom_trs"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_marginTop="@dimen/margin_scroll_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

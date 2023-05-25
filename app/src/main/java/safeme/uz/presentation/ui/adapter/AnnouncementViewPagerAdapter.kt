@@ -6,9 +6,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.presentation.ui.screen.AnnouncementPagerScreen
 
-class ViewPagerAdapter(private val fm: Fragment,private val categoryList:ArrayList<CategoriesData>) : FragmentStateAdapter(fm) {
+class AnnouncementViewPagerAdapter(private val fm: Fragment, private val categoryList:ArrayList<CategoriesData>) : FragmentStateAdapter(fm) {
 
-    override fun getItemCount() = categoryList.size
+    override fun getItemCount(): Int = categoryList.size
 
     override fun createFragment(position: Int): Fragment {
         val fragment = AnnouncementPagerScreen()

@@ -37,7 +37,7 @@ class AuthAuthenticator @Inject constructor(
     private suspend fun getNewToken(
         locale: String,
         refreshToken: String?
-    ): safeme.uz.data.model.Response<LoginResponse> {
+    ): safeme.uz.data.model.ApiResponse<LoginResponse> {
 
         Log.e("TAG", "getNewToken: ffffffffffffffffffffffffffffffffffffffffffff", )
 

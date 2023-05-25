@@ -4,27 +4,33 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.model.NewsData
+import safeme.uz.data.remote.request.AgeCategoryRequest
+import safeme.uz.data.remote.request.AnnouncementCategoryRequest
+import safeme.uz.data.remote.request.AnnouncementNewsRequest
+import safeme.uz.data.remote.request.RecommendationRequest
+import safeme.uz.data.remote.response.AgeCategoryInfo
+import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.RecommendationInfo
+import safeme.uz.data.remote.response.RecommendationInfoResponse
+import safeme.uz.data.remote.response.RecommendationResponse
 import safeme.uz.data.repository.announcement.AnnouncementRepository
 import safeme.uz.domain.usecase.GetAllCategoriesUseCase
 import safeme.uz.utils.AnnouncementResult
-import safeme.uz.utils.Keys
-import safeme.uz.utils.isConnected
-import java.security.Key
 import javax.inject.Inject
 
 class GetAllCategoriesUseCaseImpl @Inject constructor(
     private val announcementRepository: AnnouncementRepository
 ) : GetAllCategoriesUseCase {
 
-    override fun getAllCategories(): Flow<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
+    override fun getAllCategories(announcementCategoryRequest: AnnouncementCategoryRequest): Flow<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
         return flow {
-            val response = announcementRepository.getAllCategories()
+            val response = announcementRepository.getAllCategories(announcementCategoryRequest)
             val code = response.body()?.code
             if (code == 200) {
                 emit(AnnouncementResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.message()))
+                emit(AnnouncementResult.Error(response.body()?.message!!))
             }
         }
     }
@@ -34,10 +40,11 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
         return flow {
             emit(AnnouncementResult.Loading())
             val response = announcementRepository.getAllNewsByCategory(categoryId)
-            if (response.code() == 200) {
+            val code = response.body()?.code
+            if (code == 200) {
                 emit(AnnouncementResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.message()))
+                emit(AnnouncementResult.Error(response.body()?.message!!))
             }
         }
     }
@@ -47,10 +54,63 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
         return flow {
             emit(AnnouncementResult.Loading())
             val response = announcementRepository.getNewsById(id)
-            if (response.code() == 200) {
+            val code = response.body()?.code
+            if (code == 200) {
                 emit(AnnouncementResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.message()))
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getAgeCategory(): Flow<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>> {
+        return flow {
+            val response = announcementRepository.getAgeCategory()
+            val code = response.body()?.code
+            if (code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<AnnouncementResult<AgeCategoryResponse<RecommendationInfo>>> {
+        return flow {
+            emit(AnnouncementResult.Loading())
+            val response = announcementRepository.getRecommendationByCategory(recommendationRequest)
+            val code = response.body()?.code
+            if (code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest): Flow<AnnouncementResult<RecommendationInfoResponse>> {
+        return flow {
+            emit(AnnouncementResult.Loading())
+            val response =
+                announcementRepository.getRecommendationInfoByCategory(ageCategoryRequest)
+            val code = response.body()?.code
+            if (code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getRecommendationById(id: Int): Flow<AnnouncementResult<RecommendationResponse>> {
+        return flow {
+            emit(AnnouncementResult.Loading())
+            val response = announcementRepository.getRecommendationById(id)
+            val code = response.body()?.code
+            if (code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
             }
         }
     }

@@ -1,6 +1,6 @@
 package safeme.uz.data.model
 
-data class Response<T>(
+data class ApiResponse<T>(
     var success: Boolean = false,
     var message: String? = null,
     var body: T? = null,

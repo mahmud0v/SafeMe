@@ -1,5 +1,6 @@
 package safeme.uz.presentation.ui.adapter
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,17 +34,17 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
             val videoPodkat = itemView.findViewById<TextView>(R.id.videopodkat_text)
             val videoPodDesc = itemView.findViewById<TextView>(R.id.videopd_desc)
             val dateText = itemView.findViewById<TextView>(R.id.date_text)
-            Glide.with(itemView).load(data.image).into(image)
-            videoPodkat.text = data.title
-            videoPodDesc.text = data.shortText
-            dateText.text = trimDate(data.created_date!!)
+            data.image?.let { Glide.with(itemView).load(it).into(image) }
+            videoPodkat.text = data.title ?: ""
+            videoPodDesc.text = data.shortText ?: ""
+            dateText.text = trimDate(data.created_date!!) ?: ""
 
         }
 
     }
 
-    private fun trimDate(date: String) : String {
-        return date.substring(0,10)
+    private fun trimDate(date: String?): String? {
+        return date?.substring(0, 10)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -65,5 +66,7 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
         }
 
     }
+
+
 
 }
