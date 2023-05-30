@@ -28,6 +28,7 @@ import safeme.uz.utils.disable
 import safeme.uz.utils.enable
 import safeme.uz.utils.gone
 import safeme.uz.utils.hideKeyboard
+import safeme.uz.utils.orderBirthDay
 import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
 
@@ -422,7 +423,7 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
                 val userUpdateRequest = UserUpdateRequest(
                     firstName.toString(),
                     lastName.toString(),
-                    orderBirthDay(birthDay.toString()),
+                    birthDay.toString().orderBirthDay(),
                     getGender,
                     getRegionId,
                     getDistrictId,
@@ -437,12 +438,7 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
         }
     }
 
-    private fun orderBirthDay(birthDay: String): String {
-        val day = birthDay.substring(0, 2)
-        val month = birthDay.substring(3, 5)
-        val year = birthDay.substring(6)
-        return "$year-$month-$day"
-    }
+
 
     private fun getRegionId(): Int {
         var id = -1
@@ -472,6 +468,7 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
         }
         return id
     }
+
 
     private fun getMFYId(): Int {
         var id = -1

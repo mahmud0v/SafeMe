@@ -129,4 +129,20 @@ fun Number.dpToPx(): Int {
     return px.toInt()
 }
 
+fun String.orderBirthDay(): String {
+    val day = this.substring(0, 2)
+    val month = this.substring(3, 5)
+    val year = this.substring(6)
+    return "$year-$month-$day"
+}
+
+//  2000-06-03
+
+fun String.formatBirthDay(): String {
+    val year = this.substring(0, 4)
+    val month = this.substring(5, 7)
+    val day = this.substring(8)
+    return "$day-$month-$year"
+}
+
 

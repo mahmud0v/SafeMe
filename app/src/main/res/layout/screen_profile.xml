@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:foreground="?attr/selectableItemBackground"
-                android:padding="@dimen/padding_small"
+                android:padding="@dimen/padding_very_small"
                 android:src="@drawable/ic_arrow_back" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -74,31 +74,6 @@
                 android:textSize="@dimen/text_regular_big_size"
                 app:layout_constraintStart_toEndOf="@+id/ivProfile"
                 app:layout_constraintTop_toTopOf="@+id/ivProfile" />
-
-<!--            <TextView-->
-<!--                android:id="@+id/tvChildRelativeTitle"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="@dimen/margin_small"-->
-<!--                android:fontFamily="@font/roboto_regular"-->
-<!--                android:text="@string/child_s"-->
-<!--                android:textColor="@color/text_regular_color"-->
-<!--                android:textSize="@dimen/text_small_size"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/tvName"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tvName" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tvChildRelative"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="@dimen/margin_standard"-->
-<!--                android:fontFamily="@font/roboto_medium_title"-->
-<!--                tools:text="Otasi"-->
-<!--                android:textColor="@color/text_title_color"-->
-<!--                android:textSize="@dimen/text_regular_big_size"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/tvChildRelativeTitle"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tvChildRelativeTitle"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/tvChildRelativeTitle" />-->
 
             <TextView
                 android:id="@+id/tvDateOfBirthTitle"

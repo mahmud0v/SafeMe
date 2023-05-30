@@ -48,7 +48,13 @@
         android:id="@+id/about_us"
         android:name="safeme.uz.presentation.ui.screen.main.AboutUsScreen"
         android:label="screen_about_us"
-        tools:layout="@layout/screen_about_us" />
+        tools:layout="@layout/screen_about_us" >
+        <action
+            android:id="@+id/action_about_us_to_profileScreen"
+            app:destination="@id/profileScreen"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/chat"
         android:name="safeme.uz.presentation.ui.screen.main.ChatScreen"

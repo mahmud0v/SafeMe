@@ -18,7 +18,9 @@ import safeme.uz.databinding.ScreenProfileBinding
 import safeme.uz.presentation.ui.screen.ProfileInfoScreenDirections
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.formatBirthDay
 import safeme.uz.utils.gone
+import safeme.uz.utils.orderBirthDay
 import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
 
@@ -53,7 +55,7 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         binding.apply {
             userInfo.photo?.let { Glide.with(ivProfile).load(it).into(ivProfile) }
             tvName.text = "${userInfo.firstName} ${userInfo.lastName}"
-            tvDateOfBirth.text = userInfo.birthDay ?: ""
+            tvDateOfBirth.text = userInfo.birthDay?.formatBirthDay() ?: ""
             tvRegion.text = userInfo.region ?: ""
             tvDistrict.text = userInfo.district ?: ""
             tvNeighborhood.text = userInfo.mahalla ?: ""

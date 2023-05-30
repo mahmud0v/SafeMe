@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/announcements_rv"
-        android:layout_marginTop="@dimen/margin_middle"
+        android:paddingTop="@dimen/margin_middle"
         tools:listitem="@layout/item_announcement"
         />
 

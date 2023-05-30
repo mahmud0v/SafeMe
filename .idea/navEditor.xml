@@ -702,9 +702,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2542" />
-                            <option name="y" value="18" />
+                            <option name="x" value="-2992" />
+                            <option name="y" value="106" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_about_us_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -752,8 +761,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2948" />
-                            <option name="y" value="17" />
+                            <option name="x" value="-2390" />
+                            <option name="y" value="141" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -771,13 +780,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="inspectorScreen">
+                  <entry key="prevention_inspector">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2186" />
-                            <option name="y" value="31" />
+                            <option name="x" value="-1998" />
+                            <option name="y" value="51" />
                           </Point>
                         </option>
                       </LayoutPositions>
