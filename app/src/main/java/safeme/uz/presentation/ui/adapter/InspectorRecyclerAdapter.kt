@@ -16,7 +16,7 @@ import safeme.uz.data.remote.response.InspectorInfo
 
 class InspectorRecyclerAdapter : RecyclerView.Adapter<InspectorRecyclerAdapter.ViewHolder>() {
 
-    private val onItemClick: ((InspectorInfo) -> Unit)? = null
+    var onItemClick: ((InspectorInfo) -> Unit)? = null
     private val diffUtilItemCallback = object : DiffUtil.ItemCallback<InspectorInfo>() {
         override fun areItemsTheSame(oldItem: InspectorInfo, newItem: InspectorInfo) =
             oldItem.id == newItem.id

@@ -1,5 +1,7 @@
 package safeme.uz.presentation.ui.screen.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -35,6 +37,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
         backListenerEvent()
         loadInspectorData()
         initRecyclerView()
+        callInspector()
     }
 
 
@@ -82,6 +85,15 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
     private fun backListenerEvent() {
         binding.ivMenu.setOnClickListener {
             backRemindedViewModel.remindInFragment(true)
+        }
+    }
+
+    private fun callInspector() {
+        inspectorRecyclerAdapter.onItemClick = { data ->
+            val intent = Uri.parse("tel:+${data.phone}").let { number ->
+                Intent(Intent.ACTION_DIAL, number)
+            }
+            startActivity(intent)
         }
     }
 }

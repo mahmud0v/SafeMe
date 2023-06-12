@@ -57,9 +57,6 @@ class NetworkModule {
             .addInterceptor(ChuckerInterceptor.Builder(context).build())
             .authenticator(authAuthenticator).build()
 
-
-
-
     }
 
     @[Provides Singleton]

@@ -97,7 +97,6 @@
                 android:shadowRadius="22"
                 android:layout_marginTop="@dimen/margin_standard"
                 android:textAllCaps="false"
-                android:foreground="?attr/selectableItemBackground"
                 android:textSize="@dimen/text_small_size"
                 android:layout_height="wrap_content"/>
 
