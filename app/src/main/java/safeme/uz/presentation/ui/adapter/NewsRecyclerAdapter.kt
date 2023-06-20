@@ -1,6 +1,6 @@
 package safeme.uz.presentation.ui.adapter
 
-import android.util.TypedValue
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 import safeme.uz.R
 import safeme.uz.data.model.NewsData
+import safeme.uz.utils.Colors
 
 class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>() {
 
@@ -30,6 +32,9 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(position: Int) {
             val data = differ.currentList[position]
+            val color = Colors.getCategoryColors().random()
+            val materialCardView = itemView.findViewById<MaterialCardView>(R.id.announcements_item)
+            materialCardView.setStrokeColor(Color.parseColor(color))
             val image = itemView.findViewById<ImageView>(R.id.announcements_img)
             val videoPodkat = itemView.findViewById<TextView>(R.id.videopodkat_text)
             val videoPodDesc = itemView.findViewById<TextView>(R.id.videopd_desc)
@@ -66,7 +71,6 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
         }
 
     }
-
 
 
 }

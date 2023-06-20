@@ -2,15 +2,16 @@ package safeme.uz.domain.usecase.impl
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementCategoryRequest
-import safeme.uz.data.remote.request.AnnouncementNewsRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.data.remote.response.RecommendationResponse
@@ -108,6 +109,43 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
             val response = announcementRepository.getRecommendationById(id)
             val code = response.body()?.code
             if (code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getGameRecommendationByAge(ageCategoryRequest: AgeCategoryRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
+        return flow {
+            emit(AnnouncementResult.Loading())
+            val response = announcementRepository.getGameRecommendationByAge(ageCategoryRequest)
+            if (response.body()?.code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
+        return flow {
+            emit(AnnouncementResult.Loading())
+            val response =
+                announcementRepository.getGameRecommendationByCategory(recommendationRequest)
+            if (response.body()?.code == 200) {
+                emit(AnnouncementResult.Success(response.body()!!))
+            } else {
+                emit(AnnouncementResult.Error(response.body()?.message!!))
+            }
+        }
+    }
+
+    override fun getGameById(id: Int): Flow<AnnouncementResult<ApiResponse<GameRecommendationResponse>>> {
+        return flow {
+            emit(AnnouncementResult.Loading())
+            val response = announcementRepository.getGameById(id)
+            if (response.body()?.code == 200) {
                 emit(AnnouncementResult.Success(response.body()!!))
             } else {
                 emit(AnnouncementResult.Error(response.body()?.message!!))

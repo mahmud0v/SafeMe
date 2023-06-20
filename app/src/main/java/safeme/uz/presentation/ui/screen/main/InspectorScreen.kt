@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
-import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.response.InspectorInfo
-import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.databinding.ScreenInspectorBinding
 import safeme.uz.presentation.ui.adapter.InspectorRecyclerAdapter
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
@@ -38,6 +37,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
         loadInspectorData()
         initRecyclerView()
         callInspector()
+        moveToProfile()
     }
 
 
@@ -48,24 +48,9 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
     }
 
     private fun loadInspectorData() {
-        viewModel.getUserData()
-        viewModel.userLiveData.observe(viewLifecycleOwner, userDataObserver)
+        viewModel.inspectorLiveData.observe(viewLifecycleOwner,inspectorObserver)
     }
 
-    private val userDataObserver = Observer<AnnouncementResult<UserResponse>> {
-        when (it) {
-            is AnnouncementResult.Success -> initInspectorView(it.data?.body?.id)
-            is AnnouncementResult.Error -> snackMessage(it.data?.message!!)
-            else -> {}
-        }
-    }
-
-    private fun initInspectorView(id: Int?) {
-        id?.let {
-            viewModel.getInspectorDataByMFY(InspectorMFYRequest(it))
-            viewModel.inspectorLiveData.observe(viewLifecycleOwner, inspectorObserver)
-        }
-    }
 
     private val inspectorObserver =
         Observer<AnnouncementResult<ApiResponse<ArrayList<InspectorInfo>>>> {
@@ -94,6 +79,13 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
                 Intent(Intent.ACTION_DIAL, number)
             }
             startActivity(intent)
+        }
+    }
+
+    private fun moveToProfile(){
+        binding.ivProfile.setOnClickListener {
+            val action = InspectorScreenDirections.actionPreventionInspectorToProfileScreen()
+            findNavController().navigate(action)
         }
     }
 }

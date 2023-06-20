@@ -32,10 +32,7 @@ class SecondaryActivity : AppCompatActivity() {
             }
         })
 
-
     }
-
-
 }
 
 

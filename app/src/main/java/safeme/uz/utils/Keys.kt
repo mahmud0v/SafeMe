@@ -80,4 +80,6 @@ object Keys {
     const val NEWS = "news"
     const val RECOMMENDATION = "recomendation"
     const val ANNOUNCEMENTS = "announcement"
+    const val GAME = "game"
+
 }

@@ -1,20 +1,24 @@
 package safeme.uz.presentation.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import safeme.uz.R
 import safeme.uz.data.model.CategoriesData
-import safeme.uz.utils.dpToPx
+import safeme.uz.utils.Colors
+import safeme.uz.utils.Keys
+import safeme.uz.utils.invisible
 
-class RecommendationAdapter : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
+class RecommendationAdapter(private val type: String) :
+    RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
 
     var onItemClick: ((CategoriesData) -> Unit)? = null
 
@@ -29,31 +33,27 @@ class RecommendationAdapter : RecyclerView.Adapter<RecommendationAdapter.ViewHol
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(position: Int) {
-            val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
-            layoutParams.apply {
-                when {
-
-                    position % 2 == 0 -> {
-                        marginStart = 16.dpToPx()
-                        marginEnd = 8.dpToPx()
-                    }
-
-                    else -> {
-                        marginStart = 8.dpToPx()
-                        marginEnd = 16.dpToPx()
-
-                    }
-                }
-            }
+            val colorList = Colors.getCategoryColors()
             val data = differ.currentList[position]
-            val layout = itemView.findViewById<ConstraintLayout>(R.id.rec_layout)
+            val layout: MaterialCardView = itemView.findViewById(R.id.rec_layout)
             val recText = itemView.findViewById<MaterialTextView>(R.id.rec_text)
             val recIcon = itemView.findViewById<ImageView>(R.id.rec_icon)
+            val arrowImage = itemView.findViewById<ImageView>(R.id.arrow_icon)
+            when(type){
+                Keys.RECOMMENDATION -> {
+                    layout.setCardBackgroundColor(Color.parseColor(colorList[position]))
+                }
+                Keys.GAME -> {
+                    layout.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+                    arrowImage.invisible()
+                }
+            }
             data.icon?.let { Glide.with(itemView).load(it).into(recIcon) }
             recText.text = data.title ?: ""
             layout.setOnClickListener {
                 onItemClick?.invoke(data)
             }
+
         }
 
 
@@ -69,6 +69,5 @@ class RecommendationAdapter : RecyclerView.Adapter<RecommendationAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
-
     }
 }

@@ -17,14 +17,12 @@ import safeme.uz.databinding.ScreenAnnouncementPagerBinding
 import safeme.uz.presentation.ui.adapter.NewsRecyclerAdapter
 import safeme.uz.presentation.ui.screen.main.AnnouncementScreenDirections
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementPagerViewModel
-import safeme.uz.presentation.viewmodel.announcement.AnnouncementViewModel
 import safeme.uz.utils.AnnouncementResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
 import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
-import java.security.Key
 
 @AndroidEntryPoint
 class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {

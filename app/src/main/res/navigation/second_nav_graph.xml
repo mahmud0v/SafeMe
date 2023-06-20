@@ -29,6 +29,7 @@
         <argument
             android:name="desArg"
             app:argType="safeme.uz.data.model.DestinationArguments" />
+
     </fragment>
     <fragment
         android:id="@+id/recommendations"
@@ -80,7 +81,27 @@
         android:id="@+id/prevention_inspector"
         android:name="safeme.uz.presentation.ui.screen.main.InspectorScreen"
         android:label="screen_inspector"
-        tools:layout="@layout/screen_inspector" />
+        tools:layout="@layout/screen_inspector" >
+        <action
+            android:id="@+id/action_prevention_inspector_to_profileScreen"
+            app:destination="@id/profileScreen"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/game"
+        tools:layout="@layout/screen_game"
+        android:name="safeme.uz.presentation.ui.screen.main.GameScreen"
+        android:label="GameScreen" >
+        <action
+            android:id="@+id/action_game_to_profileScreen"
+            app:destination="@id/profileScreen"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_game_to_announcementInfoScreen"
+            app:destination="@id/announcementInfoScreen" />
+    </fragment>
 
 
 </navigation>

@@ -5,12 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementCategoryRequest
-import safeme.uz.data.remote.request.AnnouncementNewsRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
@@ -38,8 +36,15 @@ class RecommendationPagerViewModel @Inject constructor(
         MutableLiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
     val recommendationAllCategoriesLiveData = recommendationAllCategoriesMutableLiveData
 
+    private val gameRecommendationMutableLiveData =
+        MutableLiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
+    val gameRecommendationLiveData: LiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> =
+        gameRecommendationMutableLiveData
+
     init {
         getRecAllCategories(AnnouncementCategoryRequest(Keys.RECOMMENDATION))
+        getRecAllCategories(AnnouncementCategoryRequest(Keys.GAME))
+
     }
 
     fun getRecommendationByCategory(recommendationRequest: RecommendationRequest) =
@@ -49,18 +54,28 @@ class RecommendationPagerViewModel @Inject constructor(
             }
         }
 
-    fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest) = viewModelScope.launch {
-        getAllCategoriesUseCase.getRecommendationInfoByCategory(ageCategoryRequest).collect {
-            recommendationInfoMutableLiveData.value = it
+    fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest) =
+        viewModelScope.launch {
+            getAllCategoriesUseCase.getRecommendationInfoByCategory(ageCategoryRequest).collect {
+                recommendationInfoMutableLiveData.value = it
+            }
         }
-    }
 
     private fun getRecAllCategories(announcementCategoryRequest: AnnouncementCategoryRequest) =
         viewModelScope.launch {
             getAllCategoriesUseCase.getAllCategories(announcementCategoryRequest).collect {
-                recommendationAllCategoriesMutableLiveData.value = it
+                when (announcementCategoryRequest.type) {
+                    Keys.RECOMMENDATION -> {
+                        recommendationAllCategoriesMutableLiveData.value = it
+                    }
+
+                    Keys.GAME -> {
+                        gameRecommendationMutableLiveData.value = it
+                    }
+                }
             }
         }
 
-
 }
+
+

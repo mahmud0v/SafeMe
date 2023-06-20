@@ -37,11 +37,20 @@
     <color name="date_text_color">#7B7D81</color>
     <color name="ripple_color">#0C927D</color>
     <color name="ripple_color1">#403E3E</color>
+    <color name="ripple_color2">#CCCCCC</color>
     <color name="table_layout_tr_bottom">#1999BC</color>
     <color name="table_layout_tr_top">#147289</color>
     <color name="table_layout_tr_center">#147994</color>
     <color name="edit_text_color">#212121</color>
     <color name="button_shadow_color">#1AD6D6D6</color>
+    <color name="pink_category">#C7A9F5</color>
+    <color name="dark_yellow_category">#FFA607</color>
+    <color name="blue_category">#6CDDFF</color>
+    <color name="yellow_category">#FFC600</color>
+    <color name="red_category">#F09272</color>
+    <color name="dark_blue_color">#3796B3</color>
+    <color name="share_back_color">#1E90FF</color>
+
 
 
 

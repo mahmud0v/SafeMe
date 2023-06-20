@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.response.InspectorInfo
-import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.domain.usecase.GetInspectorDataUseCase
 import safeme.uz.domain.usecase.ProfileUseCase
 import safeme.uz.utils.AnnouncementResult
@@ -25,19 +24,28 @@ class InspectorScreenViewModel @Inject constructor(
     val inspectorLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<InspectorInfo>>>> =
         inspectorMutableLiveData
 
-    private val userMutableLiveData = MutableLiveData<AnnouncementResult<UserResponse>>()
-    val userLiveData: LiveData<AnnouncementResult<UserResponse>> = userMutableLiveData
 
-    fun getInspectorDataByMFY(inspectorMFYRequest: InspectorMFYRequest) = viewModelScope.launch {
+    init {
+        viewModelScope.launch {
+            profileUseCase.getUserInfo().collect {
+                when (it) {
+                    is AnnouncementResult.Success -> {
+                        getInspectorDataByMFY(InspectorMFYRequest(it.data?.body!!.id))
+                    }
+
+                    else -> {}
+
+                }
+            }
+        }
+    }
+
+    private fun getInspectorDataByMFY(inspectorMFYRequest: InspectorMFYRequest) = viewModelScope.launch {
         getInspectorDataUseCase.getInspectorDataByMFY(inspectorMFYRequest).collect {
             inspectorMutableLiveData.value = it
         }
     }
 
-    fun getUserData() = viewModelScope.launch {
-        profileUseCase.getUserInfo().collect {
-            userMutableLiveData.value = it
-        }
-    }
+
 
 }

@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import safeme.uz.R
+import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
-import safeme.uz.utils.dpToPx
 
-class RecommendationInfoAdapter : RecyclerView.Adapter<RecommendationInfoAdapter.ViewHolder>() {
+class RecommendationInfoAdapter :
+    RecyclerView.Adapter<RecommendationInfoAdapter.ViewHolder>() {
 
     var onItemClick: ((RecommendationInfo) -> Unit)? = null
     private val diffUtilItemCallback = object : DiffUtil.ItemCallback<RecommendationInfo>() {
@@ -29,6 +29,19 @@ class RecommendationInfoAdapter : RecyclerView.Adapter<RecommendationInfoAdapter
         ) = oldItem == newItem
 
     }
+    private val diffUtilItemCallback2 = object : DiffUtil.ItemCallback<GameRecommendationResponse>() {
+            override fun areItemsTheSame(
+                oldItem: GameRecommendationResponse,
+                newItem: GameRecommendationResponse
+            ) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(
+                oldItem: GameRecommendationResponse,
+                newItem: GameRecommendationResponse
+            ) = oldItem == newItem
+
+        }
+
 
     val differ = AsyncListDiffer(this, diffUtilItemCallback)
 
@@ -37,21 +50,6 @@ class RecommendationInfoAdapter : RecyclerView.Adapter<RecommendationInfoAdapter
             val data = differ.currentList[position]
             val rulesLayout = itemView.findViewById<LinearLayout>(R.id.rules_layout)
             val image = itemView.findViewById<ImageView>(R.id.rule_img)
-            val rulesText = itemView.findViewById<TextView>(R.id.rules_text)
-            val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
-            layoutParams.apply {
-                when {
-                    position % 2 == 0 -> {
-                        marginStart = 16.dpToPx()
-                        marginEnd = 8.dpToPx()
-                    }
-
-                    else -> {
-                        marginStart = 8.dpToPx()
-                        marginEnd = 16.dpToPx()
-                    }
-                }
-            }
             rulesLayout.setOnClickListener {
                 onItemClick?.invoke(data)
             }

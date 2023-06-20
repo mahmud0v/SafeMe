@@ -4,8 +4,8 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Url
+import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.request.AgeCategoryRequest
@@ -15,6 +15,7 @@ import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.data.remote.response.RecommendationResponse
@@ -64,11 +65,24 @@ interface AnnouncementApiService {
     @GET
     suspend fun getRecommendById(
         @Url url: String
-    ):Response<RecommendationResponse>
+    ): Response<RecommendationResponse>
+
+    @POST
+    suspend fun getGameRecommendationsByAge(
+        @Url url: String,
+        @Body ageCategoryRequest: AgeCategoryRequest
+    ): Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
 
 
+    @POST
+    suspend fun getGameRecommendationByCategory(
+        @Url url: String,
+        @Body recommendationRequest: RecommendationRequest
+    ):Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
 
-
-
+    @GET
+    suspend fun getGameById(
+        @Url url: String,
+    ):Response<ApiResponse<GameRecommendationResponse>>
 
 }

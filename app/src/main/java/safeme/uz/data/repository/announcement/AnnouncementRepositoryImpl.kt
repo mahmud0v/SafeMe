@@ -1,8 +1,8 @@
 package safeme.uz.data.repository.announcement
 
 import retrofit2.Response
-import retrofit2.http.Path
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
+import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.api.AnnouncementApiService
@@ -13,6 +13,7 @@ import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.data.remote.response.RecommendationResponse
@@ -73,5 +74,28 @@ class AnnouncementRepositoryImpl @Inject constructor(
         )
     }
 
+    override suspend fun getGameRecommendationByAge(ageCategoryRequest: AgeCategoryRequest): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getGameRecommendationsByAge(
+            "${sharedPreference.locale}/api/v1.0/games/age",
+            ageCategoryRequest
+        )
+    }
+
+    override suspend fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getGameRecommendationByCategory(
+            "${sharedPreference.locale}/api/v1.0/games/category",
+            recommendationRequest
+        )
+    }
+
+    override suspend fun getGameById(id:Int): Response<ApiResponse<GameRecommendationResponse>> {
+        return announcementApiService.getGameById(
+            "${sharedPreference.locale}/api/v1.0/games/view/$id"
+        )
+    }
+
 
 }
+
+
+

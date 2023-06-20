@@ -1,5 +1,6 @@
 package safeme.uz.presentation.ui.screen
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -11,8 +12,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationResponse
 import safeme.uz.databinding.ScreenAnnouncementsInfoBinding
@@ -44,6 +47,10 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
         }
     }
 
+    private fun getIntent(){
+
+    }
+
 
     private fun observeData() {
         remindViewModel.remindInFragment(true)
@@ -57,10 +64,17 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
 
                 Keys.RECOMMENDATION -> {
                     viewModel.getRecommendationById(destinationArguments.id)
-                    viewModel.getRecommendationLiveData.observe(viewLifecycleOwner,recommendationObserver)
+                    viewModel.getRecommendationLiveData.observe(
+                        viewLifecycleOwner,
+                        recommendationObserver
+                    )
+                }
+
+                Keys.GAME -> {
+                    viewModel.getGameById(destinationArguments.id)
+                    viewModel.getGameByIdLiveData.observe(viewLifecycleOwner, gameObserver)
                 }
             }
-
         } else {
             snackMessage(Keys.INTERNET_FAIL)
         }
@@ -77,12 +91,27 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
         }
 
     private val recommendationObserver = Observer<AnnouncementResult<RecommendationResponse>> {
-        when(it){
-            is AnnouncementResult.Success ->loadRecommendation(it.data?.body!!)
+        when (it) {
+            is AnnouncementResult.Success -> loadRecommendation(it.data?.body!!)
             is AnnouncementResult.Loading -> binding.progress.visible()
             is AnnouncementResult.Error -> snackMessage(it.message!!)
         }
     }
+
+    private val gameObserver =
+        Observer<AnnouncementResult<ApiResponse<GameRecommendationResponse>>> {
+            when (it) {
+                is AnnouncementResult.Success -> loadGame(it.data?.body)
+                is AnnouncementResult.Loading -> {
+                    binding.progress.show()
+                }
+
+                is AnnouncementResult.Error -> {
+                    binding.progress.hide()
+                    snackMessage(it.data?.message!!)
+                }
+            }
+        }
 
     private fun loadNews(newsData: NewsData) {
         binding.progress.gone()
@@ -93,17 +122,29 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
             dateText.text = trimDate(newsData.created_date!!)
 
         }
-
     }
 
-    private fun loadRecommendation(recommendationInfo: RecommendationInfo){
+    private fun loadRecommendation(recommendationInfo: RecommendationInfo) {
         binding.progress.gone()
         binding.apply {
             Glide.with(root).load(recommendationInfo.image).into(imageId)
-            newsTitle.text = recommendationInfo.title?:""
-            newsDesc.text = recommendationInfo.text?:""
-            dateText.text = trimDate(recommendationInfo.created_date)?:""
+            newsTitle.text = recommendationInfo.title ?: ""
+            newsDesc.text = recommendationInfo.text ?: ""
+            dateText.text = trimDate(recommendationInfo.created_date) ?: ""
         }
+    }
+
+    private fun loadGame(gameRecommendationResponse: GameRecommendationResponse?) {
+        binding.progress.hide()
+        gameRecommendationResponse?.let {
+            it.image?.let { url ->
+                Glide.with(binding.root).load(url).into(binding.imageId)
+                binding.newsTitle.text = gameRecommendationResponse.name ?: ""
+                binding.newsDesc.text = gameRecommendationResponse.description ?: ""
+                binding.dateText.text = trimDate(gameRecommendationResponse.createdDate) ?: ""
+            }
+        }
+
     }
 
     private fun trimDate(date: String?): String? {

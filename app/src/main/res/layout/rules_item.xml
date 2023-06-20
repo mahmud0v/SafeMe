@@ -6,9 +6,7 @@
     android:orientation="vertical"
     android:clickable="true"
     android:focusable="true"
-    android:layout_marginEnd="@dimen/margin_standard"
     android:layout_marginTop="@dimen/margin_big"
-    android:layout_marginStart="@dimen/margin_standard"
     android:id="@+id/rules_layout"
     android:layout_height="@dimen/rule_back_height">
 

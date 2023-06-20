@@ -12,7 +12,10 @@
         android:layout_marginTop="@dimen/margin_middle"
         app:cardCornerRadius="@dimen/main_card_corner"
         android:layout_marginStart="@dimen/margin_standard"
+        app:strokeWidth="@dimen/date_card_corner"
+        app:strokeColor="@color/button_green_color"
         android:layout_marginEnd="@dimen/margin_standard"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/announcement_card_back">
+            >
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image_card"

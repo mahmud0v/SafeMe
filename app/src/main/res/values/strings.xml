@@ -1,7 +1,5 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Safe Me</string>
-
-    <!--top-->
     <string name="sign_up">Ro\'yxatdan o\'tish</string>
     <string name="sign_in">Kirish</string>
     <string name="create">Yaratish</string>
@@ -74,6 +72,7 @@
     <string name="recommendations">Tavsiyalar</string>
     <string name="announcements">E\'lonlar</string>
     <string name="chat">Chat</string>
+    <string name="game">Game</string>
     <string name="consultant">Kansultant</string>
     <string name="questionnaire">So\’rovnoma</string>
     <string name="prevention_inspector">Profilaktika inspektori</string>
@@ -91,6 +90,7 @@
     <string name="fake_msg">Yolg\'on xabarlar</string>
     <string name="cybersport">Kibersport</string>
     <string name="cyber_crimes">Kiber-jinoyatlar</string>
+    <string name="lang">uz</string>
     <string name="rights_of_child">Bola huqulari</string>
     <string name="code_of_conduct">Odob-axloq qoidalari</string>
     <string name="inspectors">Inspektorlar</string>
@@ -177,6 +177,10 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="nought">0</string>
+    <string name="share_text">Поделиться</string>
+    <string name="save_text">Сохранить</string>
+    <string name="game_title">Социально-эмоциональное</string>
+    <string name="game_title2">Наблюдаем и играем вместе</string>
 
 
     <string-array name="parent_array">

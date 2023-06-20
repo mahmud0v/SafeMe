@@ -49,7 +49,7 @@
 
     <dimen name="rec_item_width">156dp</dimen>
     <dimen name="rec_item_height">58dp</dimen>
-    <dimen name="rec_text_width">56dp</dimen>
+    <dimen name="rec_text_width">90dp</dimen>
     <dimen name="rec_text_height">16dp</dimen>
     <dimen name="rec_width">24dp</dimen>
     <dimen name="rec_height">24dp</dimen>
