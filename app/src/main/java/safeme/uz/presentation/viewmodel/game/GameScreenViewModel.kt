@@ -2,10 +2,10 @@ package safeme.uz.presentation.viewmodel.game
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
@@ -23,6 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameScreenViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase
 ) : ViewModel() {
 
@@ -33,24 +34,29 @@ class GameScreenViewModel @Inject constructor(
 
     private val ageCategoryMutableLiveData =
         MutableLiveData<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>>()
-    val ageCategoryLiveData: LiveData<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>> =
-        ageCategoryMutableLiveData
+    val ageCategoryLiveData: LiveData<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>> = ageCategoryMutableLiveData
 
-    private val gameRecByAgeMutableLiveData = MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
-    val gameRecByAgeLiveData:LiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> = gameRecByAgeMutableLiveData
+    private val gameRecByAgeMutableLiveData =
+        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
+    val gameRecByAgeLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> =
+        gameRecByAgeMutableLiveData
 
-    private val gameRecByCategoryMutableLiveData = MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
-    val gameRecByCategoryLiveData:LiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> = gameRecByCategoryMutableLiveData
+    private val gameRecByCategoryMutableLiveData =
+        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
+    val gameRecByCategoryLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> =
+        gameRecByCategoryMutableLiveData
+
+//    private val errorMutableLiveData = MutableLiveData<String?>()
+//    val errorLiveData: LiveData<String?> = errorMutableLiveData
 
     init {
-        getAgeCategories()
         getGameCategories()
-
+        getAgeCategories()
     }
 
     private fun getAgeCategories() = viewModelScope.launch {
         getAllCategoriesUseCase.getAgeCategory().collect {
-            ageCategoryMutableLiveData.value = it
+           ageCategoryMutableLiveData.value = it
         }
     }
 
@@ -61,16 +67,17 @@ class GameScreenViewModel @Inject constructor(
     }
 
     fun getGameRecommendationByAge(ageCategoryRequest: AgeCategoryRequest) = viewModelScope.launch {
-        getAllCategoriesUseCase.getGameRecommendationByAge(ageCategoryRequest).collect{
-             gameRecByAgeMutableLiveData.value = it
+        getAllCategoriesUseCase.getGameRecommendationByAge(ageCategoryRequest).collect {
+            gameRecByAgeMutableLiveData.value = it
         }
     }
 
-    fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest) = viewModelScope.launch {
-        getAllCategoriesUseCase.getGameRecommendationByCategory(recommendationRequest).collect{
-            gameRecByCategoryMutableLiveData.value = it
+    fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest) =
+        viewModelScope.launch {
+            getAllCategoriesUseCase.getGameRecommendationByCategory(recommendationRequest).collect {
+                gameRecByCategoryMutableLiveData.value = it
+            }
         }
-    }
 
 
 }

@@ -81,5 +81,8 @@ object Keys {
     const val RECOMMENDATION = "recomendation"
     const val ANNOUNCEMENTS = "announcement"
     const val GAME = "game"
+    const val LOGIN_TO_EDIT = "login_to_edit"
+    const val PROFILE_TO_EDIT = "profile_to_edit"
+    const val PROFILE_BUNDLE = "profile_bundle"
 
 }

@@ -7,8 +7,29 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Url
 import safeme.uz.data.model.ApiResponse
-import safeme.uz.data.remote.request.*
-import safeme.uz.data.remote.response.*
+import safeme.uz.data.remote.request.DistrictByIdRequest
+import safeme.uz.data.remote.request.GetVerificationCodeRequest
+import safeme.uz.data.remote.request.LoginRequest
+import safeme.uz.data.remote.request.MfyByIdRequest
+import safeme.uz.data.remote.request.PasswordRecoverRequest
+import safeme.uz.data.remote.request.RefreshTokenRequest
+import safeme.uz.data.remote.request.RegisterRequest
+import safeme.uz.data.remote.request.RemindChangePasswordRequest
+import safeme.uz.data.remote.request.ResetPasswordRequest
+import safeme.uz.data.remote.request.UserUpdateRequest
+import safeme.uz.data.remote.request.VerifyRegisterRequest
+import safeme.uz.data.remote.response.Address
+import safeme.uz.data.remote.response.AddressResponse
+import safeme.uz.data.remote.response.LoginResponse
+import safeme.uz.data.remote.response.PasswordRecoverResponse
+import safeme.uz.data.remote.response.PasswordUpdateBody
+import safeme.uz.data.remote.response.RegisterResponse
+import safeme.uz.data.remote.response.RemindPasswordChangeBody
+import safeme.uz.data.remote.response.ResetPinCodeResponse
+import safeme.uz.data.remote.response.UserResponse
+import safeme.uz.data.remote.response.UserUpdateResponse
+import safeme.uz.data.remote.response.VerifyRegisterResponse
+import safeme.uz.data.remote.response.VerifyResetPasswordResponse
 
 interface AuthApiService {
     @POST
@@ -86,15 +107,38 @@ interface AuthApiService {
     @GET
     suspend fun getUserInfo(
         @Url url: String
-    ):Response<UserResponse>
+    ): Response<UserResponse>
 
 
     @PUT
     suspend fun userUpdate(
         @Url url: String,
         @Body userUpdateRequest: UserUpdateRequest
-    ):Response<ApiResponse<UserUpdateResponse>>
+    ): Response<ApiResponse<UserUpdateResponse>>
 
+    @POST
+    suspend fun passwordRecover(
+        @Url url: String,
+        @Body passwordRecoverRequest: PasswordRecoverRequest
+    ): Response<PasswordRecoverResponse>
+
+    @POST
+    suspend fun passwordVerification(
+        @Url url: String,
+        @Body verifyRegisterRequest: VerifyRegisterRequest
+    ): Response<PasswordRecoverResponse>
+
+    @POST
+    suspend fun passwordUpdate(
+        @Url url: String,
+        @Body resetPasswordRequest: ResetPasswordRequest
+    ): Response<ApiResponse<PasswordUpdateBody>>
+
+    @POST
+    suspend fun remindedPasswordChange(
+        @Url url: String,
+        @Body remindChangePasswordRequest: RemindChangePasswordRequest
+    ): Response<ApiResponse<RemindPasswordChangeBody>>
 
 
 }

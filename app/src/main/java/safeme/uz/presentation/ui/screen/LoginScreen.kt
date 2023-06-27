@@ -19,6 +19,7 @@ import safeme.uz.databinding.ScreenLoginBinding
 import safeme.uz.presentation.viewmodel.login.LoginViewModel
 import safeme.uz.presentation.viewmodel.login.LoginViewModelImpl
 import safeme.uz.utils.Keys
+import safeme.uz.utils.Keys.LOGIN_TO_EDIT
 import safeme.uz.utils.hideKeyboard
 import safeme.uz.utils.snackMessage
 
@@ -89,9 +90,7 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
         when (v) {
             forgetPasswordButton -> {
                 findNavController().navigate(
-                    LoginScreenDirections.actionLoginScreenToResetUsernameScreen(
-                        etPhoneNumber.rawText
-                    )
+                    LoginScreenDirections.actionLoginScreenToResetUsernameScreen()
                 )
             }
             loginButton -> {

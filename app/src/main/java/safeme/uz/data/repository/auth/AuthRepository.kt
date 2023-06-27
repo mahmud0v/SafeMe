@@ -29,5 +29,9 @@ interface AuthRepository {
     suspend fun getMFYs(): ApiResponse<AddressResponse>
     suspend fun getUserInfo(): Response<UserResponse>
     suspend fun userUpdate(userUpdateRequest: UserUpdateRequest):Response<ApiResponse<UserUpdateResponse>>
+    suspend fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest):Response<PasswordRecoverResponse>
+    suspend fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest):Response<PasswordRecoverResponse>
+    suspend fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest):Response<ApiResponse<PasswordUpdateBody>>
+    suspend fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest):Response<ApiResponse<RemindPasswordChangeBody>>
 
 }

@@ -1,7 +1,6 @@
 package safeme.uz.presentation.ui.screen
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -14,10 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
-import safeme.uz.SecondaryActivity
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.response.ResetPinCodeResponse
 import safeme.uz.databinding.ScreenPinCodeBinding
@@ -27,7 +24,8 @@ import safeme.uz.utils.*
 
 @AndroidEntryPoint
 class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
-    private val binding by viewBinding(ScreenPinCodeBinding::bind)
+    private var _binding: ScreenPinCodeBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: PinCodeViewModel by viewModels<PinCodeVIewModelImpl>()
     private var create = false
     private var createAfterLogin = false
@@ -36,13 +34,16 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
     private var isOpen = false
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.screen_pin_code, container, false)
+        _binding = ScreenPinCodeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
 
         val state = arguments?.getString(Keys.PIN_BUNDLE_KEY)
@@ -120,9 +121,7 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
 
             override fun onFinish() {
                 if (createAfterLogin) {
-                    startActivity(Intent(requireContext(), SecondaryActivity::class.java))
-                    requireActivity().finish()
-
+                    findNavController().navigate(PinCodeScreenDirections.actionPinCodeScreenToRecommendations())
                 } else findNavController().popBackStack()
             }
         }
@@ -210,8 +209,7 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
 
     private fun checkIsOpened(pin: String) {
         if (pin == currentPin) {
-            startActivity(Intent(requireContext(), SecondaryActivity::class.java))
-            requireActivity().finish()
+            findNavController().navigate(PinCodeScreenDirections.actionPinCodeScreenToRecommendations())
         } else {
             setShakeAnimation(binding.llPinContainer)
             binding.tvError.text = resources.getString(R.string.error_pin)
@@ -262,8 +260,7 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
                     skipButton.disable()
                     viewModel.resetPinCode()
                 } else {
-                    startActivity(Intent(requireContext(), SecondaryActivity::class.java))
-                    requireActivity().finish()
+                    findNavController().navigate(PinCodeScreenDirections.actionPinCodeScreenToRecommendations())
                 }
             }
 
@@ -348,4 +345,6 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
         btn9.isEnabled = isClick
         clearButton.isEnabled = isClick
     }
+
+
 }

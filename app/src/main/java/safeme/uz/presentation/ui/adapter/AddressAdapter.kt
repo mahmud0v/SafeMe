@@ -21,7 +21,7 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.AddressViewHolder>(It
 
         init {
             binding.tvTitle.setOnClickListener {
-                onItemClickListener?.invoke(getItem(absoluteAdapterPosition))
+//                onItemClickListener?.invoke(getItem(absoluteAdapterPosition))
             }
         }
 

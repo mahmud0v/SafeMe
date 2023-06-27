@@ -53,7 +53,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
     }
 
     private fun loadAgeCategory() {
-        viewModel.ageCategoryLiveData.observe(viewLifecycleOwner, ageCategoryObserver)
+        viewModel.ageCategoryLiveData.observe(viewLifecycleOwner,ageCategoryObserver)
     }
 
     private fun initRecyclerView() {

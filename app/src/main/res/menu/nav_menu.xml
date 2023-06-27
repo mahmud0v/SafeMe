@@ -9,9 +9,9 @@
         android:icon="@drawable/ic_announcements"
         android:title="@string/announcements"/>
 
-    <item android:id="@+id/chat"
-        android:icon="@drawable/ic_chat"
-        android:title="@string/chat"/>
+<!--    <item android:id="@+id/chat"-->
+<!--        android:icon="@drawable/ic_chat"-->
+<!--        android:title="@string/chat"/>-->
 
     <item android:id="@+id/game"
         android:icon="@drawable/game"

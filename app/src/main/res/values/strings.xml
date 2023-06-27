@@ -15,6 +15,7 @@
     <string name="resend_code">Kodni qayta yuborish</string>
     <string name="internet_not_connected">Internet bog\'lanmagan</string>
     <string name="bad_request">So\'rovda xatolik</string>
+    <string name="successfully_changed_passoword">Parol muvaffaqiyatli o\'zgartirildi</string>
     <string name="expired_password">Parolni o\'zgartirish vaqti o\'tgan</string>
     <string name="expired_verification_code">Tasdiqlash kodi vaqti o\'tgan</string>
     <string name="not_confirmed">SMS kod noto\'g\'ri kiritildi</string>
@@ -37,6 +38,11 @@
     <string name="enter_personal_info">Shaxsiy ma\'lumotlaringizni kiriting</string>
     <string name="first_name">Ism</string>
     <string name="last_name">Familiya</string>
+    <string name="old_password">Eski parol</string>
+    <string name="new_password">Yangi parol</string>
+    <string name="re_new_password">Yangi parolni qayta kiriting</string>
+    <string name="not_same_new_old_password">Yangi parol eski paroldan farq qilsin</string>
+    <string name="edit_password_desc">Parolni o\'zgartirish uchun telefon raqamingizni kiriting</string>
     <string name="skip">O\'TKAZISH</string>
     <string name="pin_code">PIN-kod</string>
     <string name="create_pin">Yangi PIN-kod kiriting</string>
@@ -116,6 +122,7 @@
     <string name="edit_profile">Profilni tahrirlash</string>
     <string name="my_profile">Mening profilim</string>
     <string name="edit_password">Parolni o\'zgartiring</string>
+    <string name="change_password">Parolni o\'zgartirish</string>
     <string name="who_are_you_this_baby">Bu bolaga kim bo\'lib keldingiz?</string>
     <string name="open">Ochish</string>
     <string name="close">Yopish</string>

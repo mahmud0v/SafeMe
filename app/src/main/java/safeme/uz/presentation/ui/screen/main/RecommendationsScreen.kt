@@ -60,8 +60,8 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
     }
 
     private fun moveToProfile() {
-        val recommendationActionToProfile =
-            RecommendationsScreenDirections.actionRecommendationsToProfileScreen()
+        requireActivity().window.setBackgroundDrawableResource(R.drawable.bg_main)
+        val recommendationActionToProfile = RecommendationsScreenDirections.actionRecommendationsToProfileScreen()
         binding.ivProfile.setOnClickListener {
             findNavController().navigate(recommendationActionToProfile)
         }

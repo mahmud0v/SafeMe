@@ -64,7 +64,7 @@
                     android:id="@+id/news_title"
                     style="@style/TitleTextViewStyle.TitleInfo"
                     android:layout_marginTop="@dimen/margin_big"
-                    android:text="@string/videopodkat"
+                    tools:text="@string/videopodkat"
                     app:layout_constraintLeft_toLeftOf="@id/img_info"
                     app:layout_constraintTop_toBottomOf="@id/img_info" />
 
@@ -75,7 +75,7 @@
                     android:layout_width="0dp"
                     android:layout_marginTop="@dimen/margin_standard"
                     android:paddingRight="20dp"
-                    android:text="@string/videopd_desc"
+                    tools:text="@string/videopd_desc"
                     android:textSize="@dimen/text_regular_big_size"
                     app:layout_constraintLeft_toLeftOf="@id/news_title"
                     app:layout_constraintTop_toBottomOf="@id/news_title" />

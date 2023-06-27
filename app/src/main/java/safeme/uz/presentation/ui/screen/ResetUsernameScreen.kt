@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
@@ -26,7 +25,6 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
 
     private val binding by viewBinding(ScreenResetUsernameBinding::bind)
     private val viewModel: ResetUserNameViewModel by viewModels<ResetUserNameViewModelImpl>()
-    private val navArgs: ResetUsernameScreenArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +43,7 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
 
     private val openVerifyScreenObserver = Observer<VerifyModel> {
         findNavController().navigate(
-            ResetUsernameScreenDirections.actionResetUsernameScreenToVerifyScreen(it)
+          ResetUsernameScreenDirections.actionResetUsernameScreenToVerifyScreen(it)
         )
     }
 
@@ -63,7 +61,6 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
     }
 
     private fun initViews() = with(binding) {
-        etPhoneNumber.setText(navArgs.phoneNumber)
 
         etPhoneNumber.addTextChangedListener {
             etPhoneNumberLayout.isErrorEnabled = false

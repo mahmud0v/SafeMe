@@ -47,10 +47,6 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
         }
     }
 
-    private fun getIntent(){
-
-    }
-
 
     private fun observeData() {
         remindViewModel.remindInFragment(true)

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-
     >
 
 
@@ -87,7 +86,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_small"
                             android:background="@drawable/bg_border_disable"
-                            android:hint="@string/first_name"
                             android:fontFamily="@font/roboto_medium_title"
                             android:imeOptions="actionNext"
                             android:inputType="textPersonName"
@@ -111,7 +109,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_small"
                             android:background="@drawable/bg_border_disable"
-                            android:hint="@string/last_name"
                             android:fontFamily="@font/roboto_medium_title"
                             android:imeOptions="actionNext"
                             android:inputType="textPersonName"
@@ -389,9 +386,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
 
 

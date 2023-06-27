@@ -10,7 +10,9 @@ import safeme.uz.data.remote.request.DistrictByIdRequest
 import safeme.uz.data.remote.request.GetVerificationCodeRequest
 import safeme.uz.data.remote.request.LoginRequest
 import safeme.uz.data.remote.request.MfyByIdRequest
+import safeme.uz.data.remote.request.PasswordRecoverRequest
 import safeme.uz.data.remote.request.RegisterRequest
+import safeme.uz.data.remote.request.RemindChangePasswordRequest
 import safeme.uz.data.remote.request.ResetPasswordRequest
 import safeme.uz.data.remote.request.UserDataRequest
 import safeme.uz.data.remote.request.UserUpdateRequest
@@ -19,7 +21,10 @@ import safeme.uz.data.remote.response.AddingChildDataResponse
 import safeme.uz.data.remote.response.Address
 import safeme.uz.data.remote.response.AddressResponse
 import safeme.uz.data.remote.response.LoginResponse
+import safeme.uz.data.remote.response.PasswordRecoverResponse
+import safeme.uz.data.remote.response.PasswordUpdateBody
 import safeme.uz.data.remote.response.RegisterResponse
+import safeme.uz.data.remote.response.RemindPasswordChangeBody
 import safeme.uz.data.remote.response.ResetPinCodeResponse
 import safeme.uz.data.remote.response.UserDataResponse
 import safeme.uz.data.remote.response.UserResponse
@@ -135,6 +140,33 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
+    override suspend fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest): Response<PasswordRecoverResponse> {
+        return api.passwordRecover(
+            "${sharedPreference.locale}/user/password/recover",
+            passwordRecoverRequest
+        )
+    }
+
+    override suspend fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest): Response<PasswordRecoverResponse> {
+        return api.passwordVerification(
+            "${sharedPreference.locale}/user/password/verification",
+            verifyRegisterRequest
+        )
+    }
+
+    override suspend fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest): Response<ApiResponse<PasswordUpdateBody>> {
+          return api.passwordUpdate(
+              "${sharedPreference.locale}/user/password/update",
+              resetPasswordRequest
+          )
+    }
+
+    override suspend fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Response<ApiResponse<RemindPasswordChangeBody>> {
+        return api.remindedPasswordChange(
+            "${sharedPreference.locale}/user/password/change",
+            remindChangePasswordRequest
+        )
+    }
 
     override suspend fun getDistrictsById(regionId: Int): ApiResponse<List<Address>> {
         return api.getDistrictsById(

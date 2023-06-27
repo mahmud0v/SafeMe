@@ -15,12 +15,10 @@ import safeme.uz.R
 import safeme.uz.data.remote.response.UserInfo
 import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.databinding.ScreenProfileBinding
-import safeme.uz.presentation.ui.screen.ProfileInfoScreenDirections
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
 import safeme.uz.utils.AnnouncementResult
 import safeme.uz.utils.formatBirthDay
 import safeme.uz.utils.gone
-import safeme.uz.utils.orderBirthDay
 import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
 
@@ -34,6 +32,7 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         loadUserData()
         moveToProfileEditScreen()
         backEvent()
+        editPassword()
     }
 
     private fun loadUserData() {
@@ -73,6 +72,13 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
     private fun backEvent() {
         binding.ivBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+    private fun editPassword() {
+        binding.btnEditPassword.setOnClickListener {
+            val action = ProfileScreenDirections.actionProfileScreenToPasswordRecoverScreen()
+            findNavController().navigate(action)
         }
     }
 
