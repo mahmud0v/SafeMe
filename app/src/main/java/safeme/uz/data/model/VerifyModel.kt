@@ -7,4 +7,5 @@ data class VerifyModel(
     val title: String? = null,
     val type: Int? = null,
     val password: String? = null,
+    val manageScreen:ManageScreen? = null
 ) : Serializable

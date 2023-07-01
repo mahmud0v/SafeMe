@@ -12,12 +12,15 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.databinding.ScreenResetUsernameBinding
 import safeme.uz.presentation.viewmodel.resetusername.ResetUserNameViewModel
 import safeme.uz.presentation.viewmodel.resetusername.ResetUserNameViewModelImpl
+import safeme.uz.utils.Keys
 import safeme.uz.utils.VerifyType
 import safeme.uz.utils.hideKeyboard
+import safeme.uz.utils.showKeyboard
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -28,7 +31,6 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews()
         initObservers()
     }
@@ -42,9 +44,11 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
     }
 
     private val openVerifyScreenObserver = Observer<VerifyModel> {
-        findNavController().navigate(
-          ResetUsernameScreenDirections.actionResetUsernameScreenToVerifyScreen(it)
-        )
+        val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
+        snackMessage(manageScreen.hostScreen.toString())
+        findNavController().navigate(ResetUsernameScreenDirections.actionResetUsernameScreenToVerifyScreen(
+            VerifyModel(it.phoneNumber,it.title,it.type,it.password,manageScreen)
+        ))
     }
 
     private val progressObserver = Observer<Boolean> {
@@ -63,11 +67,17 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
     private fun initViews() = with(binding) {
 
         etPhoneNumber.addTextChangedListener {
+            if (etPhoneNumber.rawText.length == 9) {
+                hideKeyboard()
+            } else {
+                showKeyboard()
+            }
             etPhoneNumberLayout.isErrorEnabled = false
         }
 
         button.setOnClickListener {
-            if (etPhoneNumber.rawText.length >= 9) viewModel.openVerifyScreen(VerifyModel(
+            if (etPhoneNumber.rawText.length >= 9) viewModel.openVerifyScreen(
+                VerifyModel(
                     "998${etPhoneNumber.rawText}",
                     getString(R.string.reset_password),
                     VerifyType.VERIFY_PASSWORD.ordinal

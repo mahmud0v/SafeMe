@@ -8,8 +8,11 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.databinding.ScreenAboutUsBinding
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
+import safeme.uz.utils.Keys
+import safeme.uz.utils.backPressDispatcher
 
 @AndroidEntryPoint
 class AboutUsScreen : Fragment(R.layout.screen_about_us) {
@@ -19,12 +22,16 @@ class AboutUsScreen : Fragment(R.layout.screen_about_us) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         moveToProfile()
         drawerClickEvent()
+        backPressDispatcher()
     }
 
     private fun moveToProfile() {
-        val action = AboutUsScreenDirections.actionAboutUsToProfileScreen()
         binding.ivProfile.setOnClickListener {
-            findNavController().navigate(action)
+            val manageScreen = ManageScreen(Keys.ABOUT_SCREEN, Keys.PROFILE_TO_EDIT)
+            val bundle = Bundle().apply {
+                putSerializable(Keys.BUNDLE_KEY, manageScreen)
+            }
+            findNavController().navigate(R.id.action_about_us_to_profileScreen,bundle)
         }
     }
 

@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.databinding.ScreenAnnouncementBinding
 import safeme.uz.databinding.ScreenAppealsBinding
+import safeme.uz.utils.backPressDispatcher
 
 @AndroidEntryPoint
 class AppealsScreen : Fragment(R.layout.screen_appeals) {
@@ -21,6 +22,7 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
         initViews()
         initLoads()
         initObservers()
+        backPressDispatcher()
     }
 
     private fun initObservers() {

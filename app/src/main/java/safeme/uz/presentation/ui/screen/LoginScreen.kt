@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.request.LoginRequest
 import safeme.uz.data.remote.response.LoginResponse
 import safeme.uz.databinding.ScreenLoginBinding
@@ -89,9 +90,11 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
     override fun onClick(v: View?): Unit = with(binding) {
         when (v) {
             forgetPasswordButton -> {
-                findNavController().navigate(
-                    LoginScreenDirections.actionLoginScreenToResetUsernameScreen()
-                )
+                val manageScreen = ManageScreen(Keys.LOGIN_SCREEN,Keys.LOGIN_TO_EDIT)
+                val bundle = Bundle().apply {
+                    putSerializable(Keys.BUNDLE_KEY,manageScreen)
+                }
+                findNavController().navigate(R.id.action_loginScreen_to_resetUsernameScreen,bundle)
             }
             loginButton -> {
                 check()

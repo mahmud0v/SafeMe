@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -115,9 +116,16 @@ fun dateParseToString(date: Date, format: String): String {
     return formatter.format(date)
 }
 
-fun Fragment.enableBackToolbar() {
-
+fun Fragment.backPressDispatcher(){
+    val callBack = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            requireActivity().finish()
+        }
+    }
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callBack)
 }
+
+
 
 fun Number.dpToPx(): Int {
     val dp = this.toFloat()

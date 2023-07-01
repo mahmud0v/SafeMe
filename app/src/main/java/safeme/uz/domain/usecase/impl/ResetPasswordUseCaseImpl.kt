@@ -46,6 +46,7 @@ class ResetPasswordUseCaseImpl @Inject constructor(
                         )
                     )
                 )
-            } else emit(ResultData.Fail(message = MessageData.Resource(R.string.user_not_found)))
+            }
+            else emit(ResultData.Fail(message = MessageData.Resource(R.string.user_not_found)))
         }.flowOn(Dispatchers.IO)
 }

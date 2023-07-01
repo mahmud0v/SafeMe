@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.databinding.ScreenChatBinding
+import safeme.uz.utils.backPressDispatcher
 
 @AndroidEntryPoint
 class ChatScreen : Fragment(R.layout.screen_chat) {
@@ -24,6 +25,7 @@ class ChatScreen : Fragment(R.layout.screen_chat) {
         initViews()
         initLoads()
         initObservers()
+        backPressDispatcher()
     }
 
     private fun initObservers() {

@@ -17,6 +17,7 @@ import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.model.DestinationArguments
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
@@ -31,6 +32,7 @@ import safeme.uz.presentation.viewmodel.game.GameScreenViewModel
 import safeme.uz.utils.AnnouncementResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.MarginItemDecoration
+import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -49,6 +51,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         loadGameCategories()
         recyclerItemClickEvent()
         moveToProfile()
+        backPressDispatcher()
 
     }
 
@@ -259,9 +262,12 @@ class GameScreen : Fragment(R.layout.screen_game) {
         }
 
     private fun moveToProfile() {
-        val action = GameScreenDirections.actionGameToProfileScreen()
         binding.ivProfile.setOnClickListener {
-            findNavController().navigate(action)
+            val manageScreen = ManageScreen(Keys.GAME_SCREEN, Keys.PROFILE_TO_EDIT)
+            val bundle = Bundle().apply {
+                putSerializable(Keys.BUNDLE_KEY, manageScreen)
+            }
+            findNavController().navigate(R.id.action_game_to_profileScreen,bundle)
         }
     }
 

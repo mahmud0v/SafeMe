@@ -60,7 +60,7 @@
                     android:background="@drawable/bg_border_disable"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
                     android:padding="@dimen/padding_standard"
                     android:textColor="@color/text_regular_color"

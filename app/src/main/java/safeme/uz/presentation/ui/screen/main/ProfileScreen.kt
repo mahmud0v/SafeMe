@@ -12,11 +12,14 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.UserInfo
 import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.databinding.ScreenProfileBinding
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.Keys
+import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.formatBirthDay
 import safeme.uz.utils.gone
 import safeme.uz.utils.snackMessage
@@ -33,6 +36,7 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         moveToProfileEditScreen()
         backEvent()
         editPassword()
+
     }
 
     private fun loadUserData() {
@@ -71,14 +75,25 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
 
     private fun backEvent() {
         binding.ivBack.setOnClickListener {
-            findNavController().navigateUp()
+            val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
+            when (manageScreen.hostScreen) {
+                Keys.RECOMMENDATION_SCREEN -> findNavController().navigate(R.id.recommendations)
+                Keys.ANNOUNCEMENT_SCREEN -> findNavController().navigate(R.id.announcements)
+                Keys.INSPECTOR_SCREEN -> findNavController().navigate(R.id.prevention_inspector)
+                Keys.GAME_SCREEN -> findNavController().navigate(R.id.screen_game)
+                Keys.ABOUT_SCREEN -> findNavController().navigate(R.id.about_us)
+                else -> { findNavController().navigateUp() }
+            }
         }
     }
 
     private fun editPassword() {
         binding.btnEditPassword.setOnClickListener {
-            val action = ProfileScreenDirections.actionProfileScreenToPasswordRecoverScreen()
-            findNavController().navigate(action)
+            val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
+            val bundle = Bundle().apply {
+                putSerializable(Keys.BUNDLE_KEY, manageScreen)
+            }
+            findNavController().navigate(R.id.action_profileScreen_to_passwordRecoverScreen, bundle)
         }
     }
 

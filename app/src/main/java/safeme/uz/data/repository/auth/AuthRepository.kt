@@ -21,7 +21,7 @@ interface AuthRepository {
     suspend fun verifyCodeForPassword(verification_code: String): ApiResponse<VerifyResetPasswordResponse>
     suspend fun resetPinCode(): ApiResponse<ResetPinCodeResponse>
     suspend fun verifyPinCode(verificationCode: String): ApiResponse<Unit>
-    suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ApiResponse<String>
+    suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ApiResponse<PasswordUpdateBody>
     suspend fun getRegions(): ApiResponse<AddressResponse>
     suspend fun getDistrictsById(regionId: Int): ApiResponse<List<Address>>
     suspend fun getMFYById(districtId: Int): ApiResponse<List<Address>>

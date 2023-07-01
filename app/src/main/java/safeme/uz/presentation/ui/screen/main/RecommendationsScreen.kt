@@ -11,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.databinding.ScreenRecommendationBinding
@@ -18,6 +19,10 @@ import safeme.uz.presentation.ui.adapter.RecommendationViewPagerAdapter
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.recommendation.RecommendationViewModel
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.Keys
+import safeme.uz.utils.Keys.PROFILE_TO_EDIT
+import safeme.uz.utils.Keys.RECOMMENDATION_SCREEN
+import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -32,6 +37,7 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
         loadData()
         eventBackListener()
         moveToProfile()
+        backPressDispatcher()
 
     }
 
@@ -61,9 +67,12 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
 
     private fun moveToProfile() {
         requireActivity().window.setBackgroundDrawableResource(R.drawable.bg_main)
-        val recommendationActionToProfile = RecommendationsScreenDirections.actionRecommendationsToProfileScreen()
+        val manageScreen = ManageScreen(RECOMMENDATION_SCREEN, PROFILE_TO_EDIT)
+        val bundle = Bundle().apply {
+            putSerializable(Keys.BUNDLE_KEY, manageScreen)
+        }
         binding.ivProfile.setOnClickListener {
-            findNavController().navigate(recommendationActionToProfile)
+            findNavController().navigate(R.id.action_recommendations_to_profileScreen, bundle)
         }
     }
 

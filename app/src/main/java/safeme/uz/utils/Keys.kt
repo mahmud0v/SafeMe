@@ -1,7 +1,5 @@
 package safeme.uz.utils
 
-import safeme.uz.data.remote.request.AnnouncementNewsRequest
-
 object Keys {
     const val PARENT = 0
     const val CHILD = 1
@@ -84,5 +82,12 @@ object Keys {
     const val LOGIN_TO_EDIT = "login_to_edit"
     const val PROFILE_TO_EDIT = "profile_to_edit"
     const val PROFILE_BUNDLE = "profile_bundle"
+    const val RECOMMENDATION_SCREEN = "RecommendationsScreen"
+    const val ANNOUNCEMENT_SCREEN = "AnnouncementScreen"
+    const val GAME_SCREEN = "GameScreen"
+    const val INSPECTOR_SCREEN = "InspectorScreen"
+    const val ABOUT_SCREEN = "AboutUsScreen"
+    const val LOGIN_SCREEN = "LoginScreen"
+
 
 }

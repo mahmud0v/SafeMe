@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.data.model.CategoriesData
-import safeme.uz.data.remote.request.AnnouncementCategoryRequest
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.databinding.ScreenAnnouncementBinding
 import safeme.uz.presentation.ui.adapter.AnnouncementViewPagerAdapter
@@ -20,6 +20,7 @@ import safeme.uz.presentation.viewmodel.announcement.AnnouncementViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.utils.AnnouncementResult
 import safeme.uz.utils.Keys
+import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.isConnected
 import safeme.uz.utils.snackMessage
 
@@ -35,7 +36,7 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
         initLoadData()
         manageDrawerLayout()
         moveToProfile()
-
+        backPressDispatcher()
 
     }
 
@@ -79,10 +80,12 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
     }
 
     private fun moveToProfile() {
-        val announcementActionToProfile =
-            AnnouncementScreenDirections.actionAnnouncementsToProfileScreen()
+        val manageScreen = ManageScreen(Keys.ANNOUNCEMENT_SCREEN, Keys.PROFILE_TO_EDIT)
+        val bundle = Bundle().apply {
+            putSerializable(Keys.BUNDLE_KEY, manageScreen)
+        }
         binding.ivProfile.setOnClickListener {
-            findNavController().navigate(announcementActionToProfile)
+            findNavController().navigate(R.id.action_announcements_to_profileScreen,bundle)
         }
     }
 

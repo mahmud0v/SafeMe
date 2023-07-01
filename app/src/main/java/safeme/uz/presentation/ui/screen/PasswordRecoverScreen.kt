@@ -17,6 +17,7 @@ import safeme.uz.data.remote.response.RemindPasswordChangeBody
 import safeme.uz.databinding.ScreenPasswordRecoverBinding
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.Keys
 import safeme.uz.utils.disable
 import safeme.uz.utils.enable
 import safeme.uz.utils.snackMessage
@@ -52,6 +53,7 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
         }
 
         binding.reNewPasswordEdit.addTextChangedListener {
+            binding.reNewPasswordLayout.isErrorEnabled = false
             reNewPasswordStateResult = it.toString().length >= 6
             buttonEnabledState()
 
@@ -61,7 +63,11 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
 
     private fun forgotPassword() {
         binding.allReadyMemberButton.setOnClickListener {
-            findNavController().navigate(R.id.resetUsernameScreen)
+            val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY)
+            val bundle = Bundle().apply {
+                putSerializable(Keys.BUNDLE_KEY,manageScreen)
+            }
+            findNavController().navigate(R.id.resetUsernameScreen, bundle)
         }
     }
 
@@ -75,8 +81,9 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
 
     private fun buttonClickEvent() {
         binding.button.setOnClickListener {
-            if (binding.newPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString()&&
-                    binding.reNewPasswordEdit.text.toString()!= binding.oldPasswordEdit.text.toString()) {
+            if (binding.newPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString() &&
+                binding.reNewPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString()
+            ) {
                 viewModel.remindPasswordChange(
                     RemindChangePasswordRequest(
                         binding.oldPasswordEdit.text.toString(),
@@ -89,7 +96,7 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
                     remindChangePasswordObserver
                 )
             } else {
-                snackMessage(getString(R.string.not_same_new_old_password))
+                binding.reNewPasswordLayout.error = getString(R.string.not_same_new_old_password)
             }
         }
     }

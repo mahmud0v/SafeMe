@@ -1,6 +1,7 @@
 package safeme.uz.presentation.viewmodel.verify
 
 import androidx.lifecycle.LiveData
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.request.RegisterRequest
 import safeme.uz.data.remote.request.VerifyRegisterRequest
@@ -18,7 +19,7 @@ interface VerifyViewModel {
     val timeLiveData : LiveData<Long>
     val timeStatus : LiveData<Boolean>
 
-    fun verifyCodeForPassword(verification_code: String)
+    fun verifyCodeForPassword(verification_code: String,manageScreen: ManageScreen?)
     fun verifyCodeRegister(verifyRegisterRequest: VerifyRegisterRequest)
     fun verifyCodeForPin(verification_code: String)
 

@@ -81,7 +81,7 @@ interface AuthApiService {
     suspend fun resetPassword(
         @Url url: String,
         @Body resetPasswordRequest: ResetPasswordRequest
-    ): ApiResponse<String>
+    ): ApiResponse<PasswordUpdateBody>
 
     @GET
     suspend fun getRegions(@Url url: String): ApiResponse<AddressResponse>

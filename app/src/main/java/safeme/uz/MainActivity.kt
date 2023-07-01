@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -27,14 +29,16 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by viewBinding()
     private var appUpdateManager: AppUpdateManager? = null
     private val remindListenerViewModel: RemindListenerViewModel by viewModels()
+    private lateinit var navHostFragment:NavHostFragment
     private val MY_REQUEST_CODE = 1001
     private var intentValue: String? = null
+
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navHostFragment =
+        navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         binding.navigationView.setupWithNavController(navHostFragment.navController)
         when (navHostFragment.navController.currentDestination?.id) {
@@ -116,4 +120,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

@@ -7,12 +7,24 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import safeme.uz.data.model.*
-import safeme.uz.data.remote.request.RegisterRequest
+import safeme.uz.data.model.ManageScreen
+import safeme.uz.data.model.VerifyModel
+import safeme.uz.data.model.asResource
+import safeme.uz.data.model.asSuccess
+import safeme.uz.data.model.asText
+import safeme.uz.data.model.onResource
+import safeme.uz.data.model.onSuccess
+import safeme.uz.data.model.onText
 import safeme.uz.data.remote.request.VerifyRegisterRequest
 import safeme.uz.data.remote.response.VerifyRegisterResponse
 import safeme.uz.data.remote.response.VerifyResetPasswordResponse
-import safeme.uz.domain.usecase.*
+import safeme.uz.domain.usecase.ForgetPasswordUseCase
+import safeme.uz.domain.usecase.RegisterUseCase
+import safeme.uz.domain.usecase.ResetPinCodeUseCase
+import safeme.uz.domain.usecase.VerifyPinCodeUseCase
+import safeme.uz.domain.usecase.VerifyRegisterUseCase
+import safeme.uz.domain.usecase.VerifyResetPasswordUseCase
+import safeme.uz.utils.Keys
 import javax.inject.Inject
 
 @HiltViewModel
@@ -72,13 +84,18 @@ class VerifyViewModelImpl @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    override fun verifyCodeForPassword(verification_code: String) {
+    override fun verifyCodeForPassword(verification_code: String, manageScreen: ManageScreen?) {
         progressLiveData.value = true
         verifyResetPasswordUseCase.invoke(verification_code).onEach {
             progressLiveData.value = false
             it.onSuccess {
-                val data = it.asSuccess.data
-                openResetPasswordScreenLiveData.value = data
+                if (manageScreen?.secondaryScreen == Keys.PROFILE_TO_EDIT) {
+                    openResetPasswordScreenLiveData.value =
+                        VerifyResetPasswordResponse(Keys.PROFILE_TO_EDIT)
+                } else {
+                    val data = it.asSuccess.data
+                    openResetPasswordScreenLiveData.value = data
+                }
             }
             it.onResource {
                 val error = it.asResource.resourceId

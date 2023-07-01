@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,12 +15,15 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.databinding.ScreenInspectorBinding
 import safeme.uz.presentation.ui.adapter.InspectorRecyclerAdapter
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.inspector.InspectorScreenViewModel
 import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.Keys
+import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.gone
 import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
@@ -38,6 +42,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
         initRecyclerView()
         callInspector()
         moveToProfile()
+        backPressDispatcher()
     }
 
 
@@ -84,8 +89,12 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
 
     private fun moveToProfile(){
         binding.ivProfile.setOnClickListener {
-            val action = InspectorScreenDirections.actionPreventionInspectorToProfileScreen()
-            findNavController().navigate(action)
+            val manageScreen = ManageScreen(Keys.INSPECTOR_SCREEN, Keys.PROFILE_TO_EDIT)
+            val bundle = Bundle().apply {
+                putSerializable(Keys.BUNDLE_KEY, manageScreen)
+            }
+            findNavController().navigate(R.id.action_prevention_inspector_to_profileScreen,bundle)
         }
     }
+
 }

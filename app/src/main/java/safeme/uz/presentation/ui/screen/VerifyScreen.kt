@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.request.VerifyRegisterRequest
 import safeme.uz.data.remote.response.VerifyRegisterResponse
@@ -75,11 +76,20 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
 
 
     private val openResetPasswordScreenObserver = Observer<VerifyResetPasswordResponse> {
-        findNavController().navigate(R.id.action_verifyScreen_to_resetPasswordScreen)
+        val bundle = Bundle().apply {
+            putSerializable(Keys.BUNDLE_KEY,navArgs.model.manageScreen)
+        }
+        if (it.response == Keys.PROFILE_TO_EDIT) {
+            findNavController().navigate(R.id.action_verifyScreen_to_resetPasswordScreen, bundle)
+        } else {
+            findNavController().navigate(R.id.action_verifyScreen_to_resetPasswordScreen,bundle)
+
+        }
     }
 
     private val openProfileScreenObserver = Observer<VerifyRegisterResponse> {
         findNavController().navigate(R.id.action_verifyScreen_to_profileInfoScreen)
+
     }
 
     private val openPinScreenObserver = Observer<Unit> {
@@ -87,6 +97,7 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
             R.id.action_verifyScreen_to_pinCodeScreen,
             bundleOf(Keys.PIN_BUNDLE_KEY to Keys.PIN_CREATE_AFTER_LOGIN)
         )
+
     }
 
     private val resendSmsCodeObserver = Observer<Boolean> {
@@ -104,15 +115,25 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
         etVerificationCode.addTextChangedListener {
             etVerificationCodeLayout.isErrorEnabled = false
             it?.let {
-                if (it.length == 4) button.enable()
-                else button.disable()
+                if (it.length == 4) {
+                    button.enable()
+                    hideKeyboard()
+                } else button.disable()
             }
         }
 
         button.setOnClickListener {
             when (navArgs.model.type) {
                 VerifyType.VERIFY_PASSWORD.ordinal -> {
-                    viewModel.verifyCodeForPassword(etVerificationCode.text.toString())
+                    val manageScreen = navArgs.model.manageScreen as ManageScreen
+                    if (manageScreen.secondaryScreen == Keys.PROFILE_TO_EDIT) {
+                        viewModel.verifyCodeForPassword(
+                            etVerificationCode.text.toString(),
+                            manageScreen
+                        )
+                    } else {
+                        viewModel.verifyCodeForPassword(etVerificationCode.text.toString(), null)
+                    }
                 }
 
                 VerifyType.VERIFY_REGISTER.ordinal -> {
@@ -137,12 +158,14 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
                 VerifyType.VERIFY_PASSWORD.ordinal -> {
                     viewModel.resendCodeForPassword(navArgs.model.phoneNumber)
                 }
+
                 VerifyType.VERIFY_REGISTER.ordinal -> {
                     val phone = navArgs.model.phoneNumber
                     val password = navArgs.model.password
                     val registerRequest = VerifyModel(phoneNumber = phone, password = password)
                     viewModel.resendCodeForRegister(registerRequest)
                 }
+
                 VerifyType.VERIFY_PINCODE.ordinal -> {
                     viewModel.resendCodeForPinCode()
                 }

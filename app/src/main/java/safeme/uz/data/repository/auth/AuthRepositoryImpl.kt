@@ -94,7 +94,7 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ApiResponse<String> {
+    override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ApiResponse<PasswordUpdateBody> {
         resetPasswordRequest.session_id = sharedPreference.sessionId
         return api.resetPassword(
             "${sharedPreference.locale}/user/password/update", resetPasswordRequest
