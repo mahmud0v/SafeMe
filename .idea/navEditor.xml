@@ -702,8 +702,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1032" />
-                            <option name="y" value="1855" />
+                            <option name="x" value="657" />
+                            <option name="y" value="2007" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -728,8 +728,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1892" />
-                            <option name="y" value="2504" />
+                            <option name="x" value="-2019" />
+                            <option name="y" value="1949" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -752,6 +752,11 @@
                               </value>
                             </entry>
                             <entry key="action_announcements_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_announcements_to_sosScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -802,6 +807,11 @@
                               </value>
                             </entry>
                             <entry key="action_game_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_game_to_sosScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1016,6 +1026,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_recommendations_to_sosScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -1058,7 +1073,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_resetPasswordScreen_to_recommendations">
+                            <entry key="action_resetPasswordScreen_to_profileScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1085,6 +1100,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="sosScreen">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-2032" />
+                            <option name="y" value="2830" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

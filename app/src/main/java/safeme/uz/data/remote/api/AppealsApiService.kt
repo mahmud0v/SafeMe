@@ -5,9 +5,11 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Url
 import safeme.uz.data.model.ApiResponse
+import safeme.uz.data.model.SosBody
 import safeme.uz.data.remote.request.DistrictByIdRequest
 import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.request.NeighborhoodRequest
+import safeme.uz.data.remote.request.SosRequest
 import safeme.uz.data.remote.response.DistrictInfo
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.data.remote.response.NeighborhoodInfo
@@ -40,6 +42,13 @@ interface AppealsApiService {
         @Url url: String,
         @Body neighborhoodRequest: NeighborhoodRequest
     ):Response<ApiResponse<ArrayList<NeighborhoodInfo>>>
+
+
+    @POST
+    suspend fun sosNotified(
+        @Url url: String,
+        @Body sosRequest: SosRequest
+    ):Response<ApiResponse<SosBody>>
 
 
 

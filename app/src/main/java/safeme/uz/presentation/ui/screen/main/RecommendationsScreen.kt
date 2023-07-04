@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
@@ -18,7 +19,7 @@ import safeme.uz.databinding.ScreenRecommendationBinding
 import safeme.uz.presentation.ui.adapter.RecommendationViewPagerAdapter
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.recommendation.RecommendationViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.Keys.PROFILE_TO_EDIT
 import safeme.uz.utils.Keys.RECOMMENDATION_SCREEN
@@ -30,6 +31,7 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
     private val binding: ScreenRecommendationBinding by viewBinding()
     private val viewModel: RecommendationViewModel by viewModels()
     private val remindViewModel: RemindListenerViewModel by activityViewModels()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +39,9 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
         loadData()
         eventBackListener()
         moveToProfile()
+        moveToSOS()
         backPressDispatcher()
+
 
     }
 
@@ -47,10 +51,10 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
 
 
     private val ageCategoryObserver =
-        Observer<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>> {
+        Observer<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>> {
             when (it) {
-                is AnnouncementResult.Success -> initView(it.data?.body)
-                is AnnouncementResult.Error -> snackMessage(it.data?.message!!)
+                is RemoteApiResult.Success -> initView(it.data?.body)
+                is RemoteApiResult.Error -> snackMessage(it.data?.message!!)
                 else -> {}
             }
         }
@@ -80,6 +84,14 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
         binding.ivMenu.setOnClickListener {
             remindViewModel.remindInFragment(true)
         }
+    }
+
+    private fun moveToSOS() {
+        binding.ivSOS.setOnClickListener {
+            val action = RecommendationsScreenDirections.actionRecommendationsToSosScreen()
+            findNavController().navigate(action)
+        }
+
     }
 
 

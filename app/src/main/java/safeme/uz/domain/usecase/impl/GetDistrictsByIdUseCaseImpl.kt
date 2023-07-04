@@ -15,7 +15,7 @@ import safeme.uz.data.remote.response.DistrictInfo
 import safeme.uz.data.repository.appeal.AppealRepository
 import safeme.uz.data.repository.auth.AuthRepository
 import safeme.uz.domain.usecase.GetDistrictsByIdUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.isConnected
 import javax.inject.Inject
 
@@ -49,14 +49,14 @@ class GetDistrictsByIdUseCaseImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    override fun getDistrictsByRegion(districtByIdRequest: DistrictByIdRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<DistrictInfo>>>> {
+    override fun getDistrictsByRegion(districtByIdRequest: DistrictByIdRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<DistrictInfo>>>> {
         return flow {
             val response = appealRepository.getDistrictsByRegion(districtByIdRequest)
             val code = response.body()?.code
             if (code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }

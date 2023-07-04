@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -21,7 +20,7 @@ import safeme.uz.databinding.ScreenInspectorBinding
 import safeme.uz.presentation.ui.adapter.InspectorRecyclerAdapter
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.inspector.InspectorScreenViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.gone
@@ -42,6 +41,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
         initRecyclerView()
         callInspector()
         moveToProfile()
+        moveToSOS()
         backPressDispatcher()
     }
 
@@ -58,11 +58,11 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
 
 
     private val inspectorObserver =
-        Observer<AnnouncementResult<ApiResponse<ArrayList<InspectorInfo>>>> {
+        Observer<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>> {
             when (it) {
-                is AnnouncementResult.Success -> attachInspectorData(it.data?.body)
-                is AnnouncementResult.Error -> snackMessage(it.data?.message!!)
-                is AnnouncementResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Success -> attachInspectorData(it.data?.body)
+                is RemoteApiResult.Error -> snackMessage(it.data?.message!!)
+                is RemoteApiResult.Loading -> binding.progress.visible()
             }
         }
 
@@ -95,6 +95,14 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
             }
             findNavController().navigate(R.id.action_prevention_inspector_to_profileScreen,bundle)
         }
+    }
+
+    private fun moveToSOS(){
+        binding.ivSOS.setOnClickListener {
+            val action = InspectorScreenDirections.actionPreventionInspectorToSosScreen()
+            findNavController().navigate(action)
+        }
+
     }
 
 }

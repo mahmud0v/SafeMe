@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.PasswordRecoverRequest
@@ -17,7 +16,7 @@ import safeme.uz.data.remote.response.PasswordUpdateBody
 import safeme.uz.data.remote.response.RemindPasswordChangeBody
 import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.domain.usecase.ProfileUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,26 +24,26 @@ class ProfileScreenViewModel @Inject constructor(
     private val profileUseCase: ProfileUseCase,
 ) : ViewModel() {
 
-    private val userInfoMutableLiveData = MutableLiveData<AnnouncementResult<UserResponse>>()
-    val userInfoLiveData: LiveData<AnnouncementResult<UserResponse>> = userInfoMutableLiveData
+    private val userInfoMutableLiveData = MutableLiveData<RemoteApiResult<UserResponse>>()
+    val userInfoLiveData: LiveData<RemoteApiResult<UserResponse>> = userInfoMutableLiveData
 
     private val passwordRecoverMutableLiveData =
-        MutableLiveData<AnnouncementResult<PasswordRecoverResponse>>()
-    val passwordRecoverLiveData: LiveData<AnnouncementResult<PasswordRecoverResponse>> =
+        MutableLiveData<RemoteApiResult<PasswordRecoverResponse>>()
+    val passwordRecoverLiveData: LiveData<RemoteApiResult<PasswordRecoverResponse>> =
         passwordRecoverMutableLiveData
 
     private val passwordVerificationMutableLiveData =
-        MutableLiveData<AnnouncementResult<PasswordRecoverResponse>>()
-    val passwordVerificationLiveData: LiveData<AnnouncementResult<PasswordRecoverResponse>> =
+        MutableLiveData<RemoteApiResult<PasswordRecoverResponse>>()
+    val passwordVerificationLiveData: LiveData<RemoteApiResult<PasswordRecoverResponse>> =
         passwordVerificationMutableLiveData
 
     private val passwordUpdateMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<PasswordUpdateBody>>>()
-    val passwordUpdateLiveData: LiveData<AnnouncementResult<ApiResponse<PasswordUpdateBody>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<PasswordUpdateBody>>>()
+    val passwordUpdateLiveData: LiveData<RemoteApiResult<ApiResponse<PasswordUpdateBody>>> =
         passwordUpdateMutableLiveData
 
-    private val remindChangePasswordMutableLiveData = MutableLiveData<AnnouncementResult<ApiResponse<RemindPasswordChangeBody>>>()
-    val remindChangePasswordLiveData:LiveData<AnnouncementResult<ApiResponse<RemindPasswordChangeBody>>> = remindChangePasswordMutableLiveData
+    private val remindChangePasswordMutableLiveData = MutableLiveData<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>>()
+    val remindChangePasswordLiveData:LiveData<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> = remindChangePasswordMutableLiveData
 
 
 

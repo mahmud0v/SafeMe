@@ -17,11 +17,12 @@ import safeme.uz.utils.backPressDispatcher
 @AndroidEntryPoint
 class AboutUsScreen : Fragment(R.layout.screen_about_us) {
     private val binding: ScreenAboutUsBinding by viewBinding()
-    private val remindViewModel:RemindListenerViewModel by activityViewModels()
+    private val remindViewModel: RemindListenerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         moveToProfile()
         drawerClickEvent()
+        moveToSOS()
         backPressDispatcher()
     }
 
@@ -31,17 +32,23 @@ class AboutUsScreen : Fragment(R.layout.screen_about_us) {
             val bundle = Bundle().apply {
                 putSerializable(Keys.BUNDLE_KEY, manageScreen)
             }
-            findNavController().navigate(R.id.action_about_us_to_profileScreen,bundle)
+            findNavController().navigate(R.id.action_about_us_to_profileScreen, bundle)
         }
     }
 
-    private fun drawerClickEvent(){
+    private fun drawerClickEvent() {
         binding.ivMenu.setOnClickListener {
             remindViewModel.remindInFragment(true)
         }
     }
 
+    private fun moveToSOS() {
+        binding.ivSOS.setOnClickListener {
+            val action = AboutUsScreenDirections.actionAboutUsToSosScreen()
+            findNavController().navigate(action)
+        }
 
+    }
 
 
 }

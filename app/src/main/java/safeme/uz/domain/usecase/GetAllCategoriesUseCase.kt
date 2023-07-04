@@ -14,28 +14,28 @@ import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.data.remote.response.RecommendationResponse
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 
 interface GetAllCategoriesUseCase {
 
-    fun getAllCategories(announcementCategoryRequest: AnnouncementCategoryRequest): Flow<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>
+    fun getAllCategories(announcementCategoryRequest: AnnouncementCategoryRequest): Flow<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>
 
-    fun getAllNewsByCategory(categoryId: String): Flow<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>>
+    fun getAllNewsByCategory(categoryId: String): Flow<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>>
 
-    fun getNewsById(id: Int): Flow<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>>
+    fun getNewsById(id: Int): Flow<RemoteApiResult<AnnouncementCategoryResponse<NewsData>>>
 
-    fun getAgeCategory(): Flow<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>>
+    fun getAgeCategory(): Flow<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>>
 
-    fun getRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<AnnouncementResult<AgeCategoryResponse<RecommendationInfo>>>
+    fun getRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<RemoteApiResult<AgeCategoryResponse<RecommendationInfo>>>
 
-    fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest): Flow<AnnouncementResult<RecommendationInfoResponse>>
+    fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest): Flow<RemoteApiResult<RecommendationInfoResponse>>
 
-    fun getRecommendationById(id: Int): Flow<AnnouncementResult<RecommendationResponse>>
+    fun getRecommendationById(id: Int): Flow<RemoteApiResult<RecommendationResponse>>
 
-    fun getGameRecommendationByAge(ageCategoryRequest: AgeCategoryRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>
+    fun getGameRecommendationByAge(ageCategoryRequest: AgeCategoryRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>
 
-    fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>
+    fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>
 
-    fun getGameById(id:Int):Flow<AnnouncementResult<ApiResponse<GameRecommendationResponse>>>
+    fun getGameById(id:Int):Flow<RemoteApiResult<ApiResponse<GameRecommendationResponse>>>
 
 }

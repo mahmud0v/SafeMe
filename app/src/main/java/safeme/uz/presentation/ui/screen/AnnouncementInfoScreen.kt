@@ -1,6 +1,5 @@
 package safeme.uz.presentation.ui.screen
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -21,7 +20,7 @@ import safeme.uz.data.remote.response.RecommendationResponse
 import safeme.uz.databinding.ScreenAnnouncementsInfoBinding
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementInfoViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
@@ -78,31 +77,31 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
     }
 
     private val newsObserver =
-        Observer<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>>() {
+        Observer<RemoteApiResult<AnnouncementCategoryResponse<NewsData>>>() {
             when (it) {
-                is AnnouncementResult.Success -> loadNews(it.data?.body!!)
-                is AnnouncementResult.Error -> snackMessage(it.message!!)
-                is AnnouncementResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Success -> loadNews(it.data?.body!!)
+                is RemoteApiResult.Error -> snackMessage(it.message!!)
+                is RemoteApiResult.Loading -> binding.progress.visible()
             }
         }
 
-    private val recommendationObserver = Observer<AnnouncementResult<RecommendationResponse>> {
+    private val recommendationObserver = Observer<RemoteApiResult<RecommendationResponse>> {
         when (it) {
-            is AnnouncementResult.Success -> loadRecommendation(it.data?.body!!)
-            is AnnouncementResult.Loading -> binding.progress.visible()
-            is AnnouncementResult.Error -> snackMessage(it.message!!)
+            is RemoteApiResult.Success -> loadRecommendation(it.data?.body!!)
+            is RemoteApiResult.Loading -> binding.progress.visible()
+            is RemoteApiResult.Error -> snackMessage(it.message!!)
         }
     }
 
     private val gameObserver =
-        Observer<AnnouncementResult<ApiResponse<GameRecommendationResponse>>> {
+        Observer<RemoteApiResult<ApiResponse<GameRecommendationResponse>>> {
             when (it) {
-                is AnnouncementResult.Success -> loadGame(it.data?.body)
-                is AnnouncementResult.Loading -> {
+                is RemoteApiResult.Success -> loadGame(it.data?.body)
+                is RemoteApiResult.Loading -> {
                     binding.progress.show()
                 }
 
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Error -> {
                     binding.progress.hide()
                     snackMessage(it.data?.message!!)
                 }

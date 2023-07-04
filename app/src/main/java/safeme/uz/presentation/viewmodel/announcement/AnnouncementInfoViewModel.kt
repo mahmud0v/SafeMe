@@ -12,7 +12,7 @@ import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationResponse
 import safeme.uz.domain.usecase.GetAllCategoriesUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,18 +20,18 @@ class AnnouncementInfoViewModel @Inject constructor(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
 ) : ViewModel() {
     private val getNewsByIdMutableLiveData =
-        MutableLiveData<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>>()
-    val getNewsByIdLiveData: LiveData<AnnouncementResult<AnnouncementCategoryResponse<NewsData>>> =
+        MutableLiveData<RemoteApiResult<AnnouncementCategoryResponse<NewsData>>>()
+    val getNewsByIdLiveData: LiveData<RemoteApiResult<AnnouncementCategoryResponse<NewsData>>> =
         getNewsByIdMutableLiveData
 
     private val getRecommendationMutableLiveData =
-        MutableLiveData<AnnouncementResult<RecommendationResponse>>()
-    val getRecommendationLiveData: LiveData<AnnouncementResult<RecommendationResponse>> =
+        MutableLiveData<RemoteApiResult<RecommendationResponse>>()
+    val getRecommendationLiveData: LiveData<RemoteApiResult<RecommendationResponse>> =
         getRecommendationMutableLiveData
 
     private val getGameByIdMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<GameRecommendationResponse>>>()
-    val getGameByIdLiveData: LiveData<AnnouncementResult<ApiResponse<GameRecommendationResponse>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<GameRecommendationResponse>>>()
+    val getGameByIdLiveData: LiveData<RemoteApiResult<ApiResponse<GameRecommendationResponse>>> =
         getGameByIdMutableLiveData
 
 

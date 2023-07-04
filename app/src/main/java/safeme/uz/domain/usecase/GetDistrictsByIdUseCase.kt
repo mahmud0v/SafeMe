@@ -6,10 +6,10 @@ import safeme.uz.data.model.ResultData
 import safeme.uz.data.remote.request.DistrictByIdRequest
 import safeme.uz.data.remote.response.Address
 import safeme.uz.data.remote.response.DistrictInfo
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 
 interface GetDistrictsByIdUseCase {
     operator fun invoke(regionId: Int): Flow<ResultData<List<Address>>>
 
-    fun getDistrictsByRegion(districtByIdRequest: DistrictByIdRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<DistrictInfo>>>>
+    fun getDistrictsByRegion(districtByIdRequest: DistrictByIdRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<DistrictInfo>>>>
 }

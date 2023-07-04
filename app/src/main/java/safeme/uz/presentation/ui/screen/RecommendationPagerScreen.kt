@@ -24,7 +24,7 @@ import safeme.uz.presentation.ui.adapter.RecommendationAdapter
 import safeme.uz.presentation.ui.adapter.RecommendationInfoAdapter
 import safeme.uz.presentation.ui.screen.main.RecommendationsScreenDirections
 import safeme.uz.presentation.viewmodel.recommendation.RecommendationPagerViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.MarginItemDecoration
 import safeme.uz.utils.gone
@@ -69,11 +69,11 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
 
 
     private val recommendationObserves =
-        Observer<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
+        Observer<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
             when (it) {
-                is AnnouncementResult.Success -> setDataRecommends(it.data?.body)
-                is AnnouncementResult.Loading -> binding.progress.visible()
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Success -> setDataRecommends(it.data?.body)
+                is RemoteApiResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Error -> {
                     binding.progress.gone()
                 }
             }
@@ -81,11 +81,11 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
 
 
     private val recommendationInfoObserver =
-        Observer<AnnouncementResult<RecommendationInfoResponse>> {
+        Observer<RemoteApiResult<RecommendationInfoResponse>> {
             when (it) {
-                is AnnouncementResult.Success -> setRecommendsAgeInfo(it.data?.body)
-                is AnnouncementResult.Loading -> binding.progress.visible()
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Success -> setRecommendsAgeInfo(it.data?.body)
+                is RemoteApiResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Error -> {
                     binding.progress.gone()
                 }
             }
@@ -119,15 +119,15 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
     }
 
     private val recommendationByCategoryObserver =
-        Observer<AnnouncementResult<AgeCategoryResponse<RecommendationInfo>>> {
+        Observer<RemoteApiResult<AgeCategoryResponse<RecommendationInfo>>> {
             when (it) {
-                is AnnouncementResult.Success -> setRecommendsCategoryInfo(it.data?.body)
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Success -> setRecommendsCategoryInfo(it.data?.body)
+                is RemoteApiResult.Error -> {
                     binding.progress.invisible()
                     setRecommendsCategoryInfo(null)
                 }
 
-                is AnnouncementResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Loading -> binding.progress.visible()
             }
         }
 

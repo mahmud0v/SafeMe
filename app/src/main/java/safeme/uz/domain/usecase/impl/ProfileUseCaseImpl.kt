@@ -13,68 +13,68 @@ import safeme.uz.data.remote.response.RemindPasswordChangeBody
 import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.data.repository.auth.AuthRepository
 import safeme.uz.domain.usecase.ProfileUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
 
 class ProfileUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository
 ) : ProfileUseCase {
 
-    override fun getUserInfo(): Flow<AnnouncementResult<UserResponse>> {
+    override fun getUserInfo(): Flow<RemoteApiResult<UserResponse>> {
         return flow {
-            emit(AnnouncementResult.Loading())
+            emit(RemoteApiResult.Loading())
             val response = authRepository.getUserInfo()
             val code = response.body()?.code
             if (code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }
 
-    override fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest): Flow<AnnouncementResult<PasswordRecoverResponse>> {
+    override fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest): Flow<RemoteApiResult<PasswordRecoverResponse>> {
         return flow {
             val response = authRepository.passwordRecover(passwordRecoverRequest)
             if (response.body()?.code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }
 
-    override fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest): Flow<AnnouncementResult<PasswordRecoverResponse>> {
+    override fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest): Flow<RemoteApiResult<PasswordRecoverResponse>> {
         return flow {
             val response = authRepository.passwordVerification(verifyRegisterRequest)
             if (response.body()?.code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.message()))
+                emit(RemoteApiResult.Error(response.message()))
             }
         }
     }
 
-    override fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest): Flow<AnnouncementResult<ApiResponse<PasswordUpdateBody>>> {
+    override fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest): Flow<RemoteApiResult<ApiResponse<PasswordUpdateBody>>> {
         return flow {
-            emit(AnnouncementResult.Loading())
+            emit(RemoteApiResult.Loading())
             val response = authRepository.passwordUpdate(resetPasswordRequest)
             if (response.body()?.code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.message()))
+                emit(RemoteApiResult.Error(response.message()))
             }
         }
     }
 
-    override fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Flow<AnnouncementResult<ApiResponse<RemindPasswordChangeBody>>> {
+    override fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Flow<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> {
         return flow {
-            emit(AnnouncementResult.Loading())
+            emit(RemoteApiResult.Loading())
             val response = authRepository.remindPasswordChange(remindChangePasswordRequest)
             if (response.body()?.code==200){
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             }else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }

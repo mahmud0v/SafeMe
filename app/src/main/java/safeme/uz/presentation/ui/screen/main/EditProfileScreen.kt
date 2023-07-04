@@ -21,7 +21,7 @@ import safeme.uz.data.remote.response.RegionInfo
 import safeme.uz.data.remote.response.UserUpdateResponse
 import safeme.uz.databinding.ScreenEditProfileBinding
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileEditScreenViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.presentation.ui.adapter.SpinnerAdapter
 import safeme.uz.utils.Util
 import safeme.uz.utils.disable
@@ -244,13 +244,13 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
     }
 
 
-    private val regionObserver = Observer<AnnouncementResult<ApiResponse<ArrayList<RegionInfo>>>> {
+    private val regionObserver = Observer<RemoteApiResult<ApiResponse<ArrayList<RegionInfo>>>> {
         when (it) {
-            is AnnouncementResult.Success -> {
+            is RemoteApiResult.Success -> {
                 regionAttach(it.data?.body)
             }
 
-            is AnnouncementResult.Error -> {
+            is RemoteApiResult.Error -> {
                 regionAttach(null)
             }
 
@@ -340,31 +340,31 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
 
 
     private val districtObserver =
-        Observer<AnnouncementResult<ApiResponse<ArrayList<DistrictInfo>>>> {
+        Observer<RemoteApiResult<ApiResponse<ArrayList<DistrictInfo>>>> {
             when (it) {
-                is AnnouncementResult.Success -> {
+                is RemoteApiResult.Success -> {
                     districtAttach(it.data?.body)
                 }
 
-                is AnnouncementResult.Error -> districtAttach(null)
+                is RemoteApiResult.Error -> districtAttach(null)
 
                 else -> {}
             }
 
         }
 
-    private val userUpdateObserver = Observer<AnnouncementResult<ApiResponse<UserUpdateResponse>>> {
+    private val userUpdateObserver = Observer<RemoteApiResult<ApiResponse<UserUpdateResponse>>> {
         when (it) {
-            is AnnouncementResult.Success -> {
+            is RemoteApiResult.Success -> {
                 binding.progress.gone()
                 snackMessage(it.data?.message!!)
             }
 
-            is AnnouncementResult.Loading -> {
+            is RemoteApiResult.Loading -> {
                 binding.progress.visible()
             }
 
-            is AnnouncementResult.Error -> {
+            is RemoteApiResult.Error -> {
                 binding.progress.gone()
                 snackMessage(it.message!!)
             }
@@ -372,11 +372,11 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
     }
 
     private val mfyObserver =
-        Observer<AnnouncementResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> {
+        Observer<RemoteApiResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> {
             when (it) {
-                is AnnouncementResult.Success -> mfyDataAttach(it.data?.body)
+                is RemoteApiResult.Success -> mfyDataAttach(it.data?.body)
 
-                is AnnouncementResult.Error -> mfyDataAttach(null)
+                is RemoteApiResult.Error -> mfyDataAttach(null)
 
 
                 else -> {}

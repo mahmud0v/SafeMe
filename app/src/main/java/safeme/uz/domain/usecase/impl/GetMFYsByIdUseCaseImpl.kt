@@ -16,7 +16,7 @@ import safeme.uz.data.remote.response.NeighborhoodInfo
 import safeme.uz.data.repository.appeal.AppealRepository
 import safeme.uz.data.repository.auth.AuthRepository
 import safeme.uz.domain.usecase.GetMFYsByIdUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.isConnected
 import javax.inject.Inject
 
@@ -49,14 +49,14 @@ class GetMFYsByIdUseCaseImpl @Inject constructor(
         } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
     }.flowOn(Dispatchers.IO)
 
-    override fun getNeighborhoodByDistrict(neighborhoodRequest: NeighborhoodRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> {
+    override fun getNeighborhoodByDistrict(neighborhoodRequest: NeighborhoodRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> {
         return flow {
             val response = appealRepository.getNeighborhoodByDistrict(neighborhoodRequest)
             val code = response.body()?.code
             if (code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }

@@ -29,7 +29,7 @@ import safeme.uz.presentation.ui.adapter.GameRecommendationAdapter
 import safeme.uz.presentation.ui.adapter.RecommendationAdapter
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.game.GameScreenViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.MarginItemDecoration
 import safeme.uz.utils.backPressDispatcher
@@ -51,6 +51,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         loadGameCategories()
         recyclerItemClickEvent()
         moveToProfile()
+        moveToSOS()
         backPressDispatcher()
 
     }
@@ -86,16 +87,16 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 viewLifecycleOwner,
                 Observer {
                     when (it) {
-                        is AnnouncementResult.Success -> {
+                        is RemoteApiResult.Success -> {
                             gameRecAdapter.differ.submitList(it.data?.body)
                             binding.progress.hide()
                         }
 
-                        is AnnouncementResult.Loading -> {
+                        is RemoteApiResult.Loading -> {
                             binding.progress.show()
                         }
 
-                        is AnnouncementResult.Error -> {
+                        is RemoteApiResult.Error -> {
                             binding.progress.hide()
                             gameRecAdapter.differ.submitList(emptyList())
 
@@ -149,13 +150,13 @@ class GameScreen : Fragment(R.layout.screen_game) {
     }
 
     private val ageCategoryObserver =
-        Observer<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>> {
+        Observer<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>> {
             when (it) {
-                is AnnouncementResult.Success -> {
+                is RemoteApiResult.Success -> {
                     initTabLayout(it.data?.body)
                 }
 
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Error -> {
                     snackMessage(it.data?.message!!)
                 }
 
@@ -174,18 +175,18 @@ class GameScreen : Fragment(R.layout.screen_game) {
     }
 
     private val gameCategoriesObserver =
-        Observer<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
+        Observer<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
             when (it) {
-                is AnnouncementResult.Success -> {
+                is RemoteApiResult.Success -> {
                     binding.progress.hide()
                     recommendationAdapter.differ.submitList(it.data?.body)
                 }
 
-                is AnnouncementResult.Loading -> {
+                is RemoteApiResult.Loading -> {
                     binding.progress.show()
                 }
 
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Error -> {
                     binding.progress.hide()
                     snackMessage(it.data?.message!!)
                 }
@@ -193,18 +194,18 @@ class GameScreen : Fragment(R.layout.screen_game) {
         }
 
     private val gameRecommendationObserver =
-        Observer<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
+        Observer<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
             when (it) {
-                is AnnouncementResult.Success -> {
+                is RemoteApiResult.Success -> {
                     binding.progress.hide()
                     gameRecAdapter.differ.submitList(it.data?.body)
                 }
 
-                is AnnouncementResult.Loading -> {
+                is RemoteApiResult.Loading -> {
                     binding.progress.show()
                 }
 
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Error -> {
                     binding.progress.hide()
                     gameRecAdapter.differ.submitList(emptyList())
 
@@ -243,18 +244,18 @@ class GameScreen : Fragment(R.layout.screen_game) {
     }
 
     private val gameCategoryObserver =
-        Observer<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
+        Observer<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
             when (it) {
-                is AnnouncementResult.Success -> {
+                is RemoteApiResult.Success -> {
                     binding.progress.hide()
                     loadCategory(it.data?.body)
                 }
 
-                is AnnouncementResult.Loading -> {
+                is RemoteApiResult.Loading -> {
                     binding.progress.show()
                 }
 
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Error -> {
                     binding.progress.hide()
                     snackMessage(it.data?.message!!)
                 }
@@ -269,6 +270,14 @@ class GameScreen : Fragment(R.layout.screen_game) {
             }
             findNavController().navigate(R.id.action_game_to_profileScreen,bundle)
         }
+    }
+
+    private fun moveToSOS(){
+        binding.ivSOS.setOnClickListener {
+            val action = GameScreenDirections.actionGameToSosScreen()
+            findNavController().navigate(action)
+        }
+
     }
 
 

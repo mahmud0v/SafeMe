@@ -17,7 +17,7 @@ import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.domain.usecase.GetAllCategoriesUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import javax.inject.Inject
 
@@ -28,22 +28,22 @@ class GameScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val gameRecommendationMutableLiveData =
-        MutableLiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
-    val gameRecommendationLiveData: LiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> =
+        MutableLiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
+    val gameRecommendationLiveData: LiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> =
         gameRecommendationMutableLiveData
 
     private val ageCategoryMutableLiveData =
-        MutableLiveData<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>>()
-    val ageCategoryLiveData: LiveData<AnnouncementResult<AgeCategoryResponse<AgeCategoryInfo>>> = ageCategoryMutableLiveData
+        MutableLiveData<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>>()
+    val ageCategoryLiveData: LiveData<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>> = ageCategoryMutableLiveData
 
     private val gameRecByAgeMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
-    val gameRecByAgeLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
+    val gameRecByAgeLiveData: LiveData<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> =
         gameRecByAgeMutableLiveData
 
     private val gameRecByCategoryMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
-    val gameRecByCategoryLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>()
+    val gameRecByCategoryLiveData: LiveData<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> =
         gameRecByCategoryMutableLiveData
 
 //    private val errorMutableLiveData = MutableLiveData<String?>()

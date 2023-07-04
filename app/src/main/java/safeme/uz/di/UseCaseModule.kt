@@ -77,6 +77,9 @@ interface UseCaseModule {
     fun userUpdate(impl: UserUpdateUseCaseImpl): UserUpdateUseCase
 
     @[Binds Singleton]
-    fun getInspectorData(impl:GetInspectorDataUseCaseImpl):GetInspectorDataUseCase
+    fun getInspectorData(impl: GetInspectorDataUseCaseImpl): GetInspectorDataUseCase
+
+    @[Binds Singleton]
+    fun sosNotified(impl: SosNotifiedUseCaseImpl): SosNotifiedUseCase
 
 }

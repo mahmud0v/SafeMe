@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_main"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -44,7 +45,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginTop="@dimen/margin_standard"
         android:gravity="center"
@@ -54,13 +55,24 @@
         android:textColor="@color/white"
         android:textSize="72sp" />
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/margin_huge"
+        android:layout_marginTop="@dimen/margin_huge"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_gravity="center"
+        />
+
+
     <androidx.constraintlayout.utils.widget.MotionButton
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="@dimen/margin_standard"
         android:background="@drawable/bg_button_yellow"
-        android:foreground="?attr/selectableItemBackground"
         android:text="@string/there_are_suspicious_circumstances"
         android:textColor="@color/text_dark_red_color_d"
         android:textSize="@dimen/text_regular_big_size" />
@@ -72,7 +84,6 @@
         android:layout_marginHorizontal="@dimen/margin_standard"
         android:layout_marginVertical="@dimen/margin_big"
         android:background="@drawable/bg_button_orange"
-        android:foreground="?attr/selectableItemBackground"
         android:text="@string/i_am_going_into_danger_zone"
         android:textColor="@color/text_dark_red_color_l"
         android:textSize="@dimen/text_regular_big_size" />
@@ -84,9 +95,10 @@
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginHorizontal="@dimen/margin_standard"
         android:background="@drawable/bg_button_red"
-        android:foreground="?attr/selectableItemBackground"
         android:text="@string/help_is_needed_now"
         android:textColor="@color/white"
         android:textSize="@dimen/text_regular_big_size" />
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

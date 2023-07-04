@@ -16,7 +16,7 @@ import safeme.uz.data.remote.request.RemindChangePasswordRequest
 import safeme.uz.data.remote.response.RemindPasswordChangeBody
 import safeme.uz.databinding.ScreenPasswordRecoverBinding
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.disable
 import safeme.uz.utils.enable
@@ -102,18 +102,18 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
     }
 
     private val remindChangePasswordObserver =
-        Observer<AnnouncementResult<ApiResponse<RemindPasswordChangeBody>>> {
+        Observer<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> {
             when (it) {
-                is AnnouncementResult.Success -> {
+                is RemoteApiResult.Success -> {
                     snackMessage(getString(R.string.successfully_changed_passoword))
                     binding.progress.hide()
                 }
 
-                is AnnouncementResult.Loading -> {
+                is RemoteApiResult.Loading -> {
                     binding.progress.show()
                 }
 
-                is AnnouncementResult.Error -> {
+                is RemoteApiResult.Error -> {
                     snackMessage(it.message!!)
                     binding.progress.hide()
                 }

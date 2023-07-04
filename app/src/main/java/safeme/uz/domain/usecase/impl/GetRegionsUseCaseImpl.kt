@@ -15,7 +15,7 @@ import safeme.uz.data.remote.response.RegionInfo
 import safeme.uz.data.repository.appeal.AppealRepository
 import safeme.uz.data.repository.auth.AuthRepository
 import safeme.uz.domain.usecase.GetRegionsUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.isConnected
 import javax.inject.Inject
 
@@ -48,14 +48,14 @@ class GetRegionsUseCaseImpl @Inject constructor(
         } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
     }.flowOn(Dispatchers.IO)
 
-    override fun getRegions(): Flow<AnnouncementResult<ApiResponse<ArrayList<RegionInfo>>>> {
+    override fun getRegions(): Flow<RemoteApiResult<ApiResponse<ArrayList<RegionInfo>>>> {
         return flow {
             val response = appealRepository.getRegions()
             val code = response.body()?.code
             if (code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }

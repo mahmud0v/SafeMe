@@ -3,10 +3,12 @@ package safeme.uz.data.repository.appeal
 import retrofit2.Response
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
+import safeme.uz.data.model.SosBody
 import safeme.uz.data.remote.api.AppealsApiService
 import safeme.uz.data.remote.request.DistrictByIdRequest
 import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.request.NeighborhoodRequest
+import safeme.uz.data.remote.request.SosRequest
 import safeme.uz.data.remote.response.DistrictInfo
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.data.remote.response.NeighborhoodInfo
@@ -43,6 +45,13 @@ class AppealRepositoryImpl @Inject constructor(
         return appealsApiService.getInspectorsData(
             "${sharedPreference.locale}/api/v1.0/police/",
             inspectorMFYRequest
+        )
+    }
+
+    override suspend fun sosNotified(sosRequest: SosRequest): Response<ApiResponse<SosBody>> {
+        return appealsApiService.sosNotified(
+            "${sharedPreference.locale}/api/v1.0/sos/",
+            sosRequest
         )
     }
 

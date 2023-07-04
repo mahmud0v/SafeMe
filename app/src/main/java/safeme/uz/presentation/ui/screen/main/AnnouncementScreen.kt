@@ -18,7 +18,7 @@ import safeme.uz.databinding.ScreenAnnouncementBinding
 import safeme.uz.presentation.ui.adapter.AnnouncementViewPagerAdapter
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.isConnected
@@ -36,6 +36,7 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
         initLoadData()
         manageDrawerLayout()
         moveToProfile()
+        moveToSOS()
         backPressDispatcher()
 
     }
@@ -53,10 +54,10 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
 
 
     private val categoryObserver =
-        Observer<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
+        Observer<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
             when (it) {
-                is AnnouncementResult.Success -> initViews(it.data?.body)
-                is AnnouncementResult.Error -> snackMessage(it.message!!)
+                is RemoteApiResult.Success -> initViews(it.data?.body)
+                is RemoteApiResult.Error -> snackMessage(it.message!!)
                 else -> {}
             }
         }
@@ -85,8 +86,16 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
             putSerializable(Keys.BUNDLE_KEY, manageScreen)
         }
         binding.ivProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_announcements_to_profileScreen,bundle)
+            findNavController().navigate(R.id.action_announcements_to_profileScreen, bundle)
         }
+    }
+
+    private fun moveToSOS() {
+        binding.ivSOS.setOnClickListener {
+            val action = AnnouncementScreenDirections.actionAnnouncementsToSosScreen()
+            findNavController().navigate(action)
+        }
+
     }
 
 

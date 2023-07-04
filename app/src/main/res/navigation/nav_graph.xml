@@ -257,6 +257,9 @@
             app:enterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_announcements_to_sosScreen"
+            app:destination="@id/sosScreen" />
 
     </fragment>
     <fragment
@@ -282,6 +285,9 @@
             app:destination="@id/profileScreen"
             app:enterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_recommendations_to_sosScreen"
+            app:destination="@id/sosScreen" />
     </fragment>
     <fragment
         android:id="@+id/about_us"
@@ -293,6 +299,9 @@
             app:destination="@id/profileScreen"
             app:enterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_about_us_to_sosScreen"
+            app:destination="@id/sosScreen" />
     </fragment>
 <!--    <fragment-->
 <!--        android:id="@+id/chat"-->
@@ -328,6 +337,9 @@
             app:destination="@id/profileScreen"
             app:enterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_prevention_inspector_to_sosScreen"
+            app:destination="@id/sosScreen" />
     </fragment>
     <fragment
         android:id="@+id/game"
@@ -342,6 +354,9 @@
         <action
             android:id="@+id/action_game_to_announcementInfoScreen"
             app:destination="@id/announcementInfoScreen" />
+        <action
+            android:id="@+id/action_game_to_sosScreen"
+            app:destination="@id/sosScreen" />
     </fragment>
 
     <fragment
@@ -351,7 +366,11 @@
         tools:layout="@layout/screen_password_recover">
 
     </fragment>
-
+    <fragment
+        android:id="@+id/sosScreen"
+        android:name="safeme.uz.presentation.ui.screen.main.SosScreen"
+        android:label="screen_sos"
+        tools:layout="@layout/screen_sos" />
 
 
 </navigation>

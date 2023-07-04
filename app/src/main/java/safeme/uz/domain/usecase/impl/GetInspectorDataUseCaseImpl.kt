@@ -7,22 +7,22 @@ import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.data.repository.appeal.AppealRepository
 import safeme.uz.domain.usecase.GetInspectorDataUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
 
 class GetInspectorDataUseCaseImpl @Inject constructor(
     private val appealRepository: AppealRepository
 ) : GetInspectorDataUseCase {
 
-    override fun getInspectorDataByMFY(inspectorMFYRequest: InspectorMFYRequest): Flow<AnnouncementResult<ApiResponse<ArrayList<InspectorInfo>>>> {
+    override fun getInspectorDataByMFY(inspectorMFYRequest: InspectorMFYRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>> {
         return flow {
-            emit(AnnouncementResult.Loading())
+            emit(RemoteApiResult.Loading())
             val response = appealRepository.getInspectorsByMFY(inspectorMFYRequest)
             val code = response.body()?.code
             if (code == 200) {
-                emit(AnnouncementResult.Success(response.body()!!))
+                emit(RemoteApiResult.Success(response.body()!!))
             } else {
-                emit(AnnouncementResult.Error(response.body()?.message!!))
+                emit(RemoteApiResult.Error(response.body()?.message!!))
             }
         }
     }

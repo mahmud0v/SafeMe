@@ -8,22 +8,20 @@ import safeme.uz.data.remote.request.ResetPasswordRequest
 import safeme.uz.data.remote.request.VerifyRegisterRequest
 import safeme.uz.data.remote.response.PasswordRecoverResponse
 import safeme.uz.data.remote.response.PasswordUpdateBody
-import safeme.uz.data.remote.response.RegisterResponse
 import safeme.uz.data.remote.response.RemindPasswordChangeBody
-import safeme.uz.data.remote.response.ResetPinCodeResponse
 import safeme.uz.data.remote.response.UserResponse
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 
 interface ProfileUseCase {
-    fun getUserInfo():Flow<AnnouncementResult<UserResponse>>
+    fun getUserInfo():Flow<RemoteApiResult<UserResponse>>
 
-    fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest):Flow<AnnouncementResult<PasswordRecoverResponse>>
+    fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest):Flow<RemoteApiResult<PasswordRecoverResponse>>
 
-    fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest):Flow<AnnouncementResult<PasswordRecoverResponse>>
+    fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest):Flow<RemoteApiResult<PasswordRecoverResponse>>
 
-    fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest):Flow<AnnouncementResult<ApiResponse<PasswordUpdateBody>>>
+    fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest):Flow<RemoteApiResult<ApiResponse<PasswordUpdateBody>>>
 
-    fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest):Flow<AnnouncementResult<ApiResponse<RemindPasswordChangeBody>>>
+    fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest):Flow<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>>
 
 
 }

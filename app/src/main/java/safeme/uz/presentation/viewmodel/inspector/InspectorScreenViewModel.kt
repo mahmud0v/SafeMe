@@ -11,7 +11,7 @@ import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.domain.usecase.GetInspectorDataUseCase
 import safeme.uz.domain.usecase.ProfileUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,8 +20,8 @@ class InspectorScreenViewModel @Inject constructor(
     private val profileUseCase: ProfileUseCase
 ) : ViewModel() {
     private val inspectorMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<InspectorInfo>>>>()
-    val inspectorLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<InspectorInfo>>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>>()
+    val inspectorLiveData: LiveData<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>> =
         inspectorMutableLiveData
 
 
@@ -29,7 +29,7 @@ class InspectorScreenViewModel @Inject constructor(
         viewModelScope.launch {
             profileUseCase.getUserInfo().collect {
                 when (it) {
-                    is AnnouncementResult.Success -> {
+                    is RemoteApiResult.Success -> {
                         getInspectorDataByMFY(InspectorMFYRequest(it.data?.body!!.id))
                     }
 

@@ -188,6 +188,10 @@
     <string name="save_text">Сохранить</string>
     <string name="game_title">Социально-эмоциональное</string>
     <string name="game_title2">Наблюдаем и играем вместе</string>
+    <string name="suspicious">shubhali</string>
+    <string name="dangerous_area">xavli_hudud</string>
+    <string name="danger">danger</string>
+    <string name="message_notified">Xabar berildi</string>
 
 
     <string-array name="parent_array">

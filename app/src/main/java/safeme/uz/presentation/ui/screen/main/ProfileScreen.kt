@@ -17,9 +17,8 @@ import safeme.uz.data.remote.response.UserInfo
 import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.databinding.ScreenProfileBinding
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
-import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.formatBirthDay
 import safeme.uz.utils.gone
 import safeme.uz.utils.snackMessage
@@ -44,11 +43,11 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         viewModel.userInfoLiveData.observe(viewLifecycleOwner, userObserver)
     }
 
-    private val userObserver = Observer<AnnouncementResult<UserResponse>> {
+    private val userObserver = Observer<RemoteApiResult<UserResponse>> {
         when (it) {
-            is AnnouncementResult.Success -> initView(it.data?.body!!)
-            is AnnouncementResult.Error -> snackMessage(it.data?.message!!)
-            is AnnouncementResult.Loading -> binding.progress.visible()
+            is RemoteApiResult.Success -> initView(it.data?.body!!)
+            is RemoteApiResult.Error -> snackMessage(it.data?.message!!)
+            is RemoteApiResult.Loading -> binding.progress.visible()
         }
     }
 

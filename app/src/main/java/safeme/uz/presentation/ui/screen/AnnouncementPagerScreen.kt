@@ -17,7 +17,7 @@ import safeme.uz.databinding.ScreenAnnouncementPagerBinding
 import safeme.uz.presentation.ui.adapter.NewsRecyclerAdapter
 import safeme.uz.presentation.ui.screen.main.AnnouncementScreenDirections
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementPagerViewModel
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
@@ -52,11 +52,11 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
 
 
     private val newsObserver =
-        Observer<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>> {
+        Observer<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<NewsData>>>> {
             when (it) {
-                is AnnouncementResult.Success -> initRecyclerView(it.data?.body)
-                is AnnouncementResult.Error -> snackMessage(it.message!!)
-                is AnnouncementResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Success -> initRecyclerView(it.data?.body)
+                is RemoteApiResult.Error -> snackMessage(it.message!!)
+                is RemoteApiResult.Loading -> binding.progress.visible()
                 else -> {}
             }
         }

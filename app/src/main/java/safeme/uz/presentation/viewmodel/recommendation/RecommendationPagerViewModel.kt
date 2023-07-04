@@ -15,7 +15,7 @@ import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.domain.usecase.GetAllCategoriesUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import javax.inject.Inject
 
@@ -24,21 +24,21 @@ class RecommendationPagerViewModel @Inject constructor(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase
 ) : ViewModel() {
     private val recommendationByCategoryMutableLiveData =
-        MutableLiveData<AnnouncementResult<AgeCategoryResponse<RecommendationInfo>>>()
+        MutableLiveData<RemoteApiResult<AgeCategoryResponse<RecommendationInfo>>>()
     val recommendationByCategoryLiveData = recommendationByCategoryMutableLiveData
 
     private val recommendationInfoMutableLiveData =
-        MutableLiveData<AnnouncementResult<RecommendationInfoResponse>>()
-    val recommendationInfoLiveData: LiveData<AnnouncementResult<RecommendationInfoResponse>> =
+        MutableLiveData<RemoteApiResult<RecommendationInfoResponse>>()
+    val recommendationInfoLiveData: LiveData<RemoteApiResult<RecommendationInfoResponse>> =
         recommendationInfoMutableLiveData
 
     private val recommendationAllCategoriesMutableLiveData =
-        MutableLiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
+        MutableLiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
     val recommendationAllCategoriesLiveData = recommendationAllCategoriesMutableLiveData
 
     private val gameRecommendationMutableLiveData =
-        MutableLiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
-    val gameRecommendationLiveData: LiveData<AnnouncementResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> =
+        MutableLiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
+    val gameRecommendationLiveData: LiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> =
         gameRecommendationMutableLiveData
 
     init {

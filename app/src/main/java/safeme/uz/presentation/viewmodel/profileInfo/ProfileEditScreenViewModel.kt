@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.DistrictByIdRequest
@@ -19,7 +18,7 @@ import safeme.uz.domain.usecase.GetDistrictsByIdUseCase
 import safeme.uz.domain.usecase.GetMFYsByIdUseCase
 import safeme.uz.domain.usecase.GetRegionsUseCase
 import safeme.uz.domain.usecase.UserUpdateUseCase
-import safeme.uz.utils.AnnouncementResult
+import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,23 +29,23 @@ class ProfileEditScreenViewModel @Inject constructor(
     private val userUpdateUseCase: UserUpdateUseCase
 ) : ViewModel() {
     private val regionsDataMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<RegionInfo>>>>()
-    val regionsDataLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<RegionInfo>>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<RegionInfo>>>>()
+    val regionsDataLiveData: LiveData<RemoteApiResult<ApiResponse<ArrayList<RegionInfo>>>> =
         regionsDataMutableLiveData
 
     private val districtByRegionMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<DistrictInfo>>>>()
-    val districtByRegionLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<DistrictInfo>>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<DistrictInfo>>>>()
+    val districtByRegionLiveData: LiveData<RemoteApiResult<ApiResponse<ArrayList<DistrictInfo>>>> =
         districtByRegionMutableLiveData
 
     private val getMFYByDistrictMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<ArrayList<NeighborhoodInfo>>>>()
-    val getMFYByDistrictLiveData: LiveData<AnnouncementResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<NeighborhoodInfo>>>>()
+    val getMFYByDistrictLiveData: LiveData<RemoteApiResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> =
         getMFYByDistrictMutableLiveData
 
     private val userUpdateMutableLiveData =
-        MutableLiveData<AnnouncementResult<ApiResponse<UserUpdateResponse>>>()
-    val userUpdateLiveData: LiveData<AnnouncementResult<ApiResponse<UserUpdateResponse>>> =
+        MutableLiveData<RemoteApiResult<ApiResponse<UserUpdateResponse>>>()
+    val userUpdateLiveData: LiveData<RemoteApiResult<ApiResponse<UserUpdateResponse>>> =
         userUpdateMutableLiveData
 
 
