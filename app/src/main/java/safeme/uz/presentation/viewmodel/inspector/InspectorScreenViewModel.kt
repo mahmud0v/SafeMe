@@ -25,23 +25,9 @@ class InspectorScreenViewModel @Inject constructor(
         inspectorMutableLiveData
 
 
-    init {
-        viewModelScope.launch {
-            profileUseCase.getUserInfo().collect {
-                when (it) {
-                    is RemoteApiResult.Success -> {
-                        getInspectorDataByMFY(InspectorMFYRequest(it.data?.body!!.id))
-                    }
 
-                    else -> {}
-
-                }
-            }
-        }
-    }
-
-    private fun getInspectorDataByMFY(inspectorMFYRequest: InspectorMFYRequest) = viewModelScope.launch {
-        getInspectorDataUseCase.getInspectorDataByMFY(inspectorMFYRequest).collect {
+    fun getInspectorDataByMFY() = viewModelScope.launch {
+        getInspectorDataUseCase.getInspectorDataByMFY().collect {
             inspectorMutableLiveData.value = it
         }
     }

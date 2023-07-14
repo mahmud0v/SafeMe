@@ -20,16 +20,18 @@ import safeme.uz.data.remote.response.NeighborhoodInfo
 import safeme.uz.data.remote.response.RegionInfo
 import safeme.uz.data.remote.response.UserUpdateResponse
 import safeme.uz.databinding.ScreenEditProfileBinding
-import safeme.uz.presentation.viewmodel.profileInfo.ProfileEditScreenViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.presentation.ui.adapter.SpinnerAdapter
+import safeme.uz.presentation.ui.dialog.MessageDialog
+import safeme.uz.presentation.viewmodel.profileInfo.ProfileEditScreenViewModel
+import safeme.uz.utils.Keys
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Util
 import safeme.uz.utils.disable
 import safeme.uz.utils.enable
 import safeme.uz.utils.gone
 import safeme.uz.utils.hideKeyboard
+import safeme.uz.utils.isConnected
 import safeme.uz.utils.orderBirthDay
-import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
 
 @AndroidEntryPoint
@@ -238,8 +240,13 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
 
 
     private fun loadRegionData() {
-        viewModel.getRegions()
-        viewModel.regionsDataLiveData.observe(viewLifecycleOwner, regionObserver)
+        if (isConnected()) {
+            viewModel.getRegions()
+            viewModel.regionsDataLiveData.observe(viewLifecycleOwner, regionObserver)
+        } else {
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+        }
 
     }
 
@@ -252,6 +259,7 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
 
             is RemoteApiResult.Error -> {
                 regionAttach(null)
+
             }
 
 
@@ -320,9 +328,19 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
         if (regionArrayList != null) {
             for (i in regionArrayList!!) {
                 if (i.name == regionSelectedItem) {
-                    viewModel.getDistrictsById(DistrictByIdRequest(i.id))
-                    viewModel.districtByRegionLiveData.observe(viewLifecycleOwner, districtObserver)
-                    break
+                    if (isConnected()) {
+                        viewModel.getDistrictsById(DistrictByIdRequest(i.id))
+                        viewModel.districtByRegionLiveData.observe(
+                            viewLifecycleOwner,
+                            districtObserver
+                        )
+                        break
+                    } else {
+                        val messageDialog =
+                            MessageDialog(getString(R.string.internet_not_connected))
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
+
                 }
             }
         }
@@ -332,8 +350,14 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
         val selectedDistrictByRegion = binding.districtSpinner.selectedItem.toString()
         for (i in districtByRegionArrayList!!) {
             if (i.name == selectedDistrictByRegion) {
-                viewModel.getMFYByDistrict(NeighborhoodRequest(i.id.toString()))
-                viewModel.getMFYByDistrictLiveData.observe(viewLifecycleOwner, mfyObserver)
+                if (isConnected()) {
+                    viewModel.getMFYByDistrict(NeighborhoodRequest(i.id.toString()))
+                    viewModel.getMFYByDistrictLiveData.observe(viewLifecycleOwner, mfyObserver)
+                } else {
+                    val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                }
+
             }
         }
     }
@@ -346,7 +370,9 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
                     districtAttach(it.data?.body)
                 }
 
-                is RemoteApiResult.Error -> districtAttach(null)
+                is RemoteApiResult.Error -> {
+                    districtAttach(null)
+                }
 
                 else -> {}
             }
@@ -357,7 +383,8 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
         when (it) {
             is RemoteApiResult.Success -> {
                 binding.progress.gone()
-                snackMessage(it.data?.message!!)
+                val messageDialog = MessageDialog(it.data?.message!!)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
             }
 
             is RemoteApiResult.Loading -> {
@@ -366,7 +393,8 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
 
             is RemoteApiResult.Error -> {
                 binding.progress.gone()
-                snackMessage(it.message!!)
+                val messageDialog = MessageDialog(it.message!!)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
             }
         }
     }
@@ -376,7 +404,9 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
             when (it) {
                 is RemoteApiResult.Success -> mfyDataAttach(it.data?.body)
 
-                is RemoteApiResult.Error -> mfyDataAttach(null)
+                is RemoteApiResult.Error -> {
+                    mfyDataAttach(null)
+                }
 
 
                 else -> {}
@@ -429,15 +459,20 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
                     getDistrictId,
                     getMFYId
                 )
-                viewModel.userUpdate(userUpdateRequest)
-                viewModel.userUpdateLiveData.observe(viewLifecycleOwner, userUpdateObserver)
+                if (isConnected()) {
+                    viewModel.userUpdate(userUpdateRequest)
+                    viewModel.userUpdateLiveData.observe(viewLifecycleOwner, userUpdateObserver)
+                } else {
+                    val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                }
             } else {
-                snackMessage(getString(R.string.some_error_occurred))
+                val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
             }
 
         }
     }
-
 
 
     private fun getRegionId(): Int {

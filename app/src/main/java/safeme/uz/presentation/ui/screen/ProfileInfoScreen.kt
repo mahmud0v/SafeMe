@@ -95,12 +95,11 @@ class ProfileInfoScreen : Fragment(R.layout.screen_profile_info), OnClickListene
     }
 
     private val errorObserver = Observer<Int> {
-
-        snackMessage(getString(it))
+        binding.button.snackBar(getString(it))
     }
 
     private val messageObserver = Observer<String> {
-        snackMessage(it)
+        binding.button.snackBar(it)
     }
 
     private val progressObserver = Observer<Boolean> {

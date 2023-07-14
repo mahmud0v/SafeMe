@@ -102,11 +102,11 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
     }
 
     private val messageObserver = Observer<String> {
-        snackMessage(it)
+        binding.skipButton.snackBar(it)
     }
 
     private val errorObserver = Observer<Int> {
-        snackMessage(getString(it))
+        binding.skipButton.snackBar(getString(it))
         binding.skipButton.enable()
     }
 

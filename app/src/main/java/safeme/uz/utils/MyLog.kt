@@ -18,11 +18,18 @@ import java.util.Calendar
 import java.util.Date
 
 fun Fragment.snackMessage(message: String) {
-    Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).apply {
+    Snackbar.make(this.requireView().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).apply {
         setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.color_snack_default))
             .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }.show()
 }
+
+fun View.snackBar(message: String){
+    Snackbar.make(this,message,Snackbar.LENGTH_SHORT).show()
+}
+
+
+
 
 fun Fragment.snackMessageLong(message: String) {
     Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).apply {
@@ -30,6 +37,7 @@ fun Fragment.snackMessageLong(message: String) {
             .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }.show()
 }
+
 
 fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(requireContext(), message, duration).show()

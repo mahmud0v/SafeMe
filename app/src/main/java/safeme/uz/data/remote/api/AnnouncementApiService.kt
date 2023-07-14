@@ -11,11 +11,15 @@ import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementNewsRequest
+import safeme.uz.data.remote.request.PollAnswerRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.data.remote.response.GameRecommendationResponse
+import safeme.uz.data.remote.response.PollAnswerResponse
+import safeme.uz.data.remote.response.PollDetailResponse
+import safeme.uz.data.remote.response.PollResponseInfo
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.data.remote.response.RecommendationResponse
@@ -84,5 +88,28 @@ interface AnnouncementApiService {
     suspend fun getGameById(
         @Url url: String,
     ):Response<ApiResponse<GameRecommendationResponse>>
+
+
+    @POST
+    suspend fun getPollByAgeCategory(
+        @Url url:String,
+        @Body ageCategoryRequest: AgeCategoryRequest
+    ): Response<ApiResponse<ArrayList<PollResponseInfo>>>
+
+
+    @GET
+    suspend fun getPollById(
+        @Url url: String
+    ): Response<ApiResponse<PollDetailResponse>>
+
+    @POST
+    suspend fun givePollAnswer(
+        @Url url:String,
+        @Body body:PollAnswerRequest
+    ): Response<ApiResponse<PollAnswerResponse>>
+
+
+
+
 
 }

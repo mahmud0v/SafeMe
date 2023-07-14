@@ -702,13 +702,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="657" />
-                            <option name="y" value="2007" />
+                            <option name="x" value="699" />
+                            <option name="y" value="2183" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_about_us_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_about_us_to_sosScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -757,6 +762,32 @@
                               </value>
                             </entry>
                             <entry key="action_announcements_to_sosScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="appeals">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-403" />
+                            <option name="y" value="483" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_appeals_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_appeals_to_sosScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -932,6 +963,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="pollDetailScreen">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-921" />
+                            <option name="y" value="2990" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="prevention_inspector">
                     <value>
                       <LayoutPositions>
@@ -944,6 +987,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_prevention_inspector_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_prevention_inspector_to_sosScreen">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -984,8 +1032,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1053" />
-                            <option name="y" value="817" />
+                            <option name="x" value="-1056" />
+                            <option name="y" value="1056" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -1005,18 +1053,54 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="questionnaire">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1494" />
+                            <option name="y" value="3425" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_questionnaire_to_pollDetailScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_questionnaire_to_profileScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_questionnaire_to_sosScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="recommendations">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2743" />
-                            <option name="y" value="1735" />
+                            <option name="x" value="-3171" />
+                            <option name="y" value="2003" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_recommendations_to_announcementInfoScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_recommendations_to_appealsScreen">
                               <value>
                                 <LayoutPositions />
                               </value>

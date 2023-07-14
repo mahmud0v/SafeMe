@@ -22,6 +22,7 @@ import safeme.uz.presentation.viewmodel.login.LoginViewModelImpl
 import safeme.uz.utils.Keys
 import safeme.uz.utils.Keys.LOGIN_TO_EDIT
 import safeme.uz.utils.hideKeyboard
+import safeme.uz.utils.snackBar
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -67,7 +68,7 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
 
     private val messageObserver = Observer<String> {
         hideKeyboard()
-        snackMessage(it)
+        binding.progress.snackBar(it)
     }
 
     private val progressObserver = Observer<Boolean> {

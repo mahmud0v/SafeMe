@@ -2,14 +2,16 @@ package safeme.uz.data.remote.api
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Url
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.SosBody
+import safeme.uz.data.remote.request.AppealRequest
 import safeme.uz.data.remote.request.DistrictByIdRequest
-import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.request.NeighborhoodRequest
 import safeme.uz.data.remote.request.SosRequest
+import safeme.uz.data.remote.response.AppealResponse
 import safeme.uz.data.remote.response.DistrictInfo
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.data.remote.response.NeighborhoodInfo
@@ -17,10 +19,9 @@ import safeme.uz.data.remote.response.RegionInfo
 
 interface AppealsApiService {
 
-    @POST
+    @GET
     suspend fun getInspectorsData(
-        @Url url: String,
-        @Body inspectorMFYRequest: InspectorMFYRequest
+        @Url url: String
     ): Response<ApiResponse<ArrayList<InspectorInfo>>>
 
 
@@ -37,6 +38,8 @@ interface AppealsApiService {
     ): Response<ApiResponse<ArrayList<DistrictInfo>>>
 
 
+
+
     @POST
     suspend fun getNeighborhoodByDistrict(
         @Url url: String,
@@ -49,6 +52,14 @@ interface AppealsApiService {
         @Url url: String,
         @Body sosRequest: SosRequest
     ):Response<ApiResponse<SosBody>>
+
+
+    @POST
+    suspend fun giveAppeal(
+        @Url url: String,
+        @Body appealRequest: AppealRequest
+    ): Response<ApiResponse<AppealResponse>>
+
 
 
 

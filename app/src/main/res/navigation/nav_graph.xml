@@ -288,6 +288,9 @@
         <action
             android:id="@+id/action_recommendations_to_sosScreen"
             app:destination="@id/sosScreen" />
+        <action
+            android:id="@+id/action_recommendations_to_appealsScreen"
+            app:destination="@id/appeals" />
     </fragment>
     <fragment
         android:id="@+id/about_us"
@@ -371,6 +374,45 @@
         android:name="safeme.uz.presentation.ui.screen.main.SosScreen"
         android:label="screen_sos"
         tools:layout="@layout/screen_sos" />
+    <fragment
+        android:id="@+id/questionnaire"
+        tools:layout="@layout/screen_poll"
+        android:name="safeme.uz.presentation.ui.screen.main.PollScreen"
+        android:label="PollScreen" >
+
+        <action
+            android:id="@+id/action_questionnaire_to_pollDetailScreen"
+            app:destination="@id/pollDetailScreen" />
+        <action
+            android:id="@+id/action_questionnaire_to_sosScreen"
+            app:destination="@id/sosScreen" />
+        <action
+            android:id="@+id/action_questionnaire_to_profileScreen"
+            app:destination="@id/profileScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/appeals"
+        android:name="safeme.uz.presentation.ui.screen.main.AppealsScreen"
+        android:label="screen_appeals"
+        tools:layout="@layout/screen_appeals" >
+        <action
+            android:id="@+id/action_appeals_to_profileScreen"
+            app:destination="@id/profileScreen"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_appeals_to_sosScreen"
+            app:destination="@id/sosScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/pollDetailScreen"
+        tools:layout="@layout/screen_poll_detail"
+        android:name="safeme.uz.presentation.ui.screen.PollDetailScreen"
+        android:label="PollDetailScreen" >
+        <argument
+            android:name="pollId"
+            app:argType="integer" />
+    </fragment>
 
 
 </navigation>

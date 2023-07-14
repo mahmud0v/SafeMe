@@ -29,6 +29,7 @@ object Keys {
     const val TYPE_RECEIPT = "RECEIPT"
     const val POINT_REQUEST_KEY = "POINT_REQUEST_KEY"
     const val POINT_HOME_REQUEST = "POINT_HOME_REQUEST"
+    const val KEY_VALUE = "key"
 
 
     //todo Dialog Types
@@ -72,9 +73,14 @@ object Keys {
 
     const val FILTER_BUNDLE_KEY = "FILTER_BUNDLE_KEY"
     const val FILTER_REQUEST_KEY = "FILTER_REQUEST_KEY"
+    const val radioButtonLabelColor = "#232F4D"
+    const val fontDrawable = "roboto_medium_title.ttf"
+    const val SERVER_ERROR = "Serverda xatolik"
 
 
     const val INTERNET_FAIL = "Internet mavjud emas"
+    const val SOME_ERROR = "Qandaydir xatolik mavjud"
+    const val NO_DATA = "Ma'lumot yo'q"
     const val NEWS = "news"
     const val RECOMMENDATION = "recomendation"
     const val ANNOUNCEMENTS = "announcement"
@@ -88,6 +94,10 @@ object Keys {
     const val INSPECTOR_SCREEN = "InspectorScreen"
     const val ABOUT_SCREEN = "AboutUsScreen"
     const val LOGIN_SCREEN = "LoginScreen"
+    const val POLL_PAGER = "PollPagerScreen"
+    const val APPEAL_SCREEN = "Appeal Screen"
+    const val DIALOG = "Dialog"
+
 
 
 }

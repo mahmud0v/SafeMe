@@ -10,11 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -56,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         checkUpdate()
+
+
     }
 
 

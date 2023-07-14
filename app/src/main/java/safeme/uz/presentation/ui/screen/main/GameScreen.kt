@@ -27,13 +27,16 @@ import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.databinding.ScreenGameBinding
 import safeme.uz.presentation.ui.adapter.GameRecommendationAdapter
 import safeme.uz.presentation.ui.adapter.RecommendationAdapter
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.game.GameScreenViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.MarginItemDecoration
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.backPressDispatcher
-import safeme.uz.utils.snackMessage
+import safeme.uz.utils.gone
+import safeme.uz.utils.isConnected
+import safeme.uz.utils.visible
 
 @AndroidEntryPoint
 class GameScreen : Fragment(R.layout.screen_game) {
@@ -45,19 +48,29 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadAgeCategory()
-        backListenerEvent()
+        loadAllData()
         initRecyclerView()
-        loadGameCategories()
-        recyclerItemClickEvent()
         moveToProfile()
         moveToSOS()
+        backListenerEvent()
         backPressDispatcher()
 
     }
 
+    private fun loadAllData() {
+        if (isConnected()) {
+            loadAgeCategory()
+            loadGameCategories()
+            recyclerItemClickEvent()
+
+        } else {
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+        }
+    }
+
     private fun loadAgeCategory() {
-        viewModel.ageCategoryLiveData.observe(viewLifecycleOwner,ageCategoryObserver)
+        viewModel.ageCategoryLiveData.observe(viewLifecycleOwner, ageCategoryObserver)
     }
 
     private fun initRecyclerView() {
@@ -88,16 +101,28 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 Observer {
                     when (it) {
                         is RemoteApiResult.Success -> {
-                            gameRecAdapter.differ.submitList(it.data?.body)
                             binding.progress.hide()
+                            binding.placeHolder.gone()
+                            gameRecAdapter.differ.submitList(it.data?.body)
+
                         }
 
                         is RemoteApiResult.Loading -> {
+                            binding.placeHolder.gone()
                             binding.progress.show()
                         }
 
                         is RemoteApiResult.Error -> {
                             binding.progress.hide()
+                            if (it.message == getString(R.string.no_data)) {
+                                binding.placeHolder.visible()
+                            } else {
+                                binding.placeHolder.gone()
+                                val messageDialog = MessageDialog(it.message!!)
+                                messageDialog.show(requireActivity().supportFragmentManager,
+                                    Keys.DIALOG
+                                )
+                            }
                             gameRecAdapter.differ.submitList(emptyList())
 
                         }
@@ -157,7 +182,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 }
 
                 is RemoteApiResult.Error -> {
-                    snackMessage(it.data?.message!!)
+                    val messageDialog = MessageDialog(it.message)
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                 }
 
                 else -> {}
@@ -188,7 +214,10 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
                 is RemoteApiResult.Error -> {
                     binding.progress.hide()
-                    snackMessage(it.data?.message!!)
+                    if (it.message != getString(R.string.no_data)) {
+                        val messageDialog = MessageDialog(it.message)
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
                 }
             }
         }
@@ -198,17 +227,26 @@ class GameScreen : Fragment(R.layout.screen_game) {
             when (it) {
                 is RemoteApiResult.Success -> {
                     binding.progress.hide()
+                    binding.placeHolder.gone()
                     gameRecAdapter.differ.submitList(it.data?.body)
+
                 }
 
                 is RemoteApiResult.Loading -> {
                     binding.progress.show()
+                    binding.placeHolder.gone()
                 }
 
                 is RemoteApiResult.Error -> {
                     binding.progress.hide()
+                    if (it.message == getString(R.string.no_data)) {
+                        binding.placeHolder.visible()
+                    } else {
+                        binding.placeHolder.gone()
+                        val messageDialog = MessageDialog(it.message)
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
                     gameRecAdapter.differ.submitList(emptyList())
-
                 }
             }
         }
@@ -248,16 +286,24 @@ class GameScreen : Fragment(R.layout.screen_game) {
             when (it) {
                 is RemoteApiResult.Success -> {
                     binding.progress.hide()
+                    binding.placeHolder.gone()
                     loadCategory(it.data?.body)
                 }
 
                 is RemoteApiResult.Loading -> {
                     binding.progress.show()
+                    binding.placeHolder.gone()
                 }
 
                 is RemoteApiResult.Error -> {
                     binding.progress.hide()
-                    snackMessage(it.data?.message!!)
+                    if (it.message == getString(R.string.no_data)) {
+                        binding.placeHolder.visible()
+                    } else {
+                        binding.placeHolder.gone()
+                        val messageDialog = MessageDialog(it.message!!)
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
                 }
             }
         }
@@ -268,11 +314,11 @@ class GameScreen : Fragment(R.layout.screen_game) {
             val bundle = Bundle().apply {
                 putSerializable(Keys.BUNDLE_KEY, manageScreen)
             }
-            findNavController().navigate(R.id.action_game_to_profileScreen,bundle)
+            findNavController().navigate(R.id.action_game_to_profileScreen, bundle)
         }
     }
 
-    private fun moveToSOS(){
+    private fun moveToSOS() {
         binding.ivSOS.setOnClickListener {
             val action = GameScreenDirections.actionGameToSosScreen()
             findNavController().navigate(action)

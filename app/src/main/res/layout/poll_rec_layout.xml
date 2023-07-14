@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@color/white"
+    android:id="@+id/game_rec_layout"
+    android:layout_marginTop="@dimen/margin_standard"
+    app:cardCornerRadius="@dimen/margin_middle"
+    app:strokeWidth="@dimen/margin_small_4"
+    app:strokeColor="@color/button_green_color"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:id="@+id/material_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginLeft="@dimen/margin_standard"
+            android:layout_marginRight="@dimen/margin_standard"
+            app:cardCornerRadius="@dimen/margin_very_small2"
+
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/poll_image"
+                tools:src="@drawable/cyber"
+                android:scaleType="centerCrop"
+                />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/game_title2"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium_title"
+            android:textSize="16sp"
+            android:id="@+id/poll_title"
+            app:layout_constraintTop_toBottomOf="@id/material_image"
+            app:layout_constraintLeft_toLeftOf="@id/material_image"
+            android:layout_marginTop="@dimen/margin_standard"
+            />
+
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/poll_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/start_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_big_a"
+            android:background="@drawable/poll_item_back"
+            >
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_poll"
+                android:fontFamily="@font/roboto_medium_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_regular_big_size"
+                />
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_standard"
+            app:layout_constraintTop_toBottomOf="@id/start_btn"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

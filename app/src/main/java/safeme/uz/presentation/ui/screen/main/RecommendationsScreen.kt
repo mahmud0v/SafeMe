@@ -17,6 +17,7 @@ import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.databinding.ScreenRecommendationBinding
 import safeme.uz.presentation.ui.adapter.RecommendationViewPagerAdapter
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.recommendation.RecommendationViewModel
 import safeme.uz.utils.RemoteApiResult
@@ -24,14 +25,14 @@ import safeme.uz.utils.Keys
 import safeme.uz.utils.Keys.PROFILE_TO_EDIT
 import safeme.uz.utils.Keys.RECOMMENDATION_SCREEN
 import safeme.uz.utils.backPressDispatcher
-import safeme.uz.utils.snackMessage
+import safeme.uz.utils.isConnected
+
 
 @AndroidEntryPoint
 class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
     private val binding: ScreenRecommendationBinding by viewBinding()
     private val viewModel: RecommendationViewModel by viewModels()
     private val remindViewModel: RemindListenerViewModel by activityViewModels()
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,10 +44,17 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
         backPressDispatcher()
 
 
+
+
     }
 
     private fun loadData() {
-        viewModel.getAgeCategoryLiveData.observe(viewLifecycleOwner, ageCategoryObserver)
+        if (isConnected()){
+            viewModel.getAgeCategoryLiveData.observe(viewLifecycleOwner, ageCategoryObserver)
+        }else {
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+        }
     }
 
 
@@ -54,7 +62,6 @@ class RecommendationsScreen : Fragment(R.layout.screen_recommendation) {
         Observer<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>> {
             when (it) {
                 is RemoteApiResult.Success -> initView(it.data?.body)
-                is RemoteApiResult.Error -> snackMessage(it.data?.message!!)
                 else -> {}
             }
         }

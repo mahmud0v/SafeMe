@@ -39,7 +39,6 @@ class AuthAuthenticator @Inject constructor(
         refreshToken: String?
     ): safeme.uz.data.model.ApiResponse<LoginResponse> {
 
-        Log.e("TAG", "getNewToken: ffffffffffffffffffffffffffffffffffffffffffff", )
 
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

@@ -67,7 +67,7 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
     }
 
     private val messageObserver = Observer<String> {
-        snackMessage(it)
+        binding.button.snackBar(it)
     }
 
     private val progressObserver = Observer<Boolean> {

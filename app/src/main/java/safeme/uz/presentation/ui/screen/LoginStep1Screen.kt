@@ -18,6 +18,7 @@ import safeme.uz.databinding.ScreenLoginStep1Binding
 import safeme.uz.presentation.viewmodel.loginstep1.LoginStep1ViewModel
 import safeme.uz.presentation.viewmodel.loginstep1.LoginStep1ViewModelImpl
 import safeme.uz.utils.Util
+import safeme.uz.utils.snackBar
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -50,11 +51,11 @@ class LoginStep1Screen : Fragment(R.layout.screen_login_step1), OnClickListener 
     }
 
     private val errorObserver = Observer<Int> {
-        snackMessage(getString(it))
+        binding.progress.snackBar(getString(it))
     }
 
     private val messageObserver = Observer<String> {
-        snackMessage(it)
+        binding.progress.snackBar(it)
     }
 
     private val progressObserver = Observer<Boolean> {

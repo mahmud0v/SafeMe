@@ -18,13 +18,13 @@ import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
 import safeme.uz.data.remote.response.RecommendationResponse
 import safeme.uz.databinding.ScreenAnnouncementsInfoBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementInfoViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
-import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
 
 @AndroidEntryPoint
@@ -42,7 +42,7 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
 
     private fun backClickEvent() {
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
         }
     }
 
@@ -71,7 +71,8 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
                 }
             }
         } else {
-            snackMessage(Keys.INTERNET_FAIL)
+            val messageDialog = MessageDialog(getString(R.string.no_data))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
 
     }
@@ -79,31 +80,58 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
     private val newsObserver =
         Observer<RemoteApiResult<AnnouncementCategoryResponse<NewsData>>>() {
             when (it) {
-                is RemoteApiResult.Success -> loadNews(it.data?.body!!)
-                is RemoteApiResult.Error -> snackMessage(it.message!!)
-                is RemoteApiResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Success -> {
+                    binding.progress.hide()
+                    loadNews(it.data?.body!!)
+                }
+
+                is RemoteApiResult.Error -> {
+                    binding.progress.hide()
+                    val messageDialog = MessageDialog(it.message)
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                }
+
+                is RemoteApiResult.Loading -> {
+                    binding.progress.show()
+                }
             }
         }
 
     private val recommendationObserver = Observer<RemoteApiResult<RecommendationResponse>> {
         when (it) {
-            is RemoteApiResult.Success -> loadRecommendation(it.data?.body!!)
-            is RemoteApiResult.Loading -> binding.progress.visible()
-            is RemoteApiResult.Error -> snackMessage(it.message!!)
+            is RemoteApiResult.Success -> {
+                binding.progress.hide()
+                loadRecommendation(it.data?.body!!)
+            }
+
+            is RemoteApiResult.Loading -> {
+                binding.progress.visible()
+            }
+
+            is RemoteApiResult.Error -> {
+                binding.progress.hide()
+                val messageDialog = MessageDialog(it.message)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+            }
         }
     }
 
     private val gameObserver =
         Observer<RemoteApiResult<ApiResponse<GameRecommendationResponse>>> {
             when (it) {
-                is RemoteApiResult.Success -> loadGame(it.data?.body)
+                is RemoteApiResult.Success -> {
+                    binding.progress.hide()
+                    loadGame(it.data?.body)
+                }
+
                 is RemoteApiResult.Loading -> {
                     binding.progress.show()
                 }
 
                 is RemoteApiResult.Error -> {
                     binding.progress.hide()
-                    snackMessage(it.data?.message!!)
+                    val messageDialog = MessageDialog(it.message)
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                 }
             }
         }

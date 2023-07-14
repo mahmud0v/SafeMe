@@ -53,9 +53,10 @@ class NetworkModule {
     ): OkHttpClient {
         return OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS).callTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(tokenInterceptor(sharedPreference))
             .addInterceptor(ChuckerInterceptor.Builder(context).build())
+            .addInterceptor(tokenInterceptor(sharedPreference))
             .authenticator(authAuthenticator).build()
+
 
 
 

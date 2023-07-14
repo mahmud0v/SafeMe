@@ -8,7 +8,7 @@ import safeme.uz.utils.RemoteApiResult
 
 interface GetInspectorDataUseCase {
 
-    fun getInspectorDataByMFY(inspectorMFYRequest: InspectorMFYRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>>
+    fun getInspectorDataByMFY(): Flow<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>>
 
 
 

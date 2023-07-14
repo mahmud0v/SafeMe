@@ -83,8 +83,9 @@
     <string name="questionnaire">So\’rovnoma</string>
     <string name="prevention_inspector">Profilaktika inspektori</string>
     <string name="appeals">Murojaatlar</string>
-    <string name="select_the_type_of_appeal">Murojaat turini tanlang</string>
+    <string name="select_the_type_of_appeal">Murojaat nomini kiriting</string>
     <string name="enter_the_appeal_text">Murojaat matnini kiriting</string>
+    <string name="receive_appeal">Murojaat qabul qilindi</string>
     <string name="about_us">Biz haqimizda</string>
     <string name="logout">Chiqish</string>
     <string name="safe_me">Safe me</string>
@@ -192,6 +193,9 @@
     <string name="dangerous_area">xavli_hudud</string>
     <string name="danger">danger</string>
     <string name="message_notified">Xabar berildi</string>
+    <string name="start_poll">Boshlash</string>
+    <string name="no_data">Ma\'lumot yo\'q </string>
+    <string name="phone">tel:</string>
 
 
     <string-array name="parent_array">

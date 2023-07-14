@@ -1,6 +1,6 @@
 package safeme.uz.domain.usecase.impl
 
-import android.util.Log
+import android.app.Application
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -15,7 +15,7 @@ import safeme.uz.utils.isConnected
 import javax.inject.Inject
 
 class VerifyResetPasswordUseCaseImpl @Inject constructor(
-    private val repository: AuthRepository
+    private val repository: AuthRepository,
 ) : VerifyResetPasswordUseCase {
     override fun invoke(verification_code: String) = flow {
         if (isConnected()) {

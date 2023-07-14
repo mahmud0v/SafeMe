@@ -19,6 +19,7 @@ import safeme.uz.presentation.viewmodel.register.RegisterViewModel
 import safeme.uz.presentation.viewmodel.register.RegisterViewModelImpl
 import safeme.uz.utils.VerifyType
 import safeme.uz.utils.hideKeyboard
+import safeme.uz.utils.snackBar
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -59,7 +60,7 @@ class RegistrationScreen : Fragment(R.layout.screen_registration), OnClickListen
 
     private val messageObserver = Observer<String> {
         hideKeyboard()
-        snackMessage(it)
+        binding.progress.snackBar(it)
     }
 
     private val errorObserver = Observer<Int> {

@@ -18,13 +18,14 @@ import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.databinding.ScreenInspectorBinding
 import safeme.uz.presentation.ui.adapter.InspectorRecyclerAdapter
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.inspector.InspectorScreenViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.gone
-import safeme.uz.utils.snackMessage
+import safeme.uz.utils.isConnected
 import safeme.uz.utils.visible
 
 @AndroidEntryPoint
@@ -53,21 +54,43 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
     }
 
     private fun loadInspectorData() {
-        viewModel.inspectorLiveData.observe(viewLifecycleOwner,inspectorObserver)
+        if (isConnected()) {
+            viewModel.getInspectorDataByMFY()
+            viewModel.inspectorLiveData.observe(viewLifecycleOwner, inspectorObserver)
+        } else {
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+        }
     }
 
 
     private val inspectorObserver =
         Observer<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>> {
             when (it) {
-                is RemoteApiResult.Success -> attachInspectorData(it.data?.body)
-                is RemoteApiResult.Error -> snackMessage(it.data?.message!!)
-                is RemoteApiResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Success -> {
+                    attachInspectorData(it.data?.body)
+                }
+
+                is RemoteApiResult.Error -> {
+                    binding.progress.hide()
+                    if (it.message == getString(R.string.no_data)) {
+                        binding.placeHolder.visible()
+                    } else {
+                        val messageDialog = MessageDialog(it.message)
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
+                }
+
+                is RemoteApiResult.Loading -> {
+                    binding.progress.visible()
+                    binding.placeHolder.gone()
+                }
             }
         }
 
     private fun attachInspectorData(inspectorList: ArrayList<InspectorInfo>?) {
         binding.progress.gone()
+        binding.placeHolder.gone()
         inspectorRecyclerAdapter.differ.submitList(inspectorList)
     }
 
@@ -80,29 +103,28 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
 
     private fun callInspector() {
         inspectorRecyclerAdapter.onItemClick = { data ->
-            val intent = Uri.parse("tel:+${data.phone}").let { number ->
+            val intent = Uri.parse("${getString(R.string.phone)}+${data.phone}").let { number ->
                 Intent(Intent.ACTION_DIAL, number)
             }
             startActivity(intent)
         }
     }
 
-    private fun moveToProfile(){
+    private fun moveToProfile() {
         binding.ivProfile.setOnClickListener {
             val manageScreen = ManageScreen(Keys.INSPECTOR_SCREEN, Keys.PROFILE_TO_EDIT)
             val bundle = Bundle().apply {
                 putSerializable(Keys.BUNDLE_KEY, manageScreen)
             }
-            findNavController().navigate(R.id.action_prevention_inspector_to_profileScreen,bundle)
+            findNavController().navigate(R.id.action_prevention_inspector_to_profileScreen, bundle)
         }
     }
 
-    private fun moveToSOS(){
+    private fun moveToSOS() {
         binding.ivSOS.setOnClickListener {
             val action = InspectorScreenDirections.actionPreventionInspectorToSosScreen()
             findNavController().navigate(action)
         }
-
     }
 
 }

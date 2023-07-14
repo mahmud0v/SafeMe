@@ -149,47 +149,47 @@
                         android:text="@string/viewed_count" />
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:drawableLeft="@drawable/share_btn"
-                    android:layout_marginTop="@dimen/margin_big"
-                    android:text="@string/share_text"
-                    android:textAllCaps="false"
-                    app:rippleColor="@color/ripple_color1"
-                    app:cornerRadius="5dp"
-                    android:id="@+id/share_btn"
-                    android:textSize="12sp"
-                    android:backgroundTint="@color/share_back_color"
-                    app:layout_constraintTop_toBottomOf="@id/date_layout"
-                    app:layout_constraintLeft_toLeftOf="@id/date_layout"
-                    />
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:insetTop="0dp"-->
+<!--                    android:insetBottom="0dp"-->
+<!--                    android:drawableLeft="@drawable/share_btn"-->
+<!--                    android:layout_marginTop="@dimen/margin_big"-->
+<!--                    android:text="@string/share_text"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    app:rippleColor="@color/ripple_color1"-->
+<!--                    app:cornerRadius="5dp"-->
+<!--                    android:id="@+id/share_btn"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:backgroundTint="@color/share_back_color"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/date_layout"-->
+<!--                    app:layout_constraintLeft_toLeftOf="@id/date_layout"-->
+<!--                    />-->
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:insetTop="0dp"
-                    app:rippleColor="@color/ripple_color1"
-                    app:layout_constraintTop_toTopOf="@id/share_btn"
-                    app:layout_constraintBottom_toBottomOf="@id/share_btn"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginEnd="@dimen/margin_standard"
-                    android:id="@+id/star_btn"
-                    app:cornerRadius="5dp"
-                    android:textSize="12sp"
-                    android:textAllCaps="false"
-                    android:text="@string/save_text"
-                    android:insetBottom="0dp"
-                    android:drawableLeft="@drawable/star_btn"
-                    android:backgroundTint="@color/button_yellow_color"
-                    />
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:insetTop="0dp"-->
+<!--                    app:rippleColor="@color/ripple_color1"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/share_btn"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/share_btn"-->
+<!--                    app:layout_constraintRight_toRightOf="parent"-->
+<!--                    android:layout_marginEnd="@dimen/margin_standard"-->
+<!--                    android:id="@+id/star_btn"-->
+<!--                    app:cornerRadius="5dp"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:text="@string/save_text"-->
+<!--                    android:insetBottom="0dp"-->
+<!--                    android:drawableLeft="@drawable/star_btn"-->
+<!--                    android:backgroundTint="@color/button_yellow_color"-->
+<!--                    />-->
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_huge"
-                    app:layout_constraintTop_toBottomOf="@id/share_btn" />
+                    app:layout_constraintTop_toBottomOf="@id/date_layout" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

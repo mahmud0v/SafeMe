@@ -82,4 +82,16 @@ interface UseCaseModule {
     @[Binds Singleton]
     fun sosNotified(impl: SosNotifiedUseCaseImpl): SosNotifiedUseCase
 
+    @[Binds Singleton]
+    fun giveAppeal(impl: GiveAppealUseCaseImpl): GiveAppealUseCase
+
+    @[Binds Singleton]
+    fun pollQuestion(impl: PollQuestionUseCaseImpl): PollQuestionUseCase
+
+    @[Binds Singleton]
+    fun getPollById(impl: GetPollByIdUseCaseImpl): GetPollByIdUseCase
+
+    @[Binds Singleton]
+    fun giveAnswer(impl: GivePollAnswerUseCaseImpl): GivePollAnswerUseCase
+
 }

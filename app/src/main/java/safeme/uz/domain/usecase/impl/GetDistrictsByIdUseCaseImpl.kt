@@ -1,5 +1,7 @@
 package safeme.uz.domain.usecase.impl
 
+import android.app.Application
+import android.content.res.Resources
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -15,6 +17,7 @@ import safeme.uz.data.remote.response.DistrictInfo
 import safeme.uz.data.repository.appeal.AppealRepository
 import safeme.uz.data.repository.auth.AuthRepository
 import safeme.uz.domain.usecase.GetDistrictsByIdUseCase
+import safeme.uz.utils.Keys
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.isConnected
 import javax.inject.Inject
@@ -22,7 +25,8 @@ import javax.inject.Inject
 
 class GetDistrictsByIdUseCaseImpl @Inject constructor(
     private val repository: AuthRepository,
-    private val appealRepository: AppealRepository
+    private val appealRepository: AppealRepository,
+    private val application: Application
 ) : GetDistrictsByIdUseCase {
     override fun invoke(regionId: Int) = flow {
         if (isConnected()) {
@@ -52,11 +56,11 @@ class GetDistrictsByIdUseCaseImpl @Inject constructor(
     override fun getDistrictsByRegion(districtByIdRequest: DistrictByIdRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<DistrictInfo>>>> {
         return flow {
             val response = appealRepository.getDistrictsByRegion(districtByIdRequest)
-            val code = response.body()?.code
-            if (code == 200) {
-                emit(RemoteApiResult.Success(response.body()!!))
-            } else {
-                emit(RemoteApiResult.Error(response.body()?.message!!))
+            when(response.code()){
+                in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
+                else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
         }
     }

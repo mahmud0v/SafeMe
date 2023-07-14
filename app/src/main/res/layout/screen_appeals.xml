@@ -1,16 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_main"
-    android:padding="@dimen/padding_standard"
     tools:context=".presentation.ui.screen.main.AppealsScreen">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/appbar_blue_color">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/padding_very_small"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAppBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium_title"
+                android:paddingHorizontal="@dimen/padding_standard"
+                android:text="@string/appeals"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_title_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivMenu"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                android:id="@+id/ivSearch"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="@dimen/margin_middle"-->
+<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:padding="@dimen/padding_very_small"-->
+<!--                android:src="@drawable/ic_search"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/ivSOS"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivSOS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_middle"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/padding_very_small"
+                android:src="@drawable/ic_sos"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivNotification"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_middle"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/padding_very_small"
+                android:src="@drawable/ic_notifications"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivProfile"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_standard"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/padding_very_small"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="440dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_big_b"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,19 +130,27 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etAppeal"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:id="@+id/appeal_type_spinner_layout"
+                app:layout_constraintTop_toBottomOf="@id/tvAppealTitle"
                 android:layout_marginTop="@dimen/margin_small"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/bg_border_disable"
-                android:drawableEnd="@drawable/ic_expand_more"
-                android:inputType="text"
-                android:padding="@dimen/padding_standard"
-                android:textColor="@color/text_regular_color"
-                android:textSize="@dimen/text_small_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAppealTitle" />
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/appeal_type_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tvAppealTitle2"
@@ -54,19 +162,21 @@
                 android:text="@string/select_the_type_of_appeal"
                 android:textColor="@color/text_regular_color"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAppeal" />
+                app:layout_constraintTop_toBottomOf="@+id/appeal_type_spinner_layout" />
 
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etAppeal2"
+                android:id="@+id/appeal_title_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/margin_small"
+                android:textCursorDrawable="@null"
                 android:background="@drawable/bg_border_disable"
                 android:inputType="text"
-                android:padding="@dimen/padding_standard"
-                android:textColor="@color/text_regular_color"
-                android:textSize="@dimen/text_small_size"
+                android:paddingStart="@dimen/margin_middle"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_regular_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvAppealTitle2" />
 
@@ -80,40 +190,62 @@
                 android:text="@string/select_the_type_of_appeal"
                 android:textColor="@color/text_regular_color"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAppeal2" />
+                app:layout_constraintTop_toBottomOf="@+id/appeal_title_edit_text" />
 
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etAppealText"
+                android:id="@+id/appeal_text_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/edit_text_height_2"
                 android:layout_marginTop="@dimen/margin_small"
                 android:background="@drawable/bg_border_disable"
                 android:inputType="textMultiLine"
-                android:padding="@dimen/padding_standard"
                 android:lines="4"
+                android:paddingTop="@dimen/padding_standard"
+                android:textCursorDrawable="@null"
+                android:fontFamily="@font/roboto_regular"
+                android:paddingStart="@dimen/padding_middle"
+                android:paddingEnd="@dimen/padding_middle"
                 android:gravity="top|start"
+                android:imeOptions="actionDone"
                 android:scrollbars="vertical"
                 android:scrollHorizontally="false"
-                android:textColor="@color/text_regular_color"
-                android:textSize="@dimen/text_small_size"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_regular_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvAppealTextTitle" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSend"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/send"
-                android:textSize="@dimen/text_small_size"
-                android:textAllCaps="false"
-                app:backgroundTint="@null"
-                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginTop="@dimen/margin_big_a"
                 android:background="@drawable/bg_button"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:enabled="false"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_small_size"
+                app:backgroundTint="@null"
+                app:layout_constraintTop_toBottomOf="@id/appeal_text_edit_text" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progress"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_huge"
+                style="?android:attr/progressBarStyleLarge"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

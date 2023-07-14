@@ -5,10 +5,12 @@ import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.SosBody
 import safeme.uz.data.remote.api.AppealsApiService
+import safeme.uz.data.remote.request.AppealRequest
 import safeme.uz.data.remote.request.DistrictByIdRequest
 import safeme.uz.data.remote.request.InspectorMFYRequest
 import safeme.uz.data.remote.request.NeighborhoodRequest
 import safeme.uz.data.remote.request.SosRequest
+import safeme.uz.data.remote.response.AppealResponse
 import safeme.uz.data.remote.response.DistrictInfo
 import safeme.uz.data.remote.response.InspectorInfo
 import safeme.uz.data.remote.response.NeighborhoodInfo
@@ -41,10 +43,9 @@ class AppealRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getInspectorsByMFY(inspectorMFYRequest: InspectorMFYRequest): Response<ApiResponse<ArrayList<InspectorInfo>>> {
+    override suspend fun getInspectorsByMFY(): Response<ApiResponse<ArrayList<InspectorInfo>>> {
         return appealsApiService.getInspectorsData(
-            "${sharedPreference.locale}/api/v1.0/police/",
-            inspectorMFYRequest
+            "${sharedPreference.locale}/api/v1.0/police/mahalla/"
         )
     }
 
@@ -52,6 +53,13 @@ class AppealRepositoryImpl @Inject constructor(
         return appealsApiService.sosNotified(
             "${sharedPreference.locale}/api/v1.0/sos/",
             sosRequest
+        )
+    }
+
+    override suspend fun giveAppeal(appealRequest: AppealRequest): Response<ApiResponse<AppealResponse>> {
+        return appealsApiService.giveAppeal(
+            "${sharedPreference.locale}/api/v1.0/murojaat/",
+            appealRequest
         )
     }
 

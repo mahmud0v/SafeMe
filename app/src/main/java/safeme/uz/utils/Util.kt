@@ -7,7 +7,11 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.R
 
 object Util {
-    fun openDatePickerDotly(context: Context, currentDate: String, etDateOfBirth: AppCompatEditText) {
+    fun openDatePickerDotly(
+        context: Context,
+        currentDate: String,
+        etDateOfBirth: AppCompatEditText
+    ) {
         val currentYear: Int
         val currentMonth: Int
         val currentDay: Int
@@ -51,5 +55,11 @@ object Util {
             ContextCompat.getDrawable(context, R.color.m3_ref_palette_white)
         )
         tvDatePickerDialog.show()
+    }
+
+    fun getAppealTypes(): ArrayList<String> {
+        return arrayListOf(
+            "ariza", "shikoyat", "taklif"
+        )
     }
 }

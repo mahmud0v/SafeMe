@@ -22,15 +22,14 @@ import safeme.uz.data.remote.response.RecommendationInfoResponse
 import safeme.uz.databinding.ScreenRecommendPagerBinding
 import safeme.uz.presentation.ui.adapter.RecommendationAdapter
 import safeme.uz.presentation.ui.adapter.RecommendationInfoAdapter
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.ui.screen.main.RecommendationsScreenDirections
 import safeme.uz.presentation.viewmodel.recommendation.RecommendationPagerViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.MarginItemDecoration
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
-import safeme.uz.utils.invisible
 import safeme.uz.utils.isConnected
-import safeme.uz.utils.snackMessage
 import safeme.uz.utils.visible
 
 @AndroidEntryPoint
@@ -47,11 +46,12 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
     }
 
     private fun loadData() {
-        val category = requireArguments().getInt("key")
+        val category = requireArguments().getInt(Keys.KEY_VALUE)
         if (isConnected()) {
             loadViews(category)
         } else {
-            snackMessage(Keys.INTERNET_FAIL)
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
     }
 
@@ -75,6 +75,8 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
                 is RemoteApiResult.Loading -> binding.progress.visible()
                 is RemoteApiResult.Error -> {
                     binding.progress.gone()
+                    val messageDialog = MessageDialog(it.message)
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                 }
             }
         }
@@ -83,10 +85,24 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
     private val recommendationInfoObserver =
         Observer<RemoteApiResult<RecommendationInfoResponse>> {
             when (it) {
-                is RemoteApiResult.Success -> setRecommendsAgeInfo(it.data?.body)
-                is RemoteApiResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Success -> {
+                    binding.placeHolder.gone()
+                    setRecommendsAgeInfo(it.data?.body)
+                }
+
+                is RemoteApiResult.Loading -> {
+                    binding.placeHolder.gone()
+                    binding.progress.visible()
+                }
+
                 is RemoteApiResult.Error -> {
                     binding.progress.gone()
+                    if (it.message == getString(R.string.no_data)) {
+                        binding.placeHolder.visible()
+                    } else {
+                        val messageDialog = MessageDialog(it.message)
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
                 }
             }
         }
@@ -114,20 +130,31 @@ class RecommendationPagerScreen : Fragment(R.layout.screen_recommend_pager) {
                     recommendationByCategoryObserver
                 )
             }
-
         }
     }
 
     private val recommendationByCategoryObserver =
         Observer<RemoteApiResult<AgeCategoryResponse<RecommendationInfo>>> {
             when (it) {
-                is RemoteApiResult.Success -> setRecommendsCategoryInfo(it.data?.body)
+                is RemoteApiResult.Success -> {
+                    binding.placeHolder.gone()
+                    setRecommendsCategoryInfo(it.data?.body)
+                }
+
                 is RemoteApiResult.Error -> {
-                    binding.progress.invisible()
+                    if (it.message == getString(R.string.no_data)) {
+                        binding.placeHolder.visible()
+                    } else {
+                        val messageDialog = MessageDialog(it.message!!)
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
                     setRecommendsCategoryInfo(null)
                 }
 
-                is RemoteApiResult.Loading -> binding.progress.visible()
+                is RemoteApiResult.Loading -> {
+                    binding.progress.visible()
+                    binding.placeHolder.gone()
+                }
             }
         }
 

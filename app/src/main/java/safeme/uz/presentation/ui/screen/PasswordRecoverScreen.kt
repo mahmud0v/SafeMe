@@ -15,11 +15,14 @@ import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.RemindChangePasswordRequest
 import safeme.uz.data.remote.response.RemindPasswordChangeBody
 import safeme.uz.databinding.ScreenPasswordRecoverBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.disable
 import safeme.uz.utils.enable
+import safeme.uz.utils.isConnected
+import safeme.uz.utils.snackBar
 import safeme.uz.utils.snackMessage
 
 
@@ -84,17 +87,23 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
             if (binding.newPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString() &&
                 binding.reNewPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString()
             ) {
-                viewModel.remindPasswordChange(
-                    RemindChangePasswordRequest(
-                        binding.oldPasswordEdit.text.toString(),
-                        binding.newPasswordEdit.text.toString(),
-                        binding.reNewPasswordEdit.text.toString()
+                if (isConnected()){
+                    viewModel.remindPasswordChange(
+                        RemindChangePasswordRequest(
+                            binding.oldPasswordEdit.text.toString(),
+                            binding.newPasswordEdit.text.toString(),
+                            binding.reNewPasswordEdit.text.toString()
+                        )
                     )
-                )
-                viewModel.remindChangePasswordLiveData.observe(
-                    viewLifecycleOwner,
-                    remindChangePasswordObserver
-                )
+                    viewModel.remindChangePasswordLiveData.observe(
+                        viewLifecycleOwner,
+                        remindChangePasswordObserver
+                    )
+                }else {
+                    val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                }
+
             } else {
                 binding.reNewPasswordLayout.error = getString(R.string.not_same_new_old_password)
             }
@@ -105,8 +114,10 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
         Observer<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> {
             when (it) {
                 is RemoteApiResult.Success -> {
-                    snackMessage(getString(R.string.successfully_changed_passoword))
                     binding.progress.hide()
+                    val messageDialog = MessageDialog(getString(R.string.successfully_changed_passoword))
+                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+
                 }
 
                 is RemoteApiResult.Loading -> {
@@ -114,8 +125,9 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
                 }
 
                 is RemoteApiResult.Error -> {
-                    snackMessage(it.message!!)
                     binding.progress.hide()
+                    val messageDialog = MessageDialog(it.message)
+                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
                 }
             }
         }

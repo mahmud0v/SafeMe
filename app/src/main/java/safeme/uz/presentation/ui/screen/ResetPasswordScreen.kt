@@ -19,6 +19,7 @@ import safeme.uz.databinding.ScreenResetPasswordBinding
 import safeme.uz.presentation.viewmodel.resetpassword.ResetPasswordViewModel
 import safeme.uz.presentation.viewmodel.resetpassword.ResetPasswordViewModelImpl
 import safeme.uz.utils.Keys
+import safeme.uz.utils.snackBar
 import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
@@ -63,12 +64,12 @@ class ResetPasswordScreen : Fragment(R.layout.screen_reset_password) {
     }
 
     private val messageObserver = Observer<String> {
-        snackMessage(it)
+        binding.progress.snackBar(it)
     }
 
     private val errorObserver = Observer<Int> {
         binding.etPasswordLayout.error = getString(it)
-        snackMessage(getString(it))
+        binding.progress.snackBar(getString(it))
     }
 
     private fun initViews() = with(binding) {

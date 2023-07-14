@@ -24,6 +24,7 @@
     <color name="button_green_color">#63D586</color>
     <color name="button_yellow_color">#FFC600</color>
     <color name="button_orange_color">#FFA607</color>
+    <color name="logo_color">#1888CB</color>
     <color name="button_red_color">#E15C2F</color>
     <color name="button_green_pink">#514A9F</color>
     <color name="border_disable_color">#E6EAF0</color>

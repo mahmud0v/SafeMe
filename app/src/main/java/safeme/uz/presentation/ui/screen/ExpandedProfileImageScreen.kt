@@ -18,7 +18,6 @@ class ExpandedProfileImageScreen : Fragment(R.layout.screen_expanded_profile_ima
     private val navArgs: ExpandedProfileImageScreenArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initViews()
     }
 

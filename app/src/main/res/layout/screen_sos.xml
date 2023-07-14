@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_main"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -25,8 +24,7 @@
                 android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:foreground="?attr/selectableItemBackground"
-                android:padding="@dimen/padding_small"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_arrow_back" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -34,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium_title"
-                android:paddingHorizontal="@dimen/padding_middle"
+                android:paddingHorizontal="@dimen/padding_standard"
                 android:text="@string/sos"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_title_size" />
@@ -71,6 +69,7 @@
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:textAllCaps="false"
         android:layout_marginHorizontal="@dimen/margin_standard"
         android:background="@drawable/bg_button_yellow"
         android:text="@string/there_are_suspicious_circumstances"
@@ -81,6 +80,7 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:textAllCaps="false"
         android:layout_marginHorizontal="@dimen/margin_standard"
         android:layout_marginVertical="@dimen/margin_big"
         android:background="@drawable/bg_button_orange"
@@ -92,6 +92,7 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="116dp"
+        android:textAllCaps="false"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginHorizontal="@dimen/margin_standard"
         android:background="@drawable/bg_button_red"

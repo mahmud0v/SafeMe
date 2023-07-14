@@ -15,8 +15,9 @@ class SpinnerAdapter(context: Context, list: ArrayList<String>) :
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view: View? = null
+        val textView = TextView(context)
+        textView.setTextColor(Color.parseColor("#6E7599"))
         if (position == 0) {
-            val textView = TextView(context)
             textView.height = 0
             view = textView
         } else {

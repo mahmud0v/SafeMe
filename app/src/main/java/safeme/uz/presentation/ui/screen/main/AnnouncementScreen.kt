@@ -16,13 +16,13 @@ import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
 import safeme.uz.databinding.ScreenAnnouncementBinding
 import safeme.uz.presentation.ui.adapter.AnnouncementViewPagerAdapter
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.isConnected
-import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
 class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
@@ -48,7 +48,8 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
                 getAllCategoriesLiveData.observe(viewLifecycleOwner, categoryObserver)
             }
         } else {
-            snackMessage(Keys.INTERNET_FAIL)
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
         }
     }
 
@@ -57,7 +58,10 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
         Observer<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
             when (it) {
                 is RemoteApiResult.Success -> initViews(it.data?.body)
-                is RemoteApiResult.Error -> snackMessage(it.message!!)
+                is RemoteApiResult.Error -> {
+                    val messageDialog = MessageDialog(it.message!!)
+                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                }
                 else -> {}
             }
         }

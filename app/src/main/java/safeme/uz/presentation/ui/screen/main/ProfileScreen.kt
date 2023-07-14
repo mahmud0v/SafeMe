@@ -16,12 +16,13 @@ import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.response.UserInfo
 import safeme.uz.data.remote.response.UserResponse
 import safeme.uz.databinding.ScreenProfileBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
+import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.formatBirthDay
 import safeme.uz.utils.gone
-import safeme.uz.utils.snackMessage
+import safeme.uz.utils.isConnected
 import safeme.uz.utils.visible
 
 @AndroidEntryPoint
@@ -39,14 +40,24 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
     }
 
     private fun loadUserData() {
-        viewModel.getProfileInfo()
-        viewModel.userInfoLiveData.observe(viewLifecycleOwner, userObserver)
+        if (isConnected()) {
+            viewModel.getProfileInfo()
+            viewModel.userInfoLiveData.observe(viewLifecycleOwner, userObserver)
+        } else {
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+            messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+        }
+
     }
 
     private val userObserver = Observer<RemoteApiResult<UserResponse>> {
         when (it) {
             is RemoteApiResult.Success -> initView(it.data?.body!!)
-            is RemoteApiResult.Error -> snackMessage(it.data?.message!!)
+            is RemoteApiResult.Error -> {
+                val messageDialog = MessageDialog(it.message)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+            }
+
             is RemoteApiResult.Loading -> binding.progress.visible()
         }
     }
@@ -79,12 +90,17 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
                 Keys.RECOMMENDATION_SCREEN -> findNavController().navigate(R.id.recommendations)
                 Keys.ANNOUNCEMENT_SCREEN -> findNavController().navigate(R.id.announcements)
                 Keys.INSPECTOR_SCREEN -> findNavController().navigate(R.id.prevention_inspector)
-                Keys.GAME_SCREEN -> findNavController().navigate(R.id.screen_game)
+                Keys.GAME_SCREEN -> findNavController().navigate(R.id.game)
                 Keys.ABOUT_SCREEN -> findNavController().navigate(R.id.about_us)
-                else -> { findNavController().navigateUp() }
+                Keys.APPEAL_SCREEN -> findNavController().navigate(R.id.appeals)
+                Keys.POLL_PAGER -> findNavController().navigate(R.id.questionnaire)
+                else -> {
+                    findNavController().popBackStack()
+                }
             }
         }
     }
+
 
     private fun editPassword() {
         binding.btnEditPassword.setOnClickListener {
