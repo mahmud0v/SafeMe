@@ -97,6 +97,9 @@ object Keys {
     const val POLL_PAGER = "PollPagerScreen"
     const val APPEAL_SCREEN = "Appeal Screen"
     const val DIALOG = "Dialog"
+    const val WHITE = "#FFFFFF"
+    const val BLACK = "#000000"
+    const val BLUE = "#03A9F4"
 
 
 

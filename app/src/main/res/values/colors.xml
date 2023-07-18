@@ -51,6 +51,13 @@
     <color name="red_category">#F09272</color>
     <color name="dark_blue_color">#3796B3</color>
     <color name="share_back_color">#1E90FF</color>
+    <color name="recommendation_icon_color">#1ACBAD</color>
+    <color name="announcement_icon_color">#63D586</color>
+    <color name="game_icon_color">#23af5f</color>
+    <color name="poll_icon_color">#6CDDFF</color>
+    <color name="appeal_icon_color">#FFC600</color>
+    <color name="inpector_icon_color">#F09272</color>
+    <color name="about_icon_color">#9F3A3A</color>
 
 
 
