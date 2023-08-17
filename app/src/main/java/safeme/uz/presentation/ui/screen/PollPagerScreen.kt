@@ -19,6 +19,7 @@ import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.ui.screen.main.PollScreenDirections
 import safeme.uz.presentation.viewmodel.poll.PollPagerScreenViewModel
 import safeme.uz.utils.Keys
+import safeme.uz.utils.MarginGameItemDecoration
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
@@ -40,6 +41,7 @@ class PollPagerScreen : Fragment(R.layout.screen_poll_pager) {
     private fun initRecycler() {
         binding.pollRv.adapter = pollRecyclerAdapter
         binding.pollRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.pollRv.addItemDecoration(MarginGameItemDecoration())
     }
 
     private fun loadPollRecyclerData() {
@@ -48,6 +50,7 @@ class PollPagerScreen : Fragment(R.layout.screen_poll_pager) {
             viewModel.getPollQuestion(AgeCategoryRequest(ageCategoryId))
             viewModel.pollMutableLiveData.observe(viewLifecycleOwner, pollObserver)
         } else {
+            binding.progress.gone()
             val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
             messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
@@ -63,17 +66,14 @@ class PollPagerScreen : Fragment(R.layout.screen_poll_pager) {
                 it.data?.let { data ->
                     pollRecyclerAdapter.differ.submitList(data.body)
                 }
-
             }
 
             is RemoteApiResult.Error -> {
                 pollRecyclerAdapter.differ.submitList(emptyList())
                 binding.progress.hide()
-                if (it.message == getString(R.string.no_data)) {
-                    binding.placeHolder.visible()
-                } else {
-                    binding.placeHolder.gone()
-                    val messageDialog = MessageDialog(it.message)
+                binding.placeHolder.visible()
+                if (it.message != getString(R.string.not_found)) {
+                    val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
                     messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                 }
             }

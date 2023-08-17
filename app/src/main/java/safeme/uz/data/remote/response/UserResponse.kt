@@ -3,6 +3,7 @@ package safeme.uz.data.remote.response
 import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
+import java.io.Serializable
 
 
 data class UserResponse(
@@ -11,6 +12,7 @@ data class UserResponse(
     val body: UserInfo? = null,
     val code: Int
 )
+
 
 data class UserInfo(
     val id: Int,
@@ -26,6 +28,6 @@ data class UserInfo(
     val district: String? = null,
     val mahalla: String? = null,
     val adress: String? = null,
-    val photo:MultipartBody.Part? = null
+    val photo:String? = null
 
-)
+):Serializable

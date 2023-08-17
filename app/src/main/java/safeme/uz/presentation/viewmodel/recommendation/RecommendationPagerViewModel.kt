@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
 import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementCategoryRequest
+import safeme.uz.data.remote.request.AgeCatRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryResponse
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
@@ -40,6 +42,11 @@ class RecommendationPagerViewModel @Inject constructor(
         MutableLiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>>()
     val gameRecommendationLiveData: LiveData<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> =
         gameRecommendationMutableLiveData
+
+    private val getRecAgeCatMutableLiveData = MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<RecommendationInfo>>>>()
+    val getRecAgeCatLiveData:LiveData<RemoteApiResult<ApiResponse<ArrayList<RecommendationInfo>>>> = getRecAgeCatMutableLiveData
+
+
 
     init {
         getRecAllCategories(AnnouncementCategoryRequest(Keys.RECOMMENDATION))
@@ -75,6 +82,12 @@ class RecommendationPagerViewModel @Inject constructor(
                 }
             }
         }
+
+    fun getRecAgeCat(recAgeCatRequest: AgeCatRequest) = viewModelScope.launch {
+        getAllCategoriesUseCase.getRecAgeCat(recAgeCatRequest).collect{
+            getRecAgeCatMutableLiveData.value = it
+        }
+    }
 
 }
 

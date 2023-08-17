@@ -17,7 +17,6 @@ import javax.inject.Inject
 @HiltViewModel
 class InspectorScreenViewModel @Inject constructor(
     private val getInspectorDataUseCase: GetInspectorDataUseCase,
-    private val profileUseCase: ProfileUseCase
 ) : ViewModel() {
     private val inspectorMutableLiveData =
         MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<InspectorInfo>>>>()

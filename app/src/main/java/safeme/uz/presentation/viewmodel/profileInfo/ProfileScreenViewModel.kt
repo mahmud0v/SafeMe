@@ -7,14 +7,16 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import safeme.uz.data.model.ApiResponse
+import safeme.uz.data.model.ResultData
 import safeme.uz.data.remote.request.PasswordRecoverRequest
 import safeme.uz.data.remote.request.RemindChangePasswordRequest
 import safeme.uz.data.remote.request.ResetPasswordRequest
 import safeme.uz.data.remote.request.VerifyRegisterRequest
 import safeme.uz.data.remote.response.PasswordRecoverResponse
 import safeme.uz.data.remote.response.PasswordUpdateBody
-import safeme.uz.data.remote.response.RemindPasswordChangeBody
+import safeme.uz.data.remote.response.RegisterResponse
 import safeme.uz.data.remote.response.UserResponse
+import safeme.uz.domain.usecase.ForgetPasswordUseCase
 import safeme.uz.domain.usecase.ProfileUseCase
 import safeme.uz.utils.RemoteApiResult
 import javax.inject.Inject
@@ -22,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileScreenViewModel @Inject constructor(
     private val profileUseCase: ProfileUseCase,
+    private val forgetPasswordUseCase: ForgetPasswordUseCase
 ) : ViewModel() {
 
     private val userInfoMutableLiveData = MutableLiveData<RemoteApiResult<UserResponse>>()
@@ -42,8 +45,11 @@ class ProfileScreenViewModel @Inject constructor(
     val passwordUpdateLiveData: LiveData<RemoteApiResult<ApiResponse<PasswordUpdateBody>>> =
         passwordUpdateMutableLiveData
 
-    private val remindChangePasswordMutableLiveData = MutableLiveData<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>>()
-    val remindChangePasswordLiveData:LiveData<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> = remindChangePasswordMutableLiveData
+    private val remindChangePasswordMutableLiveData = MutableLiveData<RemoteApiResult<ApiResponse<ArrayList<String>>>>()
+    val remindChangePasswordLiveData:LiveData<RemoteApiResult<ApiResponse<ArrayList<String>>>> = remindChangePasswordMutableLiveData
+
+    private val sendSmsMutableLiveData = MutableLiveData<RemoteApiResult<ApiResponse<RegisterResponse>>>()
+    val sendSmsLiveData:LiveData<RemoteApiResult<ApiResponse<RegisterResponse>>> = sendSmsMutableLiveData
 
 
 
@@ -78,5 +84,11 @@ class ProfileScreenViewModel @Inject constructor(
         }
     }
 
+    fun sendSms(phone:String) = viewModelScope.launch {
+        forgetPasswordUseCase.sendSms(phone).collect{
+            sendSmsMutableLiveData.value = it
+        }
+
+    }
 
 }

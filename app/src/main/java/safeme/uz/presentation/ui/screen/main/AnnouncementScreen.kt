@@ -2,6 +2,7 @@ package safeme.uz.presentation.ui.screen.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -22,7 +23,9 @@ import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
 import safeme.uz.utils.backPressDispatcher
+import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
+import safeme.uz.utils.visible
 
 @AndroidEntryPoint
 class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
@@ -59,8 +62,12 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
             when (it) {
                 is RemoteApiResult.Success -> initViews(it.data?.body)
                 is RemoteApiResult.Error -> {
-                    val messageDialog = MessageDialog(it.message!!)
-                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                    binding.placeHolder.visible()
+                    binding.viewPager2.gone()
+                    if (it.message!=getString(R.string.not_found)){
+                        val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
+                        messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                    }
                 }
                 else -> {}
             }
@@ -68,6 +75,8 @@ class AnnouncementScreen : Fragment(R.layout.screen_announcement) {
 
 
     private fun initViews(listCategory: ArrayList<CategoriesData>?) {
+        binding.viewPager2.visible()
+        binding.placeHolder.gone()
         listCategory?.let {
             val adapter = AnnouncementViewPagerAdapter(this, listCategory)
             binding.viewPager2.adapter = adapter

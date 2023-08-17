@@ -6,5 +6,5 @@ import safeme.uz.data.remote.request.VerifyRegisterRequest
 import safeme.uz.data.remote.response.VerifyResetPasswordResponse
 
 interface VerifyResetPasswordUseCase {
-    operator fun invoke(verification_code: String): Flow<ResultData<VerifyResetPasswordResponse>>
+    operator fun invoke(verification_code: String): Flow<ResultData<VerifyResetPasswordResponse?>>
 }

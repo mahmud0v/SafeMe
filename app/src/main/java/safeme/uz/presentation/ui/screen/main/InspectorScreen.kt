@@ -22,6 +22,7 @@ import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.inspector.InspectorScreenViewModel
 import safeme.uz.utils.Keys
+import safeme.uz.utils.MarginGameItemDecoration
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.gone
@@ -51,6 +52,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
         inspectorRecyclerAdapter = InspectorRecyclerAdapter()
         binding.rvInspector.adapter = inspectorRecyclerAdapter
         binding.rvInspector.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvInspector.addItemDecoration(MarginGameItemDecoration())
     }
 
     private fun loadInspectorData() {
@@ -58,6 +60,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
             viewModel.getInspectorDataByMFY()
             viewModel.inspectorLiveData.observe(viewLifecycleOwner, inspectorObserver)
         } else {
+            binding.progress.gone()
             val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
             messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
@@ -73,10 +76,9 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
 
                 is RemoteApiResult.Error -> {
                     binding.progress.hide()
-                    if (it.message == getString(R.string.no_data)) {
-                        binding.placeHolder.visible()
-                    } else {
-                        val messageDialog = MessageDialog(it.message)
+                    binding.placeHolder.visible()
+                    if (it.message != getString(R.string.not_found)) {
+                        val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
                         messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                     }
                 }
@@ -109,6 +111,7 @@ class InspectorScreen : Fragment(R.layout.screen_inspector) {
             startActivity(intent)
         }
     }
+
 
     private fun moveToProfile() {
         binding.ivProfile.setOnClickListener {

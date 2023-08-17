@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="12dp"
     android:elevation="1dp"
     android:layout_marginVertical="@dimen/margin_very_small"
@@ -31,7 +32,7 @@
             android:layout_weight="1"
             android:maxLines="2"
             android:layout_height="wrap_content"
-            android:text="@string/safe_internet"/>
+            tools:text="@string/safe_internet"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivItemRightIcon"

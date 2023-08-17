@@ -27,8 +27,9 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent"
             >
 
@@ -59,16 +60,17 @@
                 android:id="@+id/polls_title"
                 style="@style/TitleTextViewStyle"
                 android:layout_marginTop="@dimen/margin_standard"
-                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_width="350dp"
+                android:layout_marginStart="@dimen/margin_standard"
                 app:layout_constraintTop_toBottomOf="@id/img_info"
                 app:layout_constraintLeft_toLeftOf="@id/img_info"
-                tools:text="@string/videopodkat" />
+                tools:text="@string/about_us_desc" />
 
 
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_marginTop="242dp"
+                android:layout_marginTop="@dimen/margin_standard"
                 app:layout_constraintTop_toBottomOf="@id/polls_title"
                 android:layout_height="match_parent">
 
@@ -100,36 +102,39 @@
 
             </androidx.core.widget.NestedScrollView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_standard"
-                android:background="@drawable/bg_button"
-                android:enabled="false"
-                android:text="@string/save"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textAllCaps="false"
-                android:textSize="@dimen/text_small_size"
-                app:backgroundTint="@null" />
-
-
-            <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/progress"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="@dimen/margin_huge"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
 
 
+        </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:background="@drawable/bg_button"
+            android:enabled="false"
+            android:layout_gravity="bottom"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_small_size"
+            app:backgroundTint="@null" />
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_huge"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
 
     </com.google.android.material.card.MaterialCardView>

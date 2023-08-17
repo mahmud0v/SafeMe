@@ -83,14 +83,15 @@
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/etFirstName"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/edit_text_height"
                             android:layout_marginTop="@dimen/margin_small"
+                            android:textCursorDrawable="@drawable/cursor"
                             android:background="@drawable/bg_border_disable"
-                            android:fontFamily="@font/roboto_medium_title"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/black"
                             android:imeOptions="actionNext"
                             android:inputType="textPersonName"
-                            android:padding="@dimen/padding_standard"
-                            android:textColorHint="@color/hint_color"
+                            android:paddingStart="@dimen/margin_middle"
                             android:textSize="@dimen/text_regular_size" />
 
                         <TextView
@@ -106,14 +107,15 @@
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/etLastName"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/edit_text_height"
                             android:layout_marginTop="@dimen/margin_small"
+                            android:textCursorDrawable="@drawable/cursor"
                             android:background="@drawable/bg_border_disable"
-                            android:fontFamily="@font/roboto_medium_title"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/black"
                             android:imeOptions="actionNext"
                             android:inputType="textPersonName"
-                            android:padding="@dimen/padding_standard"
-                            android:textColorHint="@color/hint_color"
+                            android:paddingStart="@dimen/margin_middle"
                             android:textSize="@dimen/text_regular_size" />
 
 
@@ -141,13 +143,15 @@
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 android:background="@drawable/bg_border_disable"
                                 android:hint="@string/hint_mask"
+                                android:textCursorDrawable="@drawable/cursor"
                                 android:inputType="date"
                                 app:mask="##.##.####"
-                                android:fontFamily="@font/roboto_medium_title"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/roboto_regular"
                                 android:imeOptions="actionDone"
-                                android:padding="@dimen/padding_standard"
+                                android:paddingStart="@dimen/margin_middle"
                                 android:textColorHint="@color/hint_color"
-                                android:textSize="@dimen/text_small_size" />
+                                android:textSize="@dimen/text_regular_size" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -166,37 +170,37 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                        <TextView
-                            android:id="@+id/tvWhoTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_standard"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/who_are_you_this_baby"
-                            android:textColor="@color/text_regular_color"
-                            android:textSize="@dimen/text_regular_size" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvWhoTitle"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="@dimen/margin_standard"-->
+<!--                            android:fontFamily="@font/roboto_regular"-->
+<!--                            android:text="@string/who_are_you_this_baby"-->
+<!--                            android:textColor="@color/text_regular_color"-->
+<!--                            android:textSize="@dimen/text_regular_size" />-->
 
 
 
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:paddingStart="@dimen/padding_standard"
-                            android:layout_marginTop="@dimen/margin_small"
-                            android:background="@drawable/bg_border_disable"
-                            android:orientation="horizontal">
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_marginTop="@dimen/margin_small"-->
+<!--                            android:paddingStart="@dimen/margin_small_4"-->
+<!--                            android:background="@drawable/bg_border_disable"-->
+<!--                            android:orientation="horizontal">-->
 
-                            <Spinner
-                                android:id="@+id/parent_spinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:spinnerMode="dropdown" />
+<!--                            <Spinner-->
+<!--                                android:id="@+id/parent_spinner"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_centerVertical="true"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:gravity="center"-->
+<!--                                android:spinnerMode="dropdown" />-->
 
-                        </RelativeLayout>
+<!--                        </RelativeLayout>-->
 
 
 
@@ -213,8 +217,8 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:paddingStart="@dimen/padding_standard"
                             android:layout_marginTop="@dimen/margin_small"
+                            android:paddingStart="@dimen/margin_small_4"
                             android:background="@drawable/bg_border_disable"
                             android:orientation="horizontal">
 
@@ -241,7 +245,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:paddingStart="@dimen/padding_standard"
+                            android:paddingStart="@dimen/margin_small_4"
                             android:layout_marginTop="@dimen/margin_small"
                             android:background="@drawable/bg_border_disable"
                             android:orientation="horizontal">
@@ -269,7 +273,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:paddingStart="@dimen/padding_standard"
+                            android:paddingStart="@dimen/margin_small_4"
                             android:layout_marginTop="@dimen/margin_small"
                             android:background="@drawable/bg_border_disable"
                             android:orientation="horizontal">
@@ -285,6 +289,7 @@
 
                         </RelativeLayout>
 
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -292,7 +297,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/tvEducation"
+                                android:id="@+id/genderText"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -348,26 +353,90 @@
 
                             </LinearLayout>
 
+
+
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/vlImageContainer"
+                            android:layout_marginTop="@dimen/margin_standard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivProfile"
+                                android:layout_width="100dp"
+                                android:layout_height="116dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_launcher_background"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/RoundedCorner4r" />
+
+                            <LinearLayout
+                                android:id="@+id/llCloseImage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_very_small"
+                                android:background="@drawable/bg_circle_close"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:padding="4dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_close" />
+
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <Space
+                            android:layout_marginTop="@dimen/margin_small_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_standard"
+
+                            />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.core.widget.NestedScrollView>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/bg_border_enable"
+                    android:fontFamily="@font/roboto_regular"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/add_image"
+                    android:textAllCaps="false"
+                    android:textColor="@color/main_green_color"
+                    android:textSize="@dimen/text_small_size"
+                    app:backgroundTint="@null" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:backgroundTint="@null"
                     android:layout_marginTop="@dimen/margin_standard"
                     android:background="@drawable/bg_button"
-                    android:enabled="false"
+                    android:fontFamily="@font/roboto_regular"
                     android:foreground="?attr/selectableItemBackground"
                     android:text="@string/save"
                     android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/margin_standard"
                     android:textSize="@dimen/text_small_size"
                     app:backgroundTint="@null"
                     app:layout_constraintBottom_toBottomOf="parent" />
+
 
             </LinearLayout>
 

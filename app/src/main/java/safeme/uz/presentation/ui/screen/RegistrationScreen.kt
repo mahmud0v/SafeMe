@@ -13,10 +13,13 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.databinding.ScreenRegistrationBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.register.RegisterViewModel
 import safeme.uz.presentation.viewmodel.register.RegisterViewModelImpl
+import safeme.uz.utils.Keys
 import safeme.uz.utils.VerifyType
 import safeme.uz.utils.hideKeyboard
 import safeme.uz.utils.snackBar
@@ -26,7 +29,6 @@ import safeme.uz.utils.snackMessage
 class RegistrationScreen : Fragment(R.layout.screen_registration), OnClickListener {
     private val binding by viewBinding(ScreenRegistrationBinding::bind)
     private val viewModel: RegisterViewModel by viewModels<RegisterViewModelImpl>()
-
     private var checkPassword: Boolean = false
     private var checkPhoneNumber: Boolean = false
     private var checkConfirmPassword: Boolean = false
@@ -60,7 +62,8 @@ class RegistrationScreen : Fragment(R.layout.screen_registration), OnClickListen
 
     private val messageObserver = Observer<String> {
         hideKeyboard()
-        binding.progress.snackBar(it)
+        val messageDialog = MessageDialog(it)
+        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
     }
 
     private val errorObserver = Observer<Int> {
@@ -71,7 +74,10 @@ class RegistrationScreen : Fragment(R.layout.screen_registration), OnClickListen
     private fun initViews() = with(binding) {
         registerButton.setOnClickListener(this@RegistrationScreen)
         allReadyMemberButton.setOnClickListener(this@RegistrationScreen)
-
+        val bundle = requireArguments().getSerializable(Keys.BUNDLE_KEY) as ManageScreen
+        bundle.phoneNumber?.let {
+            binding.etPhoneNumber.setText(it)
+        }
         etPhoneNumber.addTextChangedListener {
             etPhoneNumberLayout.isErrorEnabled = false
         }

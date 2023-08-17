@@ -20,17 +20,15 @@ class AddingChildDataUseCaseImpl @Inject constructor(
     override fun invoke(addingChildDataRequest: AddingChildDataRequest) = flow {
         if (isConnected()) {
             val response = repository.addingChildData(addingChildDataRequest)
-            if (response.success) {
-                response.body?.let {
-                    emit(ResultData.Success(it))
+            when (response.code()) {
+                in 200..209 -> {
+                    emit(ResultData.Success(response.body()?.body))
                 }
-            } else {
-                when (response.code) {
-                    400 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-                    in 500..599 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-                    else -> emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
-                }
+                400 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
+                in 500..599 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
+                else -> emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
             }
+
         } else {
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
         }

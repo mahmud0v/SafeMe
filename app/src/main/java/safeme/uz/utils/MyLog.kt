@@ -18,17 +18,19 @@ import java.util.Calendar
 import java.util.Date
 
 fun Fragment.snackMessage(message: String) {
-    Snackbar.make(this.requireView().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).apply {
+    Snackbar.make(
+        this.requireView().findViewById(android.R.id.content),
+        message,
+        Snackbar.LENGTH_SHORT
+    ).apply {
         setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.color_snack_default))
             .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }.show()
 }
 
-fun View.snackBar(message: String){
-    Snackbar.make(this,message,Snackbar.LENGTH_SHORT).show()
+fun View.snackBar(message: String) {
+    Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()
 }
-
-
 
 
 fun Fragment.snackMessageLong(message: String) {
@@ -124,15 +126,14 @@ fun dateParseToString(date: Date, format: String): String {
     return formatter.format(date)
 }
 
-fun Fragment.backPressDispatcher(){
-    val callBack = object : OnBackPressedCallback(true){
+fun Fragment.backPressDispatcher() {
+    val callBack = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             requireActivity().finish()
         }
     }
-    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callBack)
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callBack)
 }
-
 
 
 fun Number.dpToPx(): Int {
@@ -159,6 +160,34 @@ fun String.formatBirthDay(): String {
     val month = this.substring(5, 7)
     val day = this.substring(8)
     return "$day-$month-$year"
+}
+
+fun String.reFormatBirthDay(): String {
+    val year = this.substring(0, 4)
+    val month = this.substring(5, 7)
+    val day = this.substring(8)
+    return "$day.$month.$year"
+}
+
+fun String?.trimDate(): String? {
+    return if (this != null && this.length >= 10) {
+        this.substring(0, 10)
+    } else {
+        null
+    }
+
+}
+
+fun String?.maskPhoneText(): String? {
+    return if (this != null && this.length == 12) {
+        val part1 = this.substring(0, 5)
+        val part2 = "*****"
+        val part3 = this.substring(10)
+        "$part1$part2$part3"
+    } else {
+        null
+    }
+
 }
 
 

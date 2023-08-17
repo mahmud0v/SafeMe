@@ -1,5 +1,6 @@
 package safeme.uz.presentation.viewmodel.register
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,6 +25,7 @@ class RegisterViewModelImpl @Inject constructor(
         registerUseCase.invoke(registerRequest).onEach {
             progressLiveData.value = false
 
+            Log.d("LLL",progressLiveData.value.toString())
             it.onSuccess {
                 val data = it.asSuccess.data
                 openVerifyScreenLiveData.value = data

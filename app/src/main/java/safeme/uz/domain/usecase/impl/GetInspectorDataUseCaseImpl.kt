@@ -25,7 +25,7 @@ class GetInspectorDataUseCaseImpl @Inject constructor(
             val response = appealRepository.getInspectorsByMFY()
             when(response.code()){
                 in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }

@@ -45,7 +45,7 @@ class AppealRepositoryImpl @Inject constructor(
 
     override suspend fun getInspectorsByMFY(): Response<ApiResponse<ArrayList<InspectorInfo>>> {
         return appealsApiService.getInspectorsData(
-            "${sharedPreference.locale}/api/v1.0/police/mahalla/"
+            "${sharedPreference.locale}/api/v1.0/police/"
         )
     }
 

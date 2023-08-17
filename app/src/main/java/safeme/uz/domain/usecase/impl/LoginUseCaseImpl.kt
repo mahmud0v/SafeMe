@@ -23,19 +23,24 @@ class LoginUseCaseImpl @Inject constructor(
     override fun invoke(loginRequest: LoginRequest) = flow {
         if (isConnected()) {
             val response = repository.login(loginRequest)
-            if (response.success) {
-                response.body?.let {
-                    it.hasPin = sharedPreference.pinCode
-                    emit(ResultData.Success(it))
+            when(response.code()){
+                in 200..209 ->{
+                    response.body()?.body?.let {
+                        it.hasPin = sharedPreference.pinCode
+                        emit(ResultData.Success(it))
+                        it.refresh?.let {refresh->
+                            sharedPreference.refresh = refresh
+                        }
+                        it.token?.let {token->
+                            sharedPreference.token = "Bearer $token"
+                        }
+                    }
                 }
-            } else {
-                when (response.code) {
-                    400 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-                    404 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.user_not_found)))
-                    409 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.wrong_phone_password)))
-                    in 500..599 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-                    else -> emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
-                }
+                400 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
+                404 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.user_not_found)))
+                409 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.wrong_phone_password)))
+                in 500..599 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
+                else -> emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
             }
         } else {
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))

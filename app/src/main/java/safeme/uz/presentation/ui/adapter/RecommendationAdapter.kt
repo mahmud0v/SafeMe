@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import safeme.uz.R
 import safeme.uz.data.model.CategoriesData
@@ -35,7 +35,7 @@ class RecommendationAdapter(private val type: String) :
         fun bind(position: Int) {
             val colorList = Colors.getCategoryColors()
             val data = differ.currentList[position]
-            val layout: MaterialCardView = itemView.findViewById(R.id.rec_layout)
+            val layout: CardView = itemView.findViewById(R.id.rec_layout)
             val recText = itemView.findViewById<MaterialTextView>(R.id.rec_text)
             val recIcon = itemView.findViewById<ImageView>(R.id.rec_icon)
             val arrowImage = itemView.findViewById<ImageView>(R.id.arrow_icon)

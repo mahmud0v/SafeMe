@@ -56,8 +56,12 @@
     <color name="game_icon_color">#23af5f</color>
     <color name="poll_icon_color">#6CDDFF</color>
     <color name="appeal_icon_color">#FFC600</color>
+    <color name="setting_icon_color">#33c2ff</color>
     <color name="inpector_icon_color">#F09272</color>
     <color name="about_icon_color">#9F3A3A</color>
+
+
+
 
 
 

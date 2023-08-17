@@ -39,6 +39,9 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/splashScreen"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreen_to_languageScreen"
+            app:destination="@id/languageScreen" />
     </fragment>
     <fragment
         android:id="@+id/registrationScreen"
@@ -324,12 +327,17 @@
         <action
             android:id="@+id/action_profileScreen_to_passwordRecoverScreen"
             app:destination="@id/passwordRecoverScreen" />
+
     </fragment>
     <fragment
         android:id="@+id/editProfileScreen"
         android:name="safeme.uz.presentation.ui.screen.main.EditProfileScreen"
         android:label="screen_edit_profile"
-        tools:layout="@layout/screen_edit_profile" />
+        tools:layout="@layout/screen_edit_profile" >
+        <argument
+            android:name="userInfo"
+            app:argType="safeme.uz.data.remote.response.UserInfo" />
+    </fragment>
     <fragment
         android:id="@+id/prevention_inspector"
         android:name="safeme.uz.presentation.ui.screen.main.InspectorScreen"
@@ -355,11 +363,11 @@
             app:enterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_game_to_announcementInfoScreen"
-            app:destination="@id/announcementInfoScreen" />
-        <action
             android:id="@+id/action_game_to_sosScreen"
             app:destination="@id/sosScreen" />
+        <action
+            android:id="@+id/action_game_to_gameInfoScreen"
+            app:destination="@id/gameInfoScreen" />
     </fragment>
 
     <fragment
@@ -368,6 +376,12 @@
         android:label="PasswordRecoverScreen"
         tools:layout="@layout/screen_password_recover">
 
+        <argument
+            android:name="userInfo"
+            app:argType="safeme.uz.data.remote.response.UserInfo" />
+        <action
+            android:id="@+id/action_passwordRecoverScreen_to_verifyScreen"
+            app:destination="@id/verifyScreen" />
     </fragment>
     <fragment
         android:id="@+id/sosScreen"
@@ -399,7 +413,7 @@
             android:id="@+id/action_appeals_to_profileScreen"
             app:destination="@id/profileScreen"
             app:enterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_appeals_to_sosScreen"
             app:destination="@id/sosScreen" />
@@ -412,6 +426,43 @@
         <argument
             android:name="pollId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameInfoScreen"
+        tools:layout="@layout/gaming_info_screen"
+        android:name="safeme.uz.presentation.ui.screen.GameInfoScreen"
+        android:label="GameInfoScreen" >
+        <argument
+            android:name="destionationArguments"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageScreen"
+        tools:layout="@layout/select_lang_screen"
+        android:name="safeme.uz.presentation.ui.screen.LanguageScreen"
+        android:label="LanguageScreen" >
+        <action
+            android:id="@+id/action_languageScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
+        <action
+            android:id="@+id/action_languageScreen_to_pinCodeScreen"
+            app:destination="@id/pinCodeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeLangScreen"
+        tools:layout="@layout/change_lang_screen"
+        android:name="safeme.uz.presentation.ui.screen.ChangeLanguageScreen"
+        android:label="SettingsScreen" />
+    <fragment
+        android:id="@+id/settingsScreen"
+        tools:layout="@layout/settings_screen"
+        android:name="safeme.uz.presentation.ui.screen.main.SettingsScreen"
+        android:label="SettingsScreen" >
+
+
+        <action
+            android:id="@+id/action_settingsScreen_to_changeLangScreen"
+            app:destination="@id/changeLangScreen" />
     </fragment>
 
 

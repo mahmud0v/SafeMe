@@ -10,10 +10,14 @@ import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementNewsRequest
 import safeme.uz.data.remote.request.PollAnswerRequest
+import safeme.uz.data.remote.request.AgeCatRequest
+import safeme.uz.data.remote.request.GameBookmarkRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
+import safeme.uz.data.remote.response.AllBookmarkGame
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.GameBookmarkResponse
 import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.PollAnswerResponse
 import safeme.uz.data.remote.response.PollDetailResponse
@@ -115,6 +119,63 @@ class AnnouncementRepositoryImpl @Inject constructor(
         return announcementApiService.givePollAnswer(
             "${sharedPreference.locale}/api/v1.0/polling/answer",
             pollAnswerRequest
+        )
+    }
+
+    override suspend fun getRecAgeCat(recAgeCatRequest: AgeCatRequest): Response<ApiResponse<ArrayList<RecommendationInfo>>> {
+        return announcementApiService.getRecAgeCat(
+            "${sharedPreference.locale}/api/v1.0/recommendation/agecat",
+            recAgeCatRequest
+        )
+    }
+
+    override suspend fun getGameAgeCat(gameAgeCatRequest: AgeCatRequest): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getGameAgeCat(
+            "${sharedPreference.locale}/api/v1.0/games/agecategory",
+            gameAgeCatRequest
+        )
+    }
+
+    override suspend fun gameItemBookmark(gameBookmarkRequest: GameBookmarkRequest): Response<ApiResponse<GameBookmarkResponse>> {
+        return announcementApiService.gameItemBookmark(
+            "${sharedPreference.locale}/api/v1.0/games/bookmark",
+            gameBookmarkRequest
+        )
+    }
+
+    override suspend fun gameItemDeleteBookmark(gameBookmarkRequest: GameBookmarkRequest): Response<ApiResponse<Nothing>> {
+        return announcementApiService.gameItemDeleteBookmark(
+            "${sharedPreference.locale}",
+            gameBookmarkRequest
+        )
+    }
+
+    override suspend fun allBookmarkGame(agecatgory:Int,category:Int): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getAllBookmarkGame(
+            "${sharedPreference.locale}/api/v1.0/games/bookmark",
+            agecatgory,
+            category
+        )
+    }
+
+    override suspend fun allUnBookmarkGame(ageCatRequest: AgeCatRequest): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getALlUnBookmarkedGame(
+            "${sharedPreference.locale}/api/v1.0/games/unbookmark",
+            ageCatRequest
+        )
+    }
+
+    override suspend fun allBookmarkGameByAgeCategory(agecategory: Int): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getAllBookmarkGameByAgeCategory(
+            "${sharedPreference.locale}/api/v1.0/games/bookmark",
+            agecategory
+        )
+    }
+
+    override suspend fun allUnBookmarkGameByAgeCategory(ageCategoryRequest: AgeCategoryRequest): Response<ApiResponse<ArrayList<GameRecommendationResponse>>> {
+        return announcementApiService.getAllUnBookmarkedByAgeCategory(
+            "${sharedPreference.locale}/api/v1.0/games/unbookmark",
+            ageCategoryRequest
         )
     }
 

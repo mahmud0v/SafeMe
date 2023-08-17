@@ -13,11 +13,17 @@ class RemindListenerViewModel @Inject constructor(
     private val remindListenerMutableLiveData = MutableLiveData<Boolean>()
     val remindListenerLiveData: LiveData<Boolean> = remindListenerMutableLiveData
 
+    private val drawerLabelMutableLiveData = MutableLiveData<Boolean>()
+    val drawerLabelLiveData: LiveData<Boolean> = drawerLabelMutableLiveData
+
 
     fun remindInFragment(result: Boolean) {
         remindListenerMutableLiveData.value = result
     }
 
+    fun labelRecommendation() {
+        drawerLabelMutableLiveData.value = true
+    }
 
 
 

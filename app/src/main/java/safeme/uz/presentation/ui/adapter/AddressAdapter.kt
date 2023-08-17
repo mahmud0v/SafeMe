@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import safeme.uz.data.remote.response.Address
+import safeme.uz.data.remote.response.AddressResponse
+import safeme.uz.data.remote.response.RegionInfo
 import safeme.uz.databinding.ItemDialogAddressBinding
 
-class AddressAdapter : ListAdapter<Address, AddressAdapter.AddressViewHolder>(ItemDiffUtil) {
+class AddressAdapter : ListAdapter<RegionInfo, AddressAdapter.AddressViewHolder>(ItemDiffUtil) {
 
-    private var onItemClickListener: ((Address) -> Unit)? = null
+    private var onItemClickListener: ((RegionInfo) -> Unit)? = null
 
-    fun setOnItemClickListener(block: ((Address) -> Unit)) {
+    fun setOnItemClickListener(block: ((RegionInfo) -> Unit)) {
         onItemClickListener = block
     }
 
@@ -25,25 +27,22 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.AddressViewHolder>(It
             }
         }
 
-        fun bind(item: Address) {
+        fun bind(item: RegionInfo) {
             item.name?.let {
-                binding.tvTitle.text = item.name
+                binding.tvTitle.text = it
             }
         }
     }
 
-    private object ItemDiffUtil : DiffUtil.ItemCallback<Address>() {
-        override fun areItemsTheSame(
-            oldItem: Address, newItem: Address
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+    private object ItemDiffUtil : DiffUtil.ItemCallback<RegionInfo>() {
+        override fun areItemsTheSame(oldItem: RegionInfo, newItem: RegionInfo) =
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: Address, newItem: Address
-        ): Boolean {
-            return oldItem == newItem
-        }
+            oldItem: RegionInfo,
+            newItem: RegionInfo
+        ) = oldItem == newItem
+
 
     }
 

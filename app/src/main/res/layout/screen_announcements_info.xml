@@ -69,16 +69,17 @@
                     app:layout_constraintTop_toBottomOf="@id/img_info" />
 
 
-                <com.google.android.material.textview.MaterialTextView
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/news_desc"
-                    style="@style/TitleTextViewStyle.DescTextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:paddingRight="20dp"
-                    tools:text="@string/videopd_desc"
-                    android:textSize="@dimen/text_regular_big_size"
                     app:layout_constraintLeft_toLeftOf="@id/news_title"
-                    app:layout_constraintTop_toBottomOf="@id/news_title" />
+                    app:layout_constraintTop_toBottomOf="@id/news_title"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginRight="@dimen/margin_standard"
+                    android:layout_marginLeft="@dimen/margin_standard"
+
+                    />
 
 
                 <androidx.core.widget.ContentLoadingProgressBar
@@ -86,7 +87,7 @@
                     style="?android:attr/progressBarStyleLarge"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="220dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +97,7 @@
                     android:id="@+id/date_layout"
                     android:layout_width="@dimen/date_card_width"
                     android:layout_height="@dimen/date_card_height"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/margin_huge"
                     android:background="@drawable/small_card_back"
                     android:orientation="horizontal"
@@ -118,14 +120,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_small"
-                        android:text="@string/date_sample" />
+                        tools:text="@string/date_sample" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/viewed_layout"
-                    android:layout_width="@dimen/viewed_card_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/viewed_card_height"
+                    android:visibility="gone"
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/margin_middle"
                     android:background="@drawable/small_card_back"
@@ -145,8 +148,9 @@
                         android:id="@+id/viewed_text"
                         style="@style/NumberTextViewStyle"
                         android:layout_gravity="center"
+                        android:paddingRight="@dimen/padding_middle"
                         android:layout_marginStart="@dimen/viewed_count_margin"
-                        android:text="@string/viewed_count" />
+                        tools:text="–" />
                 </LinearLayout>
 
 <!--                <com.google.android.material.button.MaterialButton-->

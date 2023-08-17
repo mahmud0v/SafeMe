@@ -20,7 +20,7 @@
     <string name="expired_verification_code">Tasdiqlash kodi vaqti o\'tgan</string>
     <string name="not_confirmed">SMS kod noto\'g\'ri kiritildi</string>
     <string name="not_active">Foydalanuvchi aktiv holatida emas</string>
-    <string name="wrong_phone_password">Telefon raqam yoki parol noto\'g\'ri</string>
+    <string name="wrong_phone_password">Parol noto\'g\'ri</string>
     <string name="user_not_found">Telefon raqam topilmadi</string>
     <string name="internal_server_error">Serverda xatolik</string>
     <string name="forgot_pin">PIN-kodni yoddan chiqardingizmi?</string>
@@ -38,10 +38,11 @@
     <string name="enter_personal_info">Shaxsiy ma\'lumotlaringizni kiriting</string>
     <string name="first_name">Ism</string>
     <string name="last_name">Familiya</string>
-    <string name="old_password">Eski parol</string>
+    <string name="old_password">Hozirgi parol</string>
     <string name="new_password">Yangi parol</string>
-    <string name="re_new_password">Yangi parolni qayta kiriting</string>
+    <string name="re_new_password">Yangi parolni tasdiqlash</string>
     <string name="not_same_new_old_password">Yangi parol eski paroldan farq qilsin</string>
+    <string name="same_new_renew_password">Yangi parol maydonlarni bir xil bo\'lishi kerak</string>
     <string name="edit_password_desc">Parolni o\'zgartirish uchun telefon raqamingizni kiriting</string>
     <string name="skip">O\'TKAZISH</string>
     <string name="pin_code">PIN-kod</string>
@@ -79,11 +80,15 @@
     <string name="announcements">E\'lonlar</string>
     <string name="chat">Chat</string>
     <string name="game">Game</string>
+    <string name="select_lang">Tilni tanlang</string>
     <string name="consultant">Kansultant</string>
     <string name="questionnaire">So\’rovnoma</string>
     <string name="prevention_inspector">Profilaktika inspektori</string>
     <string name="appeals">Murojaatlar</string>
-    <string name="select_the_type_of_appeal">Murojaat nomini kiriting</string>
+    <string name="settings_drawer">Sozlamalar</string>
+    <string name="select_the_type_of_appeal">Murojaat turini kiriting</string>
+    <string name="enter_the_name_of_appeal">Murojaat nomini kiriting</string>
+    <string name="enter_the_description_of_appeal">Murojaat mazmunini kiriting</string>
     <string name="enter_the_appeal_text">Murojaat matnini kiriting</string>
     <string name="receive_appeal">Murojaat qabul qilindi</string>
     <string name="about_us">Biz haqimizda</string>
@@ -98,6 +103,7 @@
     <string name="cybersport">Kibersport</string>
     <string name="cyber_crimes">Kiber-jinoyatlar</string>
     <string name="lang">uz</string>
+    <string name="language">Til</string>
     <string name="rights_of_child">Bola huqulari</string>
     <string name="code_of_conduct">Odob-axloq qoidalari</string>
     <string name="inspectors">Inspektorlar</string>
@@ -185,23 +191,42 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="nought">0</string>
-    <string name="share_text">Поделиться</string>
-    <string name="save_text">Сохранить</string>
-    <string name="game_title">Социально-эмоциональное</string>
-    <string name="game_title2">Наблюдаем и играем вместе</string>
+    <string name="not_found">404</string>
+    <string name="unauthorized">401</string>
+    <string name="share_text">Ulashish</string>
+    <string name="save_text">Saqlash</string>
+    <string name="game_title">Ijtimoiy-emotsional</string>
+    <string name="game_title2">Birgalikda tomosha qilish va o\'ynash</string>
     <string name="suspicious">shubhali</string>
     <string name="dangerous_area">xavli_hudud</string>
     <string name="danger">danger</string>
     <string name="message_notified">Xabar berildi</string>
     <string name="start_poll">Boshlash</string>
     <string name="no_data">Ma\'lumot yo\'q </string>
+    <string name="error_enter_old_password">Eski parol noto\'g\'ri kiritilgan</string>
     <string name="phone">tel:</string>
+    <string name="before_select_region">Avval viloyatni tanlang</string>
+    <string name="before_select_district">Avval tumanni tanlang</string>
+    <string name="uzbekcha">O\'zbekcha</string>
+    <string name="pin">Pin kod</string>
+    <string name="uzbekcha_kiril">Ўзбекча</string>
+    <string name="english">English</string>
+    <string name="russian">Русский</string>
+    <string name="appeal_type1">Ariza</string>
+    <string name="appeal_type2">Shikoyat</string>
+    <string name="appeal_type3">Taklif</string>
 
 
     <string-array name="parent_array">
         <item>Tanlang</item>
         <item>Otasi</item>
         <item>Onasi</item>
+    </string-array>
+
+    <string-array name="appeal_type">
+        <item>Ariza</item>
+        <item>Shikoyat</item>
+        <item>Taklif</item>
     </string-array>
 
 

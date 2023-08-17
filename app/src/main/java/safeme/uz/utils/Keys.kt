@@ -10,6 +10,7 @@ object Keys {
     const val PIN_CREATE = "PIN_CREATE"
     const val PIN_EDIT = "PIN_EDIT"
     const val PIN_DELETE = "PIN_DELETE"
+    const val LANG_OPEN = "LANG_OPEN"
 
     const val ADDRESS_BUNDLE_KEY = "ADDRESS_BUNDLE_KEY"
     const val ADDRESS_REQUEST_KEY = "ADDRESS_REQUEST_KEY"
@@ -96,10 +97,14 @@ object Keys {
     const val LOGIN_SCREEN = "LoginScreen"
     const val POLL_PAGER = "PollPagerScreen"
     const val APPEAL_SCREEN = "Appeal Screen"
+    const val SETTINGS_SCREEN = "Settings Screen"
     const val DIALOG = "Dialog"
     const val WHITE = "#FFFFFF"
     const val BLACK = "#000000"
     const val BLUE = "#03A9F4"
+
+    const val DELETE = "DELETE"
+    const val BOOKMARK_DELETE_ENDPOINT = "{lang}/api/v1.0/games/bookmark"
 
 
 

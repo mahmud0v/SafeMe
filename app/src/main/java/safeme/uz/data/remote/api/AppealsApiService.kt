@@ -38,8 +38,6 @@ interface AppealsApiService {
     ): Response<ApiResponse<ArrayList<DistrictInfo>>>
 
 
-
-
     @POST
     suspend fun getNeighborhoodByDistrict(
         @Url url: String,

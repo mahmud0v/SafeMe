@@ -46,12 +46,13 @@
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:text="@string/game_title2"
+            tools:text="@string/game_title2"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium_title"
             android:textSize="16sp"
+            android:maxLines="1"
             android:id="@+id/poll_title"
             app:layout_constraintTop_toBottomOf="@id/material_image"
             app:layout_constraintLeft_toLeftOf="@id/material_image"

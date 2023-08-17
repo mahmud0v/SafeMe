@@ -125,10 +125,59 @@
         android:background="@drawable/table_layout_bottom_trs"
         />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/place_holder_layout"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/place_holder"
+            android:visibility="gone"
+            android:layout_marginTop="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/no_data"
+                android:layout_gravity="center"
+                android:id="@+id/no_data_icon"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/roboto_medium_title"
+                android:textSize="28sp"
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

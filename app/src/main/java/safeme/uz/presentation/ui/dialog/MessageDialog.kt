@@ -1,19 +1,18 @@
 package safeme.uz.presentation.ui.dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textview.MaterialTextView
 import safeme.uz.R
 import safeme.uz.databinding.MessageDialogBinding
 
 class MessageDialog(private val errorMessage:String?) : DialogFragment() {
     private val binding: MessageDialogBinding by viewBinding()
+    var btnClickEvent : (()->Unit)? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,10 +25,9 @@ class MessageDialog(private val errorMessage:String?) : DialogFragment() {
     }
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.dialogBtn.setOnClickListener {
+            btnClickEvent?.invoke()
             dismiss()
         }
 
@@ -40,6 +38,8 @@ class MessageDialog(private val errorMessage:String?) : DialogFragment() {
         }
 
     }
+
+
 
 
 

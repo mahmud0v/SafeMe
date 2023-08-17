@@ -15,19 +15,11 @@
         android:background="@color/white"
         android:padding="@dimen/padding_standard">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivInspector"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/RoundedCorner4r" />
+
 
         <TextView
             android:id="@+id/tvInsName"
-            android:layout_width="@dimen/ins_name_width"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium_title"
             android:maxLines="2"
@@ -35,24 +27,25 @@
             tools:text="Закиров Нуриддин Абдухамидович"
             android:textColor="@color/text_title_color"
             android:textSize="@dimen/text_regular_big_size"
-            app:layout_constraintStart_toEndOf="@+id/ivInspector"
-            app:layout_constraintTop_toTopOf="@+id/ivInspector" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvInsDetail"
-            android:layout_width="@dimen/ins_position_txt"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_regular_size"
+            android:layout_marginTop="@dimen/margin_small"
             tools:text="“Кушбеги” MFY profilaktka inspektori"
             android:fontFamily="@font/roboto_regular"
             android:layout_marginStart="@dimen/margin_middle"
-            app:layout_constraintStart_toEndOf="@+id/ivInspector"
-            app:layout_constraintBottom_toBottomOf="@+id/ivInspector"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvInsName"
             android:textColor="@color/text_regular_color"/>
 
         <View
             android:id="@+id/line"
-            app:layout_constraintTop_toBottomOf="@+id/ivInspector"
+            app:layout_constraintTop_toBottomOf="@+id/tvInsDetail"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/margin_standard"
@@ -75,7 +68,7 @@
             android:fontFamily="@font/roboto_medium_title"
             android:maxLines="2"
             android:layout_marginStart="@dimen/margin_middle"
-            android:text="97-430-10-44"
+            tools:text="97-430-10-44"
             android:textColor="@color/text_title_color"
             android:textSize="@dimen/text_regular_big_size"
             app:layout_constraintTop_toTopOf="@+id/ivPhoneIcon"

@@ -7,31 +7,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
-import safeme.uz.data.model.ApiResponse
-import safeme.uz.data.model.CategoriesData
-import safeme.uz.data.model.DestinationArguments
 import safeme.uz.data.model.ManageScreen
-import safeme.uz.data.remote.request.AgeCategoryRequest
-import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
-import safeme.uz.data.remote.response.AnnouncementCategoryResponse
-import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.databinding.ScreenGameBinding
-import safeme.uz.presentation.ui.adapter.GameRecommendationAdapter
-import safeme.uz.presentation.ui.adapter.RecommendationAdapter
+import safeme.uz.presentation.ui.adapter.GameViewPagerAdapter
 import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.game.GameScreenViewModel
 import safeme.uz.utils.Keys
-import safeme.uz.utils.MarginItemDecoration
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.gone
@@ -43,13 +31,11 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private val binding: ScreenGameBinding by viewBinding()
     private val backRemindedViewModel: RemindListenerViewModel by activityViewModels()
     private val viewModel: GameScreenViewModel by viewModels()
-    private val recommendationAdapter by lazy { RecommendationAdapter(Keys.GAME) }
-    private val gameRecAdapter by lazy { GameRecommendationAdapter() }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         loadAllData()
-        initRecyclerView()
         moveToProfile()
         moveToSOS()
         backListenerEvent()
@@ -60,9 +46,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private fun loadAllData() {
         if (isConnected()) {
             loadAgeCategory()
-            loadGameCategories()
-            recyclerItemClickEvent()
-
         } else {
             val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
             messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
@@ -73,106 +56,21 @@ class GameScreen : Fragment(R.layout.screen_game) {
         viewModel.ageCategoryLiveData.observe(viewLifecycleOwner, ageCategoryObserver)
     }
 
-    private fun initRecyclerView() {
-        binding.gamesRv1.adapter = recommendationAdapter
-        binding.gamesRv1.layoutManager =
-            GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-        binding.gamesRv1.addItemDecoration(MarginItemDecoration())
-        binding.gamesRv2.adapter = gameRecAdapter
-        binding.gamesRv2.layoutManager =
-            LinearLayoutManager(requireContext())
 
-    }
 
     private fun initTabLayout(ageCategoryList: ArrayList<AgeCategoryInfo>?) {
-        ageCategoryList?.let {
-            for (i in ageCategoryList) {
-                val tab = binding.tabLayout.newTab()
-                tab.text = i.title
-                binding.tabLayout.addTab(tab)
-            }
+        binding.viewPager2.visible()
+        binding.placeHolder.gone()
+        if (ageCategoryList != null) {
+            val adapter = GameViewPagerAdapter(this, ageCategoryList)
+            binding.viewPager2.adapter = adapter
+            TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+                tab.text = ageCategoryList[position].title
+            }.attach()
+
         }
-
-
-        ageCategoryList?.let {
-            viewModel.getGameRecommendationByAge(AgeCategoryRequest(it[0].id))
-            viewModel.gameRecByAgeLiveData.observe(
-                viewLifecycleOwner,
-                Observer {
-                    when (it) {
-                        is RemoteApiResult.Success -> {
-                            binding.progress.hide()
-                            binding.placeHolder.gone()
-                            gameRecAdapter.differ.submitList(it.data?.body)
-
-                        }
-
-                        is RemoteApiResult.Loading -> {
-                            binding.placeHolder.gone()
-                            binding.progress.show()
-                        }
-
-                        is RemoteApiResult.Error -> {
-                            binding.progress.hide()
-                            if (it.message == getString(R.string.no_data)) {
-                                binding.placeHolder.visible()
-                            } else {
-                                binding.placeHolder.gone()
-                                val messageDialog = MessageDialog(it.message!!)
-                                messageDialog.show(requireActivity().supportFragmentManager,
-                                    Keys.DIALOG
-                                )
-                            }
-                            gameRecAdapter.differ.submitList(emptyList())
-
-                        }
-                    }
-                }
-            )
-        }
-
-
-        ageCategoryList?.let { categoryList ->
-            binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    tab?.let {
-                        val ageCategoryInfo = categoryList[tab.position]
-                        viewModel.getGameRecommendationByAge(AgeCategoryRequest(ageCategoryInfo.id))
-                        viewModel.gameRecByAgeLiveData.observe(
-                            viewLifecycleOwner,
-                            gameRecommendationObserver
-                        )
-                    }
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-
-                }
-
-            })
-        }
-
-
     }
 
-    private fun loadCategory(categoryList: ArrayList<GameRecommendationResponse>?) {
-        val oldList = gameRecAdapter.differ.currentList.toMutableList()
-        val newList = ArrayList<GameRecommendationResponse>()
-        for (i in oldList.indices) {
-            val gameData = oldList[i]
-            categoryList?.let {
-                if (categoryList.contains(gameData)) {
-                    newList.add(gameData)
-                }
-            }
-        }
-        gameRecAdapter.differ.submitList(newList)
-
-    }
 
     private val ageCategoryObserver =
         Observer<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>> {
@@ -182,8 +80,12 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 }
 
                 is RemoteApiResult.Error -> {
-                    val messageDialog = MessageDialog(it.message)
-                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    binding.placeHolder.visible()
+                    binding.viewPager2.gone()
+                    if (it.message!=getString(R.string.not_found)){
+                        val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
                 }
 
                 else -> {}
@@ -195,118 +97,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
             backRemindedViewModel.remindInFragment(true)
         }
     }
-
-    private fun loadGameCategories() {
-        viewModel.gameRecommendationLiveData.observe(viewLifecycleOwner, gameCategoriesObserver)
-    }
-
-    private val gameCategoriesObserver =
-        Observer<RemoteApiResult<AnnouncementCategoryResponse<ArrayList<CategoriesData>>>> {
-            when (it) {
-                is RemoteApiResult.Success -> {
-                    binding.progress.hide()
-                    recommendationAdapter.differ.submitList(it.data?.body)
-                }
-
-                is RemoteApiResult.Loading -> {
-                    binding.progress.show()
-                }
-
-                is RemoteApiResult.Error -> {
-                    binding.progress.hide()
-                    if (it.message != getString(R.string.no_data)) {
-                        val messageDialog = MessageDialog(it.message)
-                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
-                    }
-                }
-            }
-        }
-
-    private val gameRecommendationObserver =
-        Observer<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
-            when (it) {
-                is RemoteApiResult.Success -> {
-                    binding.progress.hide()
-                    binding.placeHolder.gone()
-                    gameRecAdapter.differ.submitList(it.data?.body)
-
-                }
-
-                is RemoteApiResult.Loading -> {
-                    binding.progress.show()
-                    binding.placeHolder.gone()
-                }
-
-                is RemoteApiResult.Error -> {
-                    binding.progress.hide()
-                    if (it.message == getString(R.string.no_data)) {
-                        binding.placeHolder.visible()
-                    } else {
-                        binding.placeHolder.gone()
-                        val messageDialog = MessageDialog(it.message)
-                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
-                    }
-                    gameRecAdapter.differ.submitList(emptyList())
-                }
-            }
-        }
-
-    private fun recyclerItemClickEvent() {
-        recommendationAdapter.onItemClick = { categoryData ->
-            categoryData.id?.let { id ->
-                viewModel.getGameRecommendationByCategory(RecommendationRequest(id))
-                viewModel.gameRecByCategoryLiveData.observe(
-                    viewLifecycleOwner,
-                    gameCategoryObserver
-                )
-            }
-        }
-
-        gameRecAdapter.onItemClick = {
-            it.id?.let { id ->
-                val action = GameScreenDirections.actionGameToAnnouncementInfoScreen(
-                    DestinationArguments(id, Keys.GAME)
-                )
-                findNavController().navigate(action)
-            }
-        }
-
-        gameRecAdapter.shareBtnClick = {
-//            val intent = Intent().apply {
-//                action = Intent.ACTION_SEND
-//                putExtra(Intent.EXTRA_TEXT,"http://cyberpolice.uz/uz/api/v1.0/games/view/1")
-//                type = "text/plain"
-//            }
-//            startActivity(Intent.createChooser(intent,null))
-        }
-    }
-
-    private val gameCategoryObserver =
-        Observer<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
-            when (it) {
-                is RemoteApiResult.Success -> {
-                    binding.progress.hide()
-                    binding.placeHolder.gone()
-                    loadCategory(it.data?.body)
-                }
-
-                is RemoteApiResult.Loading -> {
-                    binding.progress.show()
-                    binding.placeHolder.gone()
-                }
-
-                is RemoteApiResult.Error -> {
-                    binding.progress.hide()
-                    if (it.message == getString(R.string.no_data)) {
-                        binding.placeHolder.visible()
-                    } else {
-                        binding.placeHolder.gone()
-                        val messageDialog = MessageDialog(it.message!!)
-                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
-                    }
-                }
-            }
-        }
 
     private fun moveToProfile() {
         binding.ivProfile.setOnClickListener {
@@ -325,6 +115,5 @@ class GameScreen : Fragment(R.layout.screen_game) {
         }
 
     }
-
 
 }

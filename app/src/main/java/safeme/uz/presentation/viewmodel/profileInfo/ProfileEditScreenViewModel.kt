@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.DistrictByIdRequest
 import safeme.uz.data.remote.request.NeighborhoodRequest
@@ -67,8 +69,8 @@ class ProfileEditScreenViewModel @Inject constructor(
         }
     }
 
-    fun userUpdate(userUpdateRequest: UserUpdateRequest) = viewModelScope.launch {
-      userUpdateUseCase.userUpdate(userUpdateRequest).collect{
+    fun userUpdate(requestBody: MultipartBody) = viewModelScope.launch {
+      userUpdateUseCase.userUpdate(requestBody).collect{
           userUpdateMutableLiveData.value = it
       }
     }

@@ -22,7 +22,6 @@ import safeme.uz.utils.VerifyType
 import safeme.uz.utils.hideKeyboard
 import safeme.uz.utils.showKeyboard
 import safeme.uz.utils.snackBar
-import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
 class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
@@ -46,7 +45,6 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
 
     private val openVerifyScreenObserver = Observer<VerifyModel> {
         val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
-        binding.button.snackBar(manageScreen.hostScreen.toString())
         findNavController().navigate(ResetUsernameScreenDirections.actionResetUsernameScreenToVerifyScreen(
             VerifyModel(it.phoneNumber,it.title,it.type,it.password,manageScreen)
         ))
@@ -66,7 +64,10 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
     }
 
     private fun initViews() = with(binding) {
-
+        val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
+        manageScreen.phoneNumber?.let {
+            etPhoneNumber.setText(it)
+        }
         etPhoneNumber.addTextChangedListener {
             if (etPhoneNumber.rawText.length == 9) {
                 hideKeyboard()

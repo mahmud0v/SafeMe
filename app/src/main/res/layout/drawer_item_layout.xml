@@ -4,7 +4,7 @@
     android:layout_width="304dp"
     android:id="@+id/linear_layout"
     android:clickable="true"
-    android:background="@color/white"
+    android:background="@drawable/drawable_item_ripple"
     android:focusable="true"
     android:layout_height="48dp"
     android:orientation="horizontal"

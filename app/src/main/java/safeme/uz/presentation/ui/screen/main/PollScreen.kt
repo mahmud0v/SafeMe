@@ -21,7 +21,10 @@ import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.presentation.viewmodel.poll.PollScreenViewModel
 import safeme.uz.utils.Keys
 import safeme.uz.utils.RemoteApiResult
+import safeme.uz.utils.backPressDispatcher
+import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
+import safeme.uz.utils.visible
 
 @AndroidEntryPoint
 class PollScreen : Fragment(R.layout.screen_poll) {
@@ -36,10 +39,13 @@ class PollScreen : Fragment(R.layout.screen_poll) {
         backListenerEvent()
         moveToProfile()
         moveToSos()
+        backPressDispatcher()
 
     }
 
     private fun initViewPager(data: ArrayList<AgeCategoryInfo>?) {
+        binding.viewPager2.visible()
+        binding.placeHolder.gone()
         data?.let {
             val adapter = PollViewPagerAdapter(this, it)
             binding.viewPager2.adapter = adapter
@@ -54,7 +60,7 @@ class PollScreen : Fragment(R.layout.screen_poll) {
         if (isConnected()) {
             viewModel.ageCategoryLiveData.observe(viewLifecycleOwner, ageCategoryObserver)
         } else {
-            val messageDialog = MessageDialog(getString(R.string.no_data))
+            val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
             messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
     }
@@ -68,8 +74,13 @@ class PollScreen : Fragment(R.layout.screen_poll) {
                 }
 
                 is RemoteApiResult.Error -> {
-                    val messageDialog = MessageDialog(it.message)
-                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                    binding.placeHolder.visible()
+                    binding.viewPager2.gone()
+                    if (it.message!=getString(R.string.not_found)){
+                        val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
+                        messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                    }
+
                 }
 
                 else -> {}

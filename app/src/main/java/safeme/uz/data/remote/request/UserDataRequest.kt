@@ -13,5 +13,5 @@ data class UserDataRequest(
     var mahalla: Int? = null,
     var adress: String? = null,
     var photo: MultipartBody.Part? = null,
-    var photoUri: Uri? = null,
+//    var photoUri: Uri? = null,
 )

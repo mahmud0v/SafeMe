@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/bg_main"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -35,26 +36,26 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium_title"
                 android:paddingHorizontal="@dimen/padding_standard"
-                android:text="@string/recommendations"
+                android:text="@string/questionnaire"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_title_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivMenu"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <androidx.appcompat.widget.AppCompatImageView-->
-<!--                android:id="@+id/ivSearch"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="@dimen/margin_middle"-->
-<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--                android:clickable="true"-->
-<!--                android:focusable="true"-->
-<!--                android:padding="@dimen/padding_very_small"-->
-<!--                android:src="@drawable/ic_search"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/ivSOS"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <!--            <androidx.appcompat.widget.AppCompatImageView-->
+            <!--                android:id="@+id/ivSearch"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginEnd="@dimen/margin_middle"-->
+            <!--                android:background="?attr/selectableItemBackgroundBorderless"-->
+            <!--                android:clickable="true"-->
+            <!--                android:focusable="true"-->
+            <!--                android:padding="@dimen/padding_very_small"-->
+            <!--                android:src="@drawable/ic_search"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/ivSOS"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivSOS"
@@ -107,12 +108,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar_blue_color"
+        android:paddingStart="@dimen/padding_very_small2"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:tabIndicatorColor="@color/white"
         app:tabMode="scrollable"
-        android:paddingStart="@dimen/padding_very_small2"
-        app:tabTextAppearance="@style/TabTextAppearance"
         app:tabSelectedTextColor="@color/white"
+        app:tabTextAppearance="@style/TabTextAppearance"
         app:tabTextColor="@color/white74" />
 
 
@@ -123,12 +124,49 @@
         android:background="@drawable/table_layout_bottom_trs"
         app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_scroll_view" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/place_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
+            <ImageView
+                android:id="@+id/no_data_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/no_data"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/roboto_medium_title"
+                android:text="@string/no_data"
+                android:textColor="@color/white"
+                android:textSize="28sp" />
+
+
+        </LinearLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -21,7 +21,7 @@ interface ProfileUseCase {
 
     fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest):Flow<RemoteApiResult<ApiResponse<PasswordUpdateBody>>>
 
-    fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest):Flow<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>>
+    fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest):Flow<RemoteApiResult<ApiResponse<ArrayList<String>>>>
 
 
 }

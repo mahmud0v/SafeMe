@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.response.ResetPinCodeResponse
 import safeme.uz.databinding.ScreenPinCodeBinding
@@ -27,6 +29,7 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
     private var _binding: ScreenPinCodeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: PinCodeViewModel by viewModels<PinCodeVIewModelImpl>()
+    private val appSharedPreference by lazy { AppSharedPreference(requireContext()) }
     private var create = false
     private var createAfterLogin = false
     private var edit = false
@@ -77,6 +80,8 @@ class PinCodeScreen : Fragment(R.layout.screen_pin_code), View.OnClickListener {
         initObservers()
         initViews()
     }
+
+
 
     @SuppressLint("FragmentLiveDataObserve")
     private fun initObservers() = with(viewModel) {

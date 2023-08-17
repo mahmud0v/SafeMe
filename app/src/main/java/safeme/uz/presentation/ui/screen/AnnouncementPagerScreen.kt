@@ -21,6 +21,7 @@ import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.ui.screen.main.AnnouncementScreenDirections
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementPagerViewModel
 import safeme.uz.utils.Keys
+import safeme.uz.utils.MarginAnnouncementItemDecoration
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
@@ -37,7 +38,6 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
         loadData()
         itemCLickEvent()
 
-
     }
 
 
@@ -49,6 +49,7 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
                 getAllNewsLiveData.observe(viewLifecycleOwner, newsObserver)
             }
         } else {
+            binding.progress.gone()
             val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
             messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
         }
@@ -63,11 +64,10 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
                 }
 
                 is RemoteApiResult.Error -> {
-                    binding.placeHolder.gone()
-                    if (it.message == getString(R.string.no_data)) {
-                        binding.placeHolder.visible()
-                    } else {
-                        val messageDialog = MessageDialog(it.message)
+                    binding.progress.hide()
+                    binding.placeHolder.visible()
+                    if (it.message != getString(R.string.not_found)) {
+                        val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
                         messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                     }
                 }
@@ -87,6 +87,7 @@ class AnnouncementPagerScreen : Fragment(R.layout.screen_announcement_pager) {
         newsAdapter.differ.submitList(newsList)
         binding.announcementsRv.adapter = newsAdapter
         binding.announcementsRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.announcementsRv.addItemDecoration(MarginAnnouncementItemDecoration())
     }
 
     private fun itemCLickEvent() {

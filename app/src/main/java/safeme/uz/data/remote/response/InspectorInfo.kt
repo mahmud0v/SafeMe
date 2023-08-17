@@ -9,13 +9,13 @@ data class InspectorInfo(
   @SerializedName("last_name")
   val lastName:String? = null,
   val patranomic:String? = null,
-  val lavozimi:String? = null,
+  var lavozimi:String? = null,
   val unvoni:String? = null,
   val phone:String? = null,
   val image:String? = null,
-  val region:Int? = null,
-  val district:Int? = null,
-  val mahalla:Int? = null
+  val region:String? = null,
+  val district:String? = null,
+  var mahalla:String? = null
 
 
 )

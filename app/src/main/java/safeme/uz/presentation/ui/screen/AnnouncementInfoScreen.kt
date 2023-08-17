@@ -1,5 +1,6 @@
 package safeme.uz.presentation.ui.screen
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ import safeme.uz.utils.Keys
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
+import safeme.uz.utils.trimDate
 import safeme.uz.utils.visible
 
 @AndroidEntryPoint
@@ -42,13 +44,15 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
 
     private fun backClickEvent() {
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigateUp()
         }
     }
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun observeData() {
         remindViewModel.remindInFragment(true)
+        binding.newsDesc.settings.javaScriptEnabled = true
         val destinationArguments = mySafeArgs.desArg
         if (isConnected()) {
             when (destinationArguments.key) {
@@ -71,6 +75,7 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
                 }
             }
         } else {
+            binding.progress.gone()
             val messageDialog = MessageDialog(getString(R.string.no_data))
             messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
@@ -141,8 +146,13 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
         binding.apply {
             Glide.with(root).load(newsData.image).into(imageId)
             newsTitle.text = newsData.title
-            newsDesc.text = newsData.content
-            dateText.text = trimDate(newsData.created_date!!)
+            newsData.content?.let {
+                newsDesc.loadDataWithBaseURL(null,it,"text/html","UTF-8","about:blank")
+            }
+            dateLayout.visible()
+            viewedLayout.visible()
+            dateText.text = newsData.created_date.trimDate()?:""
+            viewedText.text = newsData.views.toString()
 
         }
     }
@@ -152,8 +162,11 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
         binding.apply {
             Glide.with(root).load(recommendationInfo.image).into(imageId)
             newsTitle.text = recommendationInfo.title ?: ""
-            newsDesc.text = recommendationInfo.text ?: ""
-            dateText.text = trimDate(recommendationInfo.created_date) ?: ""
+            recommendationInfo.text?.let {
+                newsDesc.loadDataWithBaseURL(null,it,"text/html","UTF-8","about:blank")
+            }
+            dateLayout.gone()
+            viewedLayout.gone()
         }
     }
 
@@ -163,16 +176,20 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
             it.image?.let { url ->
                 Glide.with(binding.root).load(url).into(binding.imageId)
                 binding.newsTitle.text = gameRecommendationResponse.name ?: ""
-                binding.newsDesc.text = gameRecommendationResponse.description ?: ""
-                binding.dateText.text = trimDate(gameRecommendationResponse.createdDate) ?: ""
+                gameRecommendationResponse.description?.let {
+                    binding.newsDesc.loadDataWithBaseURL(null,it,"text/html","UTF-8","about:blank")
+                }
             }
         }
+        binding.dateLayout.gone()
+        binding.viewedLayout.gone()
+
 
     }
 
-    private fun trimDate(date: String?): String? {
-        return date?.substring(0, 10)
-    }
+//    private fun trimDate(date: String?): String? {
+//        return date?.substring(0, 10)
+//    }
 
 
 }

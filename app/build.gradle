@@ -18,7 +18,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        buildConfigField('String', 'BASE_URL', '"http://cyberpolice.uz/"')
+        buildConfigField('String', 'BASE_URL', '"https://back.cyberpolice.uz"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,6 +50,9 @@ android {
             enableSplit = false
         }
     }
+
+
+
 }
 
 dependencies {

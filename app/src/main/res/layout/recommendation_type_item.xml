@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="58dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rec_layout"
     app:cardBackgroundColor="@color/button_green_color"
     android:layout_marginTop="@dimen/margin_small"
+    app:cardUseCompatPadding="false"
     app:cardElevation="10dp"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="@dimen/card_corner">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:id="@+id/rec_text"
             style="@style/TitleTextViewStyle.RecommendText"
             android:layout_marginStart="@dimen/margin_middle_2"
-            android:text="@string/safe_internet"
+            tools:text="@string/safe_internet"
+            android:maxLines="2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/rec_icon"
@@ -49,4 +51,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

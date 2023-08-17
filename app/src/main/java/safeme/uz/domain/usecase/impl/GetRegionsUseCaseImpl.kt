@@ -12,6 +12,7 @@ import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.MessageData
 import safeme.uz.data.model.ResultData
+import safeme.uz.data.remote.response.Address
 import safeme.uz.data.remote.response.AddressResponse
 import safeme.uz.data.remote.response.RegionInfo
 import safeme.uz.data.repository.appeal.AppealRepository
@@ -28,36 +29,36 @@ class GetRegionsUseCaseImpl @Inject constructor(
     private val appealRepository: AppealRepository,
     private val application: Application
 ) : GetRegionsUseCase {
-    override fun invoke() = flow<ResultData<AddressResponse>> {
+    override fun invoke() = flow<ResultData<ArrayList<Address>>> {
         if (isConnected()) {
             val response = repository.getRegions()
-            if (response.success) {
-                response.body?.let {
-                    emit(ResultData.Success(it))
+            when(response.code()){
+                in 200..209->{
+                    response.body()?.body?.let {
+                        emit(ResultData.Success(it))
+                    }
                 }
-            } else {
-                when (response.code) {
-                    404, 0 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.regions_not_found)))
-                    in 500..599 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-                    else -> emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
-                }
+                404 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.regions_not_found)))
+                in 500..599 -> emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
+                else -> emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
             }
+
         } else {
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
-        }
-    }.catch {
-        if (it is HttpException) {
-            if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-            else if (it.code() in 500..599) emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-        } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
-    }.flowOn(Dispatchers.IO)
+        }}
+//    }.catch {
+//        if (it is HttpException) {
+//            if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
+//            else if (it.code() in 500..599) emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
+//        } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
+//    }.flowOn(Dispatchers.IO)
 
     override fun getRegions(): Flow<RemoteApiResult<ApiResponse<ArrayList<RegionInfo>>>> {
         return flow {
             val response = appealRepository.getRegions()
             when(response.code()){
                 in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }

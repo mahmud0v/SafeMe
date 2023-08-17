@@ -133,6 +133,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:paddingStart="@dimen/margin_small_4"
                 android:id="@+id/appeal_type_spinner_layout"
                 app:layout_constraintTop_toBottomOf="@id/tvAppealTitle"
                 android:layout_marginTop="@dimen/margin_small"
@@ -159,7 +160,7 @@
                 android:layout_marginTop="20dp"
                 android:textSize="@dimen/text_regular_size"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/select_the_type_of_appeal"
+                android:text="@string/enter_the_name_of_appeal"
                 android:textColor="@color/text_regular_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appeal_type_spinner_layout" />
@@ -170,7 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/margin_small"
-                android:textCursorDrawable="@null"
+                android:textCursorDrawable="@drawable/cursor"
                 android:background="@drawable/bg_border_disable"
                 android:inputType="text"
                 android:paddingStart="@dimen/margin_middle"
@@ -187,7 +188,7 @@
                 android:layout_marginTop="20dp"
                 android:textSize="@dimen/text_regular_size"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/select_the_type_of_appeal"
+                android:text="@string/enter_the_description_of_appeal"
                 android:textColor="@color/text_regular_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appeal_title_edit_text" />
@@ -202,7 +203,7 @@
                 android:inputType="textMultiLine"
                 android:lines="4"
                 android:paddingTop="@dimen/padding_standard"
-                android:textCursorDrawable="@null"
+                android:textCursorDrawable="@drawable/cursor"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingStart="@dimen/padding_middle"
                 android:paddingEnd="@dimen/padding_middle"

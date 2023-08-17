@@ -50,6 +50,7 @@
             android:id="@+id/game_title"
             android:layout_marginTop="@dimen/margin_standard"
             android:textSize="14sp"
+            android:maxLines="1"
             android:fontFamily="@font/roboto_medium_title"
             app:layout_constraintTop_toBottomOf="@id/material_image"
             app:layout_constraintLeft_toLeftOf="@id/material_image"
@@ -62,54 +63,72 @@
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium_title"
             android:textSize="16sp"
+            android:maxLines="1"
             android:id="@+id/game_title2"
             app:layout_constraintTop_toBottomOf="@id/game_title"
             app:layout_constraintLeft_toLeftOf="@id/game_title"
             android:layout_marginTop="@dimen/margin_very_small2"
             />
         
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:drawableLeft="@drawable/share_btn"
-            android:layout_marginTop="23dp"
-            android:text="@string/share_text"
-            android:textAllCaps="false"
-            app:rippleColor="@color/ripple_color1"
-            app:cornerRadius="5dp"
-            android:id="@+id/share_btn"
-            android:textSize="12sp"
-            android:backgroundTint="@color/share_back_color"
-            app:layout_constraintTop_toBottomOf="@id/game_title2"
-            app:layout_constraintLeft_toLeftOf="@id/game_title2"
-            />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:insetTop="0dp"-->
+<!--            android:insetBottom="0dp"-->
+<!--            android:drawableLeft="@drawable/share_btn"-->
+<!--            android:layout_marginTop="23dp"-->
+<!--            android:text="@string/share_text"-->
+<!--            android:textAllCaps="false"-->
+<!--            app:rippleColor="@color/ripple_color1"-->
+<!--            app:cornerRadius="5dp"-->
+<!--            android:id="@+id/share_btn"-->
+<!--            android:textSize="12sp"-->
+<!--            android:backgroundTint="@color/share_back_color"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/game_title2"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/game_title2"-->
+<!--            />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:insetTop="0dp"-->
+<!--            app:rippleColor="@color/ripple_color1"-->
+<!--            -->
+<!--            android:id="@+id/star_btn"-->
+<!--            app:cornerRadius="5dp"-->
+<!--            android:layout_marginTop="23dp"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:insetBottom="0dp"-->
+<!--            android:drawableLeft="@drawable/star_btn"-->
+<!--            android:backgroundTint="@color/button_yellow_color"-->
+<!--            />-->
+<!--        -->
+
+        <LinearLayout
+            android:layout_width="50dp"
             android:layout_height="30dp"
-            android:insetTop="0dp"
-            app:rippleColor="@color/ripple_color1"
-            app:layout_constraintTop_toTopOf="@id/share_btn"
-            app:layout_constraintBottom_toBottomOf="@id/share_btn"
+            android:id="@+id/star_btn_layout"
+            app:layout_constraintTop_toBottomOf="@id/game_title2"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginEnd="@dimen/margin_standard"
-            android:id="@+id/star_btn"
-            app:cornerRadius="5dp"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:text="@string/save_text"
-            android:insetBottom="0dp"
-            android:drawableLeft="@drawable/star_btn"
-            android:backgroundTint="@color/button_yellow_color"
+            android:gravity="center"
+            android:background="@drawable/star_back"
+            >
 
-            />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/star_btn"
+                android:id="@+id/star_btn"
+                />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_standard"
-            app:layout_constraintTop_toBottomOf="@id/share_btn"
+            app:layout_constraintTop_toBottomOf="@id/star_btn_layout"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

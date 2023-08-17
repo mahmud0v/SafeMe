@@ -12,18 +12,20 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
+import safeme.uz.data.model.ManageScreen
+import safeme.uz.data.model.VerifyModel
 import safeme.uz.data.remote.request.RemindChangePasswordRequest
-import safeme.uz.data.remote.response.RemindPasswordChangeBody
+import safeme.uz.data.remote.response.RegisterResponse
 import safeme.uz.databinding.ScreenPasswordRecoverBinding
 import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.profileInfo.ProfileScreenViewModel
-import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.Keys
+import safeme.uz.utils.RemoteApiResult
+import safeme.uz.utils.VerifyType
 import safeme.uz.utils.disable
 import safeme.uz.utils.enable
+import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
-import safeme.uz.utils.snackBar
-import safeme.uz.utils.snackMessage
 
 
 @AndroidEntryPoint
@@ -50,6 +52,7 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
         }
 
         binding.newPasswordEdit.addTextChangedListener {
+            binding.newPasswordLayout.isErrorEnabled = false
             newPasswordStateResult = it.toString().length >= 6
             buttonEnabledState()
 
@@ -66,13 +69,46 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
 
     private fun forgotPassword() {
         binding.allReadyMemberButton.setOnClickListener {
-            val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY)
+            val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
             val bundle = Bundle().apply {
-                putSerializable(Keys.BUNDLE_KEY,manageScreen)
+                putSerializable(Keys.BUNDLE_KEY, manageScreen)
             }
-            findNavController().navigate(R.id.resetUsernameScreen, bundle)
+            val verifyModel = VerifyModel(
+                manageScreen.phoneNumber, getString(R.string.reset_password),
+                VerifyType.VERIFY_PASSWORD.ordinal, manageScreen = manageScreen
+            )
+
+            if(isConnected()){
+                viewModel.sendSms(manageScreen.phoneNumber!!)
+                viewModel.sendSmsLiveData.observe(viewLifecycleOwner, Observer {
+                    when (it) {
+                        is RemoteApiResult.Success -> {
+                            findNavController().navigate(
+                                PasswordRecoverScreenDirections.actionPasswordRecoverScreenToVerifyScreen(
+                                    verifyModel
+                                )
+                            )
+                        }
+
+                        is RemoteApiResult.Error -> {
+                            val messageDialog = MessageDialog(it.message)
+                            messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                        }
+
+                        else -> {}
+                    }
+                })
+            }else {
+                binding.progress.gone()
+                val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
+                messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+            }
+
+
         }
     }
+
+
 
     private fun buttonEnabledState() {
         if (oldPasswordStateResult && newPasswordStateResult && reNewPasswordStateResult) {
@@ -84,24 +120,32 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
 
     private fun buttonClickEvent() {
         binding.button.setOnClickListener {
+            binding.newPasswordLayout.isErrorEnabled = false
+            binding.reNewPasswordLayout.isErrorEnabled = false
             if (binding.newPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString() &&
                 binding.reNewPasswordEdit.text.toString() != binding.oldPasswordEdit.text.toString()
             ) {
-                if (isConnected()){
-                    viewModel.remindPasswordChange(
-                        RemindChangePasswordRequest(
-                            binding.oldPasswordEdit.text.toString(),
-                            binding.newPasswordEdit.text.toString(),
-                            binding.reNewPasswordEdit.text.toString()
+                if (binding.newPasswordEdit.text.toString() == binding.reNewPasswordEdit.text.toString()) {
+                    if (isConnected()) {
+                        viewModel.remindPasswordChange(
+                            RemindChangePasswordRequest(
+                                binding.oldPasswordEdit.text.toString(),
+                                binding.newPasswordEdit.text.toString(),
+                                binding.reNewPasswordEdit.text.toString()
+                            )
                         )
-                    )
-                    viewModel.remindChangePasswordLiveData.observe(
-                        viewLifecycleOwner,
-                        remindChangePasswordObserver
-                    )
-                }else {
-                    val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
-                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                        viewModel.remindChangePasswordLiveData.observe(
+                            viewLifecycleOwner,
+                            remindChangePasswordObserver
+                        )
+                    } else {
+                        binding.progress.gone()
+                        val messageDialog =
+                            MessageDialog(getString(R.string.internet_not_connected))
+                        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                    }
+                } else {
+                    binding.reNewPasswordLayout.error = getString(R.string.same_new_renew_password)
                 }
 
             } else {
@@ -111,12 +155,13 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
     }
 
     private val remindChangePasswordObserver =
-        Observer<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> {
+        Observer<RemoteApiResult<ApiResponse<ArrayList<String>>>> {
             when (it) {
                 is RemoteApiResult.Success -> {
                     binding.progress.hide()
-                    val messageDialog = MessageDialog(getString(R.string.successfully_changed_passoword))
-                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                    val messageDialog =
+                        MessageDialog(getString(R.string.successfully_changed_passoword))
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
 
                 }
 
@@ -127,7 +172,7 @@ class PasswordRecoverScreen : Fragment(R.layout.screen_password_recover) {
                 is RemoteApiResult.Error -> {
                     binding.progress.hide()
                     val messageDialog = MessageDialog(it.message)
-                    messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                    messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                 }
             }
         }

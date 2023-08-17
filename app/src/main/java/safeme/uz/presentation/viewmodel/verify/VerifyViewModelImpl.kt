@@ -71,7 +71,7 @@ class VerifyViewModelImpl @Inject constructor(
             progressLiveData.value = false
             it.onSuccess {
                 val data = it.asSuccess.data
-                openProfileScreenLiveData.value = data
+                openProfileScreenLiveData.value = data.body!!
             }
             it.onResource {
                 val error = it.asResource.resourceId
@@ -94,7 +94,7 @@ class VerifyViewModelImpl @Inject constructor(
                         VerifyResetPasswordResponse(Keys.PROFILE_TO_EDIT)
                 } else {
                     val data = it.asSuccess.data
-                    openResetPasswordScreenLiveData.value = data
+                    openResetPasswordScreenLiveData.value = data!!
                 }
             }
             it.onResource {

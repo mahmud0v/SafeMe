@@ -11,7 +11,7 @@
     <dimen name="margin_big_b">29dp</dimen>
     <dimen name="margin_huge">40dp</dimen>
     <dimen name="margin_huge_a">48dp</dimen>
-    <dimen name="margin_scroll_view">110dp</dimen>
+    <dimen name="margin_scroll_view">106dp</dimen>
     <dimen name="margin_huge_top">80dp</dimen>
     <dimen name="margin_middle_2">14dp</dimen>
     <dimen name="margin_big_2">33dp</dimen>
@@ -27,6 +27,7 @@
     <dimen name="padding_middle2">14dp</dimen>
     <dimen name="padding_standard">16dp</dimen>
     <dimen name="padding_big">24dp</dimen>
+    <dimen name="padding_huge_top">80dp</dimen>
 
     <dimen name="text_title_size">20sp</dimen>
     <dimen name="text_small_size">12sp</dimen>

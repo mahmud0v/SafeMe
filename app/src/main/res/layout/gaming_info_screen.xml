@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/place_holder"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/no_data"
+        android:layout_gravity="center"
+        android:id="@+id/no_data_icon"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/roboto_medium_title"
+        android:textSize="28sp"
+        android:textColor="@color/white"
+        />
+
+    </LinearLayout>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/head_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:cardCornerRadius="@dimen/card_corner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+
+        >
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/img_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/news_img_height"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"
+                    app:cardCornerRadius="@dimen/card_corner"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/image_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/news_img_height"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:src="@drawable/cyber" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/gaming_name"
+                    style="@style/TitleTextViewStyle.TitleInfo"
+                    android:layout_marginTop="@dimen/margin_big"
+                    app:layout_constraintLeft_toLeftOf="@id/img_info"
+                    app:layout_constraintTop_toBottomOf="@id/img_info"
+                    tools:text="@string/videopodkat" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TitleTextViewStyle.TitleInfo"
+                    android:id="@+id/gaming_desc"
+                    android:textSize="@dimen/text_regular_big_size"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    app:layout_constraintLeft_toLeftOf="@id/gaming_name"
+                    app:layout_constraintTop_toBottomOf="@id/gaming_name" />
+
+
+                <WebView
+                    android:id="@+id/gaming_recommendation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_standard"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginRight="@dimen/margin_standard"
+                    app:layout_constraintLeft_toLeftOf="@id/gaming_desc"
+                    app:layout_constraintTop_toBottomOf="@id/gaming_desc"
+
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TitleTextViewStyle.TitleInfo"
+                    app:layout_constraintLeft_toLeftOf="@id/gaming_desc"
+                    app:layout_constraintTop_toBottomOf="@id/gaming_recommendation"
+                    android:id="@+id/gaming_owner"
+                    android:textSize="@dimen/text_regular_size"
+                    android:layout_marginTop="@dimen/margin_standard"
+
+                    />
+
+
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="120dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/date_layout"
+                    android:layout_width="@dimen/date_card_width"
+                    android:layout_height="@dimen/date_card_height"
+                    android:layout_marginTop="@dimen/margin_huge"
+                    android:background="@drawable/small_card_back"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="@id/gaming_desc"
+                    app:layout_constraintTop_toBottomOf="@id/gaming_owner">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/date_card_margin"
+                        android:src="@drawable/calendar"
+
+                        />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/date_text"
+                        style="@style/NumberTextViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_small"
+                        tools:text="@string/date_sample" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/viewed_layout"
+                    android:layout_width="@dimen/viewed_card_width"
+                    android:layout_height="@dimen/viewed_card_height"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/margin_middle"
+                    android:background="@drawable/small_card_back"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/date_layout"
+                    app:layout_constraintLeft_toRightOf="@id/date_layout"
+                    app:layout_constraintTop_toTopOf="@id/date_layout">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/viewed_card_margin"
+                        android:src="@drawable/viewed_icon" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/viewed_text"
+                        style="@style/NumberTextViewStyle"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/viewed_count_margin"
+                        tools:text="–" />
+                </LinearLayout>
+
+                <!--                <com.google.android.material.button.MaterialButton-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="30dp"-->
+                <!--                    android:insetTop="0dp"-->
+                <!--                    android:insetBottom="0dp"-->
+                <!--                    android:drawableLeft="@drawable/share_btn"-->
+                <!--                    android:layout_marginTop="@dimen/margin_big"-->
+                <!--                    android:text="@string/share_text"-->
+                <!--                    android:textAllCaps="false"-->
+                <!--                    app:rippleColor="@color/ripple_color1"-->
+                <!--                    app:cornerRadius="5dp"-->
+                <!--                    android:id="@+id/share_btn"-->
+                <!--                    android:textSize="12sp"-->
+                <!--                    android:backgroundTint="@color/share_back_color"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/date_layout"-->
+                <!--                    app:layout_constraintLeft_toLeftOf="@id/date_layout"-->
+                <!--                    />-->
+
+                <!--                <com.google.android.material.button.MaterialButton-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="30dp"-->
+                <!--                    android:insetTop="0dp"-->
+                <!--                    app:rippleColor="@color/ripple_color1"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/share_btn"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/share_btn"-->
+                <!--                    app:layout_constraintRight_toRightOf="parent"-->
+                <!--                    android:layout_marginEnd="@dimen/margin_standard"-->
+                <!--                    android:id="@+id/star_btn"-->
+                <!--                    app:cornerRadius="5dp"-->
+                <!--                    android:textSize="12sp"-->
+                <!--                    android:textAllCaps="false"-->
+                <!--                    android:text="@string/save_text"-->
+                <!--                    android:insetBottom="0dp"-->
+                <!--                    android:drawableLeft="@drawable/star_btn"-->
+                <!--                    android:backgroundTint="@color/button_yellow_color"-->
+                <!--                    />-->
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_huge"
+                    app:layout_constraintTop_toBottomOf="@id/date_layout" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

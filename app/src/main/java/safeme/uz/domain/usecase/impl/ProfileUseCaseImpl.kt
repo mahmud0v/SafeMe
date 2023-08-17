@@ -31,7 +31,7 @@ class ProfileUseCaseImpl @Inject constructor(
             val response = authRepository.getUserInfo()
             when(response.code()){
                 in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
@@ -43,7 +43,7 @@ class ProfileUseCaseImpl @Inject constructor(
             val response = authRepository.passwordRecover(passwordRecoverRequest)
             when(response.code()){
                 in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
@@ -55,7 +55,7 @@ class ProfileUseCaseImpl @Inject constructor(
             val response = authRepository.passwordVerification(verifyRegisterRequest)
             when(response.code()){
                 in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
@@ -68,20 +68,21 @@ class ProfileUseCaseImpl @Inject constructor(
             val response = authRepository.passwordUpdate(resetPasswordRequest)
             when(response.code()){
                 in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
         }
     }
 
-    override fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Flow<RemoteApiResult<ApiResponse<RemindPasswordChangeBody>>> {
+    override fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<String>>>> {
         return flow {
             emit(RemoteApiResult.Loading())
             val response = authRepository.remindPasswordChange(remindChangePasswordRequest)
             when(response.code()){
-                in 200..209 -> emit(RemoteApiResult.Success(response.body()!!))
-                404 -> emit(RemoteApiResult.Error(application.getString(R.string.no_data)))
+                in 200..209 -> emit(RemoteApiResult.Success(response.body()))
+                404 -> emit(RemoteApiResult.Error(application.getString(R.string.not_found)))
+                409 -> emit(RemoteApiResult.Error(application.getString(R.string.error_enter_old_password)))
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }

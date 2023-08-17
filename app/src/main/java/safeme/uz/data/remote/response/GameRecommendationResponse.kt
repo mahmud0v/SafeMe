@@ -15,5 +15,6 @@ data class GameRecommendationResponse(
     @SerializedName("developercompany")
     val developerCompany: String? = null,
     @SerializedName("created_date")
-    val createdDate: String? = null
+    val createdDate: String? = null,
+
 )

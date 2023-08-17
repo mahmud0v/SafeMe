@@ -13,24 +13,26 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.request.LoginRequest
 import safeme.uz.data.remote.response.LoginResponse
 import safeme.uz.databinding.ScreenLoginBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.login.LoginViewModel
 import safeme.uz.presentation.viewmodel.login.LoginViewModelImpl
 import safeme.uz.utils.Keys
 import safeme.uz.utils.Keys.LOGIN_TO_EDIT
+import safeme.uz.utils.LocalHelper
 import safeme.uz.utils.hideKeyboard
-import safeme.uz.utils.snackBar
-import safeme.uz.utils.snackMessage
+
 
 @AndroidEntryPoint
 class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
 
     private val binding by viewBinding(ScreenLoginBinding::bind)
     private val viewModel: LoginViewModel by viewModels<LoginViewModelImpl>()
-
+    private val appSharedPreference by lazy { AppSharedPreference(requireContext()) }
     private var loginValid: Boolean = false
     private var passwordValid: Boolean = false
 
@@ -48,6 +50,7 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
         openMainScreenLiveData.observe(this@LoginScreen, openMainScreenObserver)
     }
 
+
     private val openMainScreenObserver = Observer<LoginResponse> {
         if (it.hasPin.isEmpty()) {
             findNavController().navigate(
@@ -63,12 +66,17 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
     }
 
     private val errorObserver = Observer<Int> {
-        binding.etPhoneNumberLayout.error = getString(it)
+        if(it==R.string.user_not_found){
+            binding.etPhoneNumberLayout.error = getString(it)
+        }else{
+            binding.etPasswordLayout.error = getString(it)
+        }
     }
 
     private val messageObserver = Observer<String> {
         hideKeyboard()
-        binding.progress.snackBar(it)
+        val messageDialog = MessageDialog(it)
+        messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
     }
 
     private val progressObserver = Observer<Boolean> {
@@ -91,7 +99,8 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
     override fun onClick(v: View?): Unit = with(binding) {
         when (v) {
             forgetPasswordButton -> {
-                val manageScreen = ManageScreen(Keys.LOGIN_SCREEN,Keys.LOGIN_TO_EDIT)
+
+                val manageScreen = ManageScreen(Keys.LOGIN_SCREEN,Keys.LOGIN_TO_EDIT, binding.etPhoneNumber.rawText)
                 val bundle = Bundle().apply {
                     putSerializable(Keys.BUNDLE_KEY,manageScreen)
                 }
@@ -107,7 +116,11 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
                 hideKeyboard()
             }
             registerButton -> {
-                findNavController().navigate(R.id.action_loginScreen_to_registrationScreen)
+                val manageScreen = ManageScreen(Keys.LOGIN_SCREEN,Keys.LOGIN_TO_EDIT,binding.etPhoneNumber.rawText)
+                val bundle = Bundle().apply {
+                    putSerializable(Keys.BUNDLE_KEY,manageScreen)
+                }
+                findNavController().navigate(R.id.action_loginScreen_to_registrationScreen,bundle)
             }
         }
     }

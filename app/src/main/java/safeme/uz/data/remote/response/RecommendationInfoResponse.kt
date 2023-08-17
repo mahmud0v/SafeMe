@@ -16,5 +16,5 @@ data class RecommendationInfo(
     val image: String? = null,
     val shorttext: String? = null,
     val text: String? = null,
-    val created_date: String? = null
+    val created_date: String? = null,
 )

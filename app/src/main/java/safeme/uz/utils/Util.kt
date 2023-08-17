@@ -60,7 +60,7 @@ object Util {
 
     fun getAppealTypes(): ArrayList<String> {
         return arrayListOf(
-            "ariza", "shikoyat", "taklif"
+            "Ariza", "Shikoyat", "Taklif"
         )
     }
 
@@ -70,8 +70,9 @@ object Util {
             DrawerItemInfo(R.drawable.ic_announcements,R.drawable.ic_white_announcements,R.color.announcement_icon_color,R.string.announcements),
             DrawerItemInfo(R.drawable.game,R.drawable.white_game,R.color.game_icon_color,R.string.games),
             DrawerItemInfo(R.drawable.ic_questionnaire,R.drawable.ic_white_questionnaire,R.color.poll_icon_color,R.string.questionnaire),
-            DrawerItemInfo(R.drawable.ic_prevention_inspector,R.drawable.ic_prevention_inspector,R.color.inpector_icon_color,R.string.inspectors),
+            DrawerItemInfo(R.drawable.ic_prevention_inspector,R.drawable.ic_white_prevention_inspector,R.color.inpector_icon_color,R.string.inspectors),
             DrawerItemInfo(R.drawable.ic_appeals,R.drawable.ic_white_appeals,R.color.appeal_icon_color,R.string.appeals),
+            DrawerItemInfo(R.drawable.settings,R.drawable.white_settings,R.color.setting_icon_color,R.string.settings_drawer),
             DrawerItemInfo(R.drawable.ic_about_us,R.drawable.ic_white_about_us,R.drawable.ic_about_us,R.string.about_us)
         )
     }

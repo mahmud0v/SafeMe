@@ -1,10 +1,14 @@
 package safeme.uz.data.remote.api
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Url
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.DistrictByIdRequest
@@ -36,31 +40,26 @@ interface AuthApiService {
     suspend fun register(
         @Url url: String,
         @Body registerRequest: RegisterRequest
-    ): ApiResponse<RegisterResponse>
+    ): Response<ApiResponse<RegisterResponse>>
 
     @POST
     suspend fun verifyRegister(
         @Url url: String,
         @Body verifyRegisterRequest: VerifyRegisterRequest
-    ): ApiResponse<VerifyRegisterResponse>
+    ): Response<ApiResponse<VerifyRegisterResponse>>
 
     @POST
     suspend fun login(
         @Url url: String,
         @Body loginRequest: LoginRequest
-    ): ApiResponse<LoginResponse>
+    ): Response<ApiResponse<LoginResponse>>
 
-    @POST
-    suspend fun refreshToken(
-        @Url url: String,
-        @Body newTokenRequest: RefreshTokenRequest
-    ): ApiResponse<LoginResponse>
 
     @POST
     suspend fun getVerificationForPassword(
         @Url url: String,
         @Body getVerificationCodeRequest: GetVerificationCodeRequest
-    ): ApiResponse<RegisterResponse>
+    ): Response<ApiResponse<RegisterResponse>>
 
     @POST
     suspend fun verifyResetPassword(
@@ -84,7 +83,7 @@ interface AuthApiService {
     ): ApiResponse<PasswordUpdateBody>
 
     @GET
-    suspend fun getRegions(@Url url: String): ApiResponse<AddressResponse>
+    suspend fun getRegions(@Url url: String): Response<ApiResponse<ArrayList<Address>>>
 
     @GET
     suspend fun getDistricts(@Url url: String): ApiResponse<AddressResponse>
@@ -113,7 +112,7 @@ interface AuthApiService {
     @PUT
     suspend fun userUpdate(
         @Url url: String,
-        @Body userUpdateRequest: UserUpdateRequest
+        @Body requestBody: MultipartBody
     ): Response<ApiResponse<UserUpdateResponse>>
 
     @POST
@@ -138,7 +137,12 @@ interface AuthApiService {
     suspend fun remindedPasswordChange(
         @Url url: String,
         @Body remindChangePasswordRequest: RemindChangePasswordRequest
-    ): Response<ApiResponse<RemindPasswordChangeBody>>
+    ): Response<ApiResponse<ArrayList<String>>>
 
+    @POST
+    suspend fun accessTokenUpdate(
+        @Url url: String,
+        @Body refreshTokenRequest: RefreshTokenRequest
+    ): Response<ApiResponse<LoginResponse>>
 
 }

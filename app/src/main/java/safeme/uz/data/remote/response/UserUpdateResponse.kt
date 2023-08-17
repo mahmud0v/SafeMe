@@ -12,5 +12,5 @@ data class UserUpdateResponse(
     val district: Int? = null,
     val mahalla: Int? = null,
     val adress: String? = null,
-    val photo: MultipartBody.Part? = null
+    val photo: String? = null
 )

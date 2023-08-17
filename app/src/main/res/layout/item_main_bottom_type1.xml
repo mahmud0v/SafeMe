@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="12dp"
     android:elevation="1dp"
     android:layout_marginVertical="@dimen/margin_middle"
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_standard"
             android:layout_height="wrap_content"
-            android:text="@string/safe_internet"/>
+            tools:text="@string/safe_internet"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

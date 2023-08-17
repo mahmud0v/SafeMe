@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="57dp"
         app:cornerRadius="8dp"
-        android:text="Davom etish"
+        android:text="@string/continuee"
         android:id="@+id/dialog_btn"
         android:textColor="@color/white"
         android:textAllCaps="false"

@@ -27,6 +27,7 @@ import safeme.uz.utils.Util
 import safeme.uz.utils.backPressDispatcher
 import safeme.uz.utils.disable
 import safeme.uz.utils.enable
+import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
 
 @AndroidEntryPoint
@@ -54,7 +55,7 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
     private fun checkViewState() {
         val typeList = ArrayList<String>()
         typeList.add(getString(R.string.select_name))
-        typeList.addAll(Util.getAppealTypes())
+        typeList.addAll(resources.getStringArray(R.array.appeal_type))
         val spinnerAdapter = SpinnerAdapter(requireContext(), typeList)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.appealTypeSpinner.adapter = spinnerAdapter
@@ -99,17 +100,34 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
 
     private fun sendAppeal() {
         binding.button.setOnClickListener {
+            var appealType = binding.appealTypeSpinner.selectedItem.toString()
+            val list = Util.getAppealTypes()
+            when (appealType) {
+                getString(R.string.appeal_type1) -> {
+                    appealType = list[0]
+                }
+
+                getString(R.string.appeal_type2) -> {
+                    appealType = list[1]
+                }
+
+                getString(R.string.appeal_type3) -> {
+                    appealType = list[2]
+                }
+            }
+
             val appealRequest = AppealRequest(
-                binding.appealTypeSpinner.selectedItem.toString(),
+                appealType.lowercase(),
                 binding.appealTitleEditText.text.toString(),
                 binding.appealTextEditText.text.toString()
             )
-            if (isConnected()){
+            if (isConnected()) {
                 viewModel.giveAppeal(appealRequest)
                 viewModel.giveAppealLiveData.observe(viewLifecycleOwner, appealObserver)
-            }else {
+            } else {
+                binding.progress.gone()
                 val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
-                messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
 
             }
 
@@ -121,7 +139,10 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
             is RemoteApiResult.Success -> {
                 binding.progress.hide()
                 val messageDialog = MessageDialog(getString(R.string.receive_appeal))
-                messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                messageDialog.btnClickEvent = {
+                    findNavController().navigate(R.id.recommendations)
+                }
             }
 
             is RemoteApiResult.Loading -> {
@@ -131,7 +152,8 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
             is RemoteApiResult.Error -> {
                 binding.progress.hide()
                 val messageDialog = MessageDialog(it.message!!)
-                messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)            }
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+            }
         }
     }
 
@@ -148,7 +170,7 @@ class AppealsScreen : Fragment(R.layout.screen_appeals) {
             val bundle = Bundle().apply {
                 putSerializable(Keys.BUNDLE_KEY, manageScreen)
             }
-            findNavController().navigate(R.id.action_appeals_to_profileScreen,bundle)
+            findNavController().navigate(R.id.action_appeals_to_profileScreen, bundle)
         }
 
     }

@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_main"
-    android:padding="@dimen/padding_standard"
     tools:context=".presentation.ui.screen.ProfileInfoScreen">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_standard"
         app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+           >
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -20,10 +34,7 @@
             android:orientation="vertical"
             android:padding="@dimen/padding_standard">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent">
+
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -52,13 +63,14 @@
                             android:id="@+id/etFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/bg_border_disable"
-                            android:hint="@string/first_name"
                             android:inputType="textPersonName"
+                            android:background="@drawable/bg_border_disable"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textCursorDrawable="@drawable/cursor"
                             android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
+                            android:textSize="@dimen/text_regular_size" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,12 +97,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_border_disable"
-                            android:hint="@string/last_name"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textCursorDrawable="@drawable/cursor"
                             android:inputType="textPersonName"
                             android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
+                            android:textSize="@dimen/text_regular_size" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,12 +132,11 @@
                             android:background="@drawable/bg_border_disable"
                             android:drawableEnd="@drawable/ic_calendar"
                             android:focusable="false"
-                            android:hint="@string/enter_date_of_birth"
                             android:inputType="date"
                             android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
+                            android:textSize="@dimen/text_regular_size" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,7 +205,6 @@
                         </LinearLayout>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
-
                     <TextView
                         android:id="@+id/tvRegion"
                         android:layout_width="wrap_content"
@@ -204,29 +215,24 @@
                         android:textColor="@color/text_regular_color"
                         android:textSize="@dimen/text_regular_size" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/etRegionLayout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="@dimen/margin_small"
-                        app:hintEnabled="false">
+                        android:paddingStart="@dimen/margin_small_4"
+                        android:background="@drawable/bg_border_disable"
+                        android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/etRegion"
+                        <Spinner
+                            android:id="@+id/region_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_border_disable"
-                            android:drawableEnd="@drawable/ic_location"
-                            android:focusable="false"
-                            android:inputType="text"
-                            android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
-                            android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:spinnerMode="dropdown" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                    </RelativeLayout>
                     <TextView
                         android:id="@+id/tvDistrict"
                         android:layout_width="wrap_content"
@@ -235,33 +241,25 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/district"
                         android:textColor="@color/text_regular_color"
-                        android:textSize="@dimen/text_regular_size"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/text_regular_size" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/etDistrictLayout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingStart="@dimen/margin_small_4"
                         android:layout_marginTop="@dimen/margin_small"
-                        android:visibility="gone"
-                        app:hintEnabled="false">
+                        android:background="@drawable/bg_border_disable"
+                        android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/etDistrict"
+                        <Spinner
+                            android:id="@+id/district_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_border_disable"
-                            android:drawableEnd="@drawable/ic_location"
-                            android:focusable="false"
-                            android:hint="@string/select"
-                            android:inputType="text"
-                            android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
-                            android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:spinnerMode="dropdown" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/tvMFY"
@@ -271,68 +269,32 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/mfy"
                         android:textColor="@color/text_regular_color"
-                        android:textSize="@dimen/text_regular_size"
-                        android:visibility="gone" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/etMFYLayout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:visibility="gone"
-                        app:hintEnabled="false">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/etMFY"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_border_disable"
-                            android:drawableEnd="@drawable/ic_location"
-                            android:focusable="false"
-                            android:inputType="text"
-                            android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
-                            android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:id="@+id/tvAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_standard"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/address"
-                        android:textColor="@color/text_regular_color"
                         android:textSize="@dimen/text_regular_size" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/etAddressLayout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingStart="@dimen/margin_small_4"
                         android:layout_marginTop="@dimen/margin_small"
-                        app:hintEnabled="false">
+                        android:background="@drawable/bg_border_disable"
+                        android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/etAddress"
+                        <Spinner
+                            android:id="@+id/mfy_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_standard"
-                            android:background="@drawable/bg_border_disable"
-                            android:hint="@string/streen_and_house_number"
-                            android:inputType="text"
-                            android:padding="@dimen/padding_standard"
-                            android:textColor="@color/text_regular_color"
-                            android:textColorHint="@color/hint_color"
-                            android:textSize="@dimen/text_small_size" />
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:spinnerMode="dropdown" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    </RelativeLayout>
+
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/vlImageContainer"
+                        android:layout_marginTop="@dimen/margin_standard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone">
@@ -367,37 +329,9 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAddImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:background="@drawable/bg_border_enable"
-                        android:fontFamily="@font/roboto_regular"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:text="@string/add_image"
-                        android:textAllCaps="false"
-                        android:textColor="@color/main_green_color"
-                        android:textSize="@dimen/text_small_size"
-                        app:backgroundTint="@null" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_standard"
-                        android:background="@drawable/bg_button"
-                        android:fontFamily="@font/roboto_regular"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:text="@string/continuee"
-                        android:textAllCaps="false"
-                        android:textSize="@dimen/text_small_size"
-                        app:backgroundTint="@null"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-            </androidx.core.widget.NestedScrollView>
+
 
             <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/progress"
@@ -412,7 +346,45 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/bg_border_enable"
+                android:fontFamily="@font/roboto_regular"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/add_image"
+                android:layout_marginRight="@dimen/margin_standard"
+                android:layout_marginLeft="@dimen/margin_standard"
+                android:textAllCaps="false"
+                android:textColor="@color/main_green_color"
+                android:textSize="@dimen/text_small_size"
+                app:backgroundTint="@null" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:background="@drawable/bg_button"
+                android:fontFamily="@font/roboto_regular"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/continuee"
+                android:layout_marginLeft="@dimen/margin_standard"
+                android:layout_marginRight="@dimen/margin_standard"
+                android:textAllCaps="false"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:textSize="@dimen/text_small_size"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+    </LinearLayout>
+
 
     </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

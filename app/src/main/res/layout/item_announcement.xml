@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,6 +13,8 @@
         android:layout_marginTop="@dimen/margin_middle"
         app:cardCornerRadius="@dimen/main_card_corner"
         android:layout_marginStart="@dimen/margin_standard"
+        android:clickable="true"
+        android:focusable="true"
         app:strokeWidth="@dimen/date_card_corner"
         app:strokeColor="@color/button_green_color"
         android:layout_marginEnd="@dimen/margin_standard"
@@ -64,8 +67,9 @@
                 android:id="@+id/videopd_desc"
                 style="@style/TitleTextViewStyle.DescTextViewStyle"
                 android:layout_marginTop="@dimen/margin_middle"
-                android:maxLines="5"
-                android:text="@string/videopd_desc"
+                android:maxLines="3"
+                android:layout_width="330dp"
+                tools:text="@string/videopd_desc"
                 app:layout_constraintLeft_toLeftOf="@id/videopodkat_text"
                 app:layout_constraintTop_toBottomOf="@id/videopodkat_text" />
 
@@ -95,13 +99,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:text="@string/date_sample" />
+                    tools:text="@string/date_sample" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/viewed_layout"
-                android:layout_width="@dimen/viewed_card_width"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/viewed_card_height"
                 android:layout_marginStart="@dimen/margin_middle"
                 android:background="@drawable/small_card_back"
@@ -121,8 +125,9 @@
                     android:id="@+id/viewed_text"
                     style="@style/NumberTextViewStyle"
                     android:layout_gravity="center"
+                    android:paddingRight="@dimen/padding_small"
                     android:layout_marginStart="@dimen/viewed_count_margin"
-                    android:text="@string/viewed_count" />
+                    tools:text="–" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

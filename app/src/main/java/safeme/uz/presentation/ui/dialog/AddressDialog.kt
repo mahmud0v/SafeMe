@@ -2,16 +2,20 @@ package safeme.uz.presentation.ui.dialog
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
 import safeme.uz.data.remote.response.Address
 import safeme.uz.data.remote.response.AddressResponse
+import safeme.uz.data.remote.response.RegionInfo
 import safeme.uz.databinding.DialogAddressBinding
 import safeme.uz.presentation.ui.adapter.AddressAdapter
 import safeme.uz.presentation.viewmodel.addressdialog.AddressDialogViewModel
@@ -41,31 +45,36 @@ class AddressDialog(val address: Address) : DialogFragment(R.layout.dialog_addre
         errorLiveData.observe(this@AddressDialog, errorObserver)
         messageLiveData.observe(this@AddressDialog) { hideKeyboard(); snackMessage(it) }
         getRegionsLiveData.observe(this@AddressDialog, getRegionsObserver)
-        getDistrictsByIdLiveData.observe(this@AddressDialog, getDistrictsByIdObserver)
-        getMFYsByIdLiveData.observe(this@AddressDialog, getMFYLsByIdObserver)
+//        getDistrictsByIdLiveData.observe(this@AddressDialog, getDistrictsByIdObserver)
+//        getMFYsByIdLiveData.observe(this@AddressDialog, getMFYLsByIdObserver)
     }
 
     private val progressBarObserver = Observer<Boolean> {
         binding.progress.isVisible = it
     }
 
-    private val errorObserver = Observer<Int> {
+    private val errorObserver = Observer<String> {
         hideKeyboard()
-        snackMessage(getString(it))
+//        Toast.makeText(requireContext(),getString(it),Toast.LENGTH_SHORT).show()
+
     }
 
-    private val getRegionsObserver = Observer<AddressResponse> {
-        addressAdapter.submitList(it.results)
-    }
-
-    private val getDistrictsByIdObserver = Observer<List<Address>> {
+    private val getRegionsObserver = Observer<ArrayList<RegionInfo>> {
         addressAdapter.submitList(it)
+        binding.recyclerView.adapter = addressAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
+//    private val getDistrictsByIdObserver = Observer<List<Address>> {
+//        addressAdapter.submitList(it)
+//    }
 
-    private val getMFYLsByIdObserver = Observer<List<Address>> {
-        addressAdapter.submitList(it)
-    }
+
+//    private val getMFYLsByIdObserver = Observer<List<Address>> {
+//        addressAdapter.submitList(it)
+//        binding.recyclerView.adapter = addressAdapter
+//        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//    }
 
     private fun initViews() = with(binding) {
         addressAdapter.setOnItemClickListener {
@@ -79,6 +88,7 @@ class AddressDialog(val address: Address) : DialogFragment(R.layout.dialog_addre
             Keys.REGION -> {
                 tvDialogTitle.text = getString(R.string.region_of_residence)
                 viewModel.getRegions()
+                viewModel.getRegionsLiveData.observe(this@AddressDialog,getRegionsObserver)
             }
             Keys.DISTRICT -> {
                 tvDialogTitle.text = getString(R.string.district_of_residence)

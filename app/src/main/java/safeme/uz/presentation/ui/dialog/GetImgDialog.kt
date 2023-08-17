@@ -18,6 +18,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.BuildConfig
 import safeme.uz.R
@@ -25,7 +26,6 @@ import safeme.uz.databinding.DialogGetImgBinding
 import safeme.uz.utils.FileDetail
 import safeme.uz.utils.Keys
 import safeme.uz.utils.showToast
-import safeme.uz.utils.snackMessage
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -50,7 +50,10 @@ class GetImgDialog : DialogFragment(R.layout.dialog_get_img), View.OnClickListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        checkCameraPermission()
+    }
 
+    private fun checkCameraPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             checkForPermissionsForHigherThenAndroid11()
         } else {
@@ -148,14 +151,16 @@ class GetImgDialog : DialogFragment(R.layout.dialog_get_img), View.OnClickListen
                 if (hasPermission) {
                     getImgFromGallery()
                 } else {
-                    snackMessage(getString(R.string.permission_denied))
+                    checkCameraPermission()
+//                    customSnackbar(getString(R.string.permission_denied))
                 }
             }
             btnOpenCamera -> {
                 if (hasPermission) {
                     pickImageFromCamera()
                 } else {
-                    snackMessage(getString(R.string.permission_denied))
+                    checkCameraPermission()
+//                    customSnackbar(getString(R.string.permission_denied))
                 }
             }
             btnClose -> {
@@ -260,4 +265,8 @@ class GetImgDialog : DialogFragment(R.layout.dialog_get_img), View.OnClickListen
                 dismiss()
             }
         }
+
+    private fun customSnackbar(str:String){
+        Snackbar.make(binding.btnOpenCamera,str,Snackbar.LENGTH_SHORT).show()
+    }
 }

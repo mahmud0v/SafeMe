@@ -36,13 +36,14 @@
 
     <style name="TitleTextViewStyle.RulesText">
         <item name="android:textSize">@dimen/text_regular_size</item>
+        <item name="android:paddingBottom">@dimen/padding_standard</item>
     </style>
 
 
     <style name="TitleTextViewStyle.TitleInfo">
         <item name="android:textSize">@dimen/text_big_title</item>
         <item name="android:layout_width">0dp</item>
-        <item name="paddingEnd">@dimen/padding_standard</item>
+        <item name="android:paddingRight">@dimen/padding_standard</item>
 
     </style>
 

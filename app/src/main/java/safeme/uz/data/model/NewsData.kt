@@ -11,5 +11,6 @@ data class NewsData(
     val shortText:String? = null,
     val content:String? = null,
     val image:String? = null,
-    val created_date:String? = null
+    val created_date:String? = null,
+    val views:Int
 ) :Serializable

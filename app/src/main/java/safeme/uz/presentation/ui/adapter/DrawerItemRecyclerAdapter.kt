@@ -15,7 +15,7 @@ import safeme.uz.data.model.DrawerItemInfo
 import safeme.uz.utils.Keys
 
 class DrawerItemRecyclerAdapter : RecyclerView.Adapter<DrawerItemRecyclerAdapter.ViewHolder>() {
-    private var selectedItem = -1
+    private var selectedItem = 0
 
     var onItemClick: ((DrawerItemInfo) -> Unit)? = null
 
@@ -68,5 +68,10 @@ class DrawerItemRecyclerAdapter : RecyclerView.Adapter<DrawerItemRecyclerAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
 
+    }
+
+    fun labelRecommendation(){
+        selectedItem = 0
+        notifyDataSetChanged()
     }
 }

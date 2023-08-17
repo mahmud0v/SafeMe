@@ -16,11 +16,11 @@ import safeme.uz.R
 import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.remote.request.ResetPasswordRequest
 import safeme.uz.databinding.ScreenResetPasswordBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.resetpassword.ResetPasswordViewModel
 import safeme.uz.presentation.viewmodel.resetpassword.ResetPasswordViewModelImpl
 import safeme.uz.utils.Keys
 import safeme.uz.utils.snackBar
-import safeme.uz.utils.snackMessage
 
 @AndroidEntryPoint
 class ResetPasswordScreen : Fragment(R.layout.screen_reset_password) {
@@ -44,18 +44,25 @@ class ResetPasswordScreen : Fragment(R.layout.screen_reset_password) {
     }
 
     private val openLoginScreenObserver = Observer<Unit> {
-        val navOption = NavOptions.Builder().setPopUpTo(R.id.resetPasswordScreen, true)
-            .setPopUpTo(R.id.verifyScreen, true).setPopUpTo(R.id.resetUsernameScreen, true)
-            .setPopUpTo(R.id.loginScreen, true).build()
-        val manageScreen:ManageScreen? = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
-        if (manageScreen?.secondaryScreen == Keys.PROFILE_TO_EDIT) {
-            val bundle = Bundle().apply {
-                putSerializable(Keys.BUNDLE_KEY,manageScreen)
+        val messageDialog = MessageDialog(getString(R.string.successfully_changed_passoword))
+        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+        messageDialog.btnClickEvent = {
+            val navOption = NavOptions.Builder().setPopUpTo(R.id.resetPasswordScreen, true)
+                .setPopUpTo(R.id.verifyScreen, true).setPopUpTo(R.id.resetUsernameScreen, true)
+                .setPopUpTo(R.id.loginScreen, true).build()
+            val manageScreen: ManageScreen? =
+                arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
+            if (manageScreen?.secondaryScreen == Keys.PROFILE_TO_EDIT) {
+                val bundle = Bundle().apply {
+                    putSerializable(Keys.BUNDLE_KEY, manageScreen)
+                }
+                findNavController().navigate(R.id.action_resetPasswordScreen_to_profileScreen, bundle)
+            } else {
+                findNavController().navigate(R.id.loginScreen, null, navOption)
             }
-            findNavController().navigate(R.id.action_resetPasswordScreen_to_profileScreen,bundle)
-        } else {
-            findNavController().navigate(R.id.loginScreen, null, navOption)
+
         }
+        messageDialog.isCancelable = false
 
     }
 

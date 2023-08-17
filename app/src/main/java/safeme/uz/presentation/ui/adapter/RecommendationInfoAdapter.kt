@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.textview.MaterialTextView
 import safeme.uz.R
 import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.RecommendationInfo
@@ -29,18 +30,7 @@ class RecommendationInfoAdapter :
         ) = oldItem == newItem
 
     }
-    private val diffUtilItemCallback2 = object : DiffUtil.ItemCallback<GameRecommendationResponse>() {
-            override fun areItemsTheSame(
-                oldItem: GameRecommendationResponse,
-                newItem: GameRecommendationResponse
-            ) = oldItem.id == newItem.id
 
-            override fun areContentsTheSame(
-                oldItem: GameRecommendationResponse,
-                newItem: GameRecommendationResponse
-            ) = oldItem == newItem
-
-        }
 
 
     val differ = AsyncListDiffer(this, diffUtilItemCallback)
@@ -50,6 +40,8 @@ class RecommendationInfoAdapter :
             val data = differ.currentList[position]
             val rulesLayout = itemView.findViewById<LinearLayout>(R.id.rules_layout)
             val image = itemView.findViewById<ImageView>(R.id.rule_img)
+            val title = itemView.findViewById<MaterialTextView>(R.id.rules_text)
+            title.text = data.title
             rulesLayout.setOnClickListener {
                 onItemClick?.invoke(data)
             }

@@ -24,7 +24,8 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: NewsData, newItem: NewsData) =
-            oldItem == newItem
+          true
+
 
     }
     val differ = AsyncListDiffer(this, diffUtilItemCallBack)
@@ -32,18 +33,22 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(position: Int) {
             val data = differ.currentList[position]
-            val color = Colors.getCategoryColors().random()
+            val color = Colors.getCategoryColors()
             val materialCardView = itemView.findViewById<MaterialCardView>(R.id.announcements_item)
-            materialCardView.setStrokeColor(Color.parseColor(color))
+            materialCardView.strokeColor = Color.parseColor(color[position%color.size])
             val image = itemView.findViewById<ImageView>(R.id.announcements_img)
             val videoPodkat = itemView.findViewById<TextView>(R.id.videopodkat_text)
             val videoPodDesc = itemView.findViewById<TextView>(R.id.videopd_desc)
             val dateText = itemView.findViewById<TextView>(R.id.date_text)
+            val viewedText = itemView.findViewById<TextView>(R.id.viewed_text)
             data.image?.let { Glide.with(itemView).load(it).into(image) }
             videoPodkat.text = data.title ?: ""
             videoPodDesc.text = data.shortText ?: ""
             dateText.text = trimDate(data.created_date!!) ?: ""
-
+            viewedText.text = data.views.toString()
+            materialCardView.setOnClickListener {
+                onItemClick?.invoke(data)
+            }
         }
 
     }
@@ -65,10 +70,6 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(differ.currentList[position])
-
-        }
 
     }
 

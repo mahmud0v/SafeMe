@@ -26,6 +26,7 @@ import safeme.uz.presentation.viewmodel.poll.PollDetailScreenViewModel
 import safeme.uz.utils.Keys
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.enable
+import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
 
 
@@ -51,6 +52,7 @@ class PollDetailScreen : Fragment(R.layout.screen_poll_detail) {
             viewModel.getPollById(id)
             viewModel.getPollByIdLiveData.observe(viewLifecycleOwner, pollObserver)
         } else {
+            binding.progress.gone()
             val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
             messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
         }
@@ -144,6 +146,9 @@ class PollDetailScreen : Fragment(R.layout.screen_poll_detail) {
                 binding.progress.hide()
                 val messageDialog = MessageDialog(getString(R.string.successfully_done))
                 messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
+                messageDialog.btnClickEvent = {
+                    findNavController().popBackStack()
+                }
             }
 
             is RemoteApiResult.Loading -> {

@@ -94,4 +94,7 @@ interface UseCaseModule {
     @[Binds Singleton]
     fun giveAnswer(impl: GivePollAnswerUseCaseImpl): GivePollAnswerUseCase
 
+    @[Binds Singleton]
+    fun accessTokenUpdate(impl:TokenUpdateUseCaseImpl):TokenUpdateUseCase
+
 }

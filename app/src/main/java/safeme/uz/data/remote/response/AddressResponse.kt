@@ -1,11 +1,14 @@
 package safeme.uz.data.remote.response
 
 data class AddressResponse(
-    val count: Int? = null,
-    val next: Int? = null,
-    val previous: Int? = null,
-    val results: List<Address>? = emptyList(),
+   val address:ArrayList<Address>?= null
 )
+
+//    val count: Int? = null,
+//    val next: Int? = null,
+//    val previous: Int? = null,
+//    val results: List<Address>?= null,
+
 
 data class Address(
     val id: Int? = null,

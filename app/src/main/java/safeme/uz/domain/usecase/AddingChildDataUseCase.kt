@@ -6,5 +6,5 @@ import safeme.uz.data.remote.request.AddingChildDataRequest
 import safeme.uz.data.remote.response.AddingChildDataResponse
 
 interface AddingChildDataUseCase {
-    operator fun invoke(addingChildDataRequest: AddingChildDataRequest): Flow<ResultData<AddingChildDataResponse>>
+    operator fun invoke(addingChildDataRequest: AddingChildDataRequest): Flow<ResultData<AddingChildDataResponse?>>
 }

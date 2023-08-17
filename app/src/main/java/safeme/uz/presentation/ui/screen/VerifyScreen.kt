@@ -3,6 +3,7 @@ package safeme.uz.presentation.ui.screen
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -107,9 +108,8 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
 
     private fun initViews() = with(binding) {
         verifyTitle.text = navArgs.model.title
-
         tvDesc.text = getString(
-            R.string.enter_confirmation_code_for_phone_number, "+${navArgs.model.phoneNumber}"
+            R.string.enter_confirmation_code_for_phone_number, "+${navArgs.model.phoneNumber.maskPhoneText()?:""}"
         )
 
         etVerificationCode.addTextChangedListener {
@@ -172,4 +172,6 @@ class VerifyScreen : Fragment(R.layout.screen_verify) {
             }
         }
     }
+
+
 }

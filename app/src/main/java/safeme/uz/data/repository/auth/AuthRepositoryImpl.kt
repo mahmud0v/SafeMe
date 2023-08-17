@@ -1,5 +1,7 @@
 package safeme.uz.data.repository.auth
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
@@ -11,6 +13,7 @@ import safeme.uz.data.remote.request.GetVerificationCodeRequest
 import safeme.uz.data.remote.request.LoginRequest
 import safeme.uz.data.remote.request.MfyByIdRequest
 import safeme.uz.data.remote.request.PasswordRecoverRequest
+import safeme.uz.data.remote.request.RefreshTokenRequest
 import safeme.uz.data.remote.request.RegisterRequest
 import safeme.uz.data.remote.request.RemindChangePasswordRequest
 import safeme.uz.data.remote.request.ResetPasswordRequest
@@ -37,53 +40,42 @@ class AuthRepositoryImpl @Inject constructor(
     private val api: AuthApiService, private val sharedPreference: AppSharedPreference
 ) : AuthRepository {
 
-    override suspend fun login(loginRequest: LoginRequest): ApiResponse<LoginResponse> {
-        val response = api.login("${sharedPreference.locale}/user/login/", loginRequest)
+    override suspend fun login(loginRequest: LoginRequest): Response<ApiResponse<LoginResponse>> {
+        return api.login("${sharedPreference.locale}/user/login/", loginRequest)
 
-        response.body?.refresh?.let {
-            sharedPreference.refresh = "Bearer $it"
-        }
-        response.body?.token?.let {
-            sharedPreference.token = "Bearer $it"
-        }
-        return response
     }
 
-    override suspend fun register(registerRequest: VerifyModel): ApiResponse<RegisterResponse> {
+    override suspend fun register(registerRequest: VerifyModel): Response<ApiResponse<RegisterResponse>> {
         val registerRequest1 = RegisterRequest(
             phone = registerRequest.phoneNumber,
             password1 = registerRequest.password,
             password2 = registerRequest.password,
         )
-        val response = api.register("${sharedPreference.locale}/user/signup/", registerRequest1)
-        sharedPreference.sessionId = response.body?.session_id.toString()
-        return response
+        return api.register("${sharedPreference.locale}/user/signup/", registerRequest1)
     }
 
-    override suspend fun verifyRegister(verifyRegisterRequest: VerifyRegisterRequest): ApiResponse<VerifyRegisterResponse> {
+    override suspend fun verifyRegister(verifyRegisterRequest: VerifyRegisterRequest): Response<ApiResponse<VerifyRegisterResponse>> {
         verifyRegisterRequest.session_id = sharedPreference.sessionId
 
-        val response = api.verifyRegister(
+       return api.verifyRegister(
             "${sharedPreference.locale}/user/verification/", verifyRegisterRequest
         )
-        if (response.success) {
-            response.body?.refresh?.let {
-                sharedPreference.refresh = "Bearer $it"
-            }
-            response.body?.access?.let {
-                sharedPreference.token = "Bearer $it"
-            }
-        }
-        return response
-    }
+     }
 
-    override suspend fun getVerificationCodeForPassword(username: String?): ApiResponse<RegisterResponse> {
-        val verificationForPassword = api.getVerificationForPassword(
+
+    override suspend fun getVerificationCodeForPassword(username: String?): Response<ApiResponse<RegisterResponse>> {
+       return api.getVerificationForPassword(
             "${sharedPreference.locale}/user/password/recover",
             GetVerificationCodeRequest(phone = username)
         )
-        sharedPreference.sessionId = verificationForPassword.body?.session_id.toString()
-        return verificationForPassword
+    }
+
+    override suspend fun sendUserData(userDataRequest: UserDataRequest): ApiResponse<UserDataResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addingChildData(addingChildDataRequest: AddingChildDataRequest): Response<ApiResponse<AddingChildDataResponse>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun verifyCodeForPassword(verification_code: String): ApiResponse<VerifyResetPasswordResponse> {
@@ -115,8 +107,8 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getRegions(): ApiResponse<AddressResponse> {
-        return api.getRegions("${sharedPreference.locale}/api/v1.0/regions")
+    override suspend fun getRegions(): Response<ApiResponse<ArrayList<Address>>> {
+        return api.getRegions("${sharedPreference.locale}/api/v1.0/regions/")
     }
 
     override suspend fun getDistricts(): ApiResponse<AddressResponse> {
@@ -133,10 +125,11 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun userUpdate(userUpdateRequest: UserUpdateRequest): Response<ApiResponse<UserUpdateResponse>> {
+    override suspend fun userUpdate(requestBody: MultipartBody): Response<ApiResponse<UserUpdateResponse>> {
         return api.userUpdate(
             "${sharedPreference.locale}/user/update/",
-            userUpdateRequest
+            requestBody,
+
         )
     }
 
@@ -161,12 +154,14 @@ class AuthRepositoryImpl @Inject constructor(
           )
     }
 
-    override suspend fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Response<ApiResponse<RemindPasswordChangeBody>> {
+    override suspend fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Response<ApiResponse<ArrayList<String>>> {
         return api.remindedPasswordChange(
             "${sharedPreference.locale}/user/password/change",
             remindChangePasswordRequest
         )
     }
+
+
 
     override suspend fun getDistrictsById(regionId: Int): ApiResponse<List<Address>> {
         return api.getDistrictsById(
@@ -182,13 +177,6 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun addingChildData(addingChildDataRequest: AddingChildDataRequest): ApiResponse<AddingChildDataResponse> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun sendUserData(userDataRequest: UserDataRequest): ApiResponse<UserDataResponse> {
-        TODO("Not yet implemented")
-    }
 
 
     override fun hasPinCode(): Boolean {
@@ -211,5 +199,12 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun getToken(): Boolean {
         return sharedPreference.token == ""
+    }
+
+    override suspend fun accessTokenUpdate(): Response<ApiResponse<LoginResponse>> {
+        return api.accessTokenUpdate(
+            "${sharedPreference.locale}/user/token/refresh/",
+            RefreshTokenRequest(sharedPreference.refresh)
+        )
     }
 }

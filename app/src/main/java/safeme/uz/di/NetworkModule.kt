@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import safeme.uz.BuildConfig
@@ -24,14 +25,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
+
     @[Provides]
     fun tokenInterceptor(preference: AppSharedPreference): Interceptor {
         return Interceptor { chain ->
+
             val url = chain.request().url
             if (!(url.toString().contains("refresh"))) {
-                val newRequest =
-                    chain.request().newBuilder().addHeader("Authorization", preference.token)
-                return@Interceptor chain.proceed(newRequest.build())
+                val builder = chain.request().newBuilder()
+                if (preference.token.isNotBlank()){
+                    builder.addHeader("Authorization", preference.token)
+                }
+                return@Interceptor chain.proceed(builder.build())
             } else {
                 val request = chain.request().newBuilder()
                 return@Interceptor chain.proceed(request.build())
@@ -42,23 +47,22 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideAuthAuthenticator(
-        sharedPreference: AppSharedPreference
-    ): AuthAuthenticator = AuthAuthenticator(sharedPreference)
+        sharedPreference: AppSharedPreference,
+        @ApplicationContext context: Context
+    ): AuthAuthenticator = AuthAuthenticator(sharedPreference,context)
 
     @[Provides Singleton]
     fun getOkHTTP(
         authAuthenticator: AuthAuthenticator,
-        sharedPreference: AppSharedPreference,
+        appSharedPreference: AppSharedPreference,
         @ApplicationContext context: Context
     ): OkHttpClient {
-        return OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS).callTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(ChuckerInterceptor.Builder(context).build())
-            .addInterceptor(tokenInterceptor(sharedPreference))
+
+        return OkHttpClient().newBuilder().readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS).callTimeout(60, TimeUnit.SECONDS)
+//            .addInterceptor(ChuckerInterceptor.Builder(context).build())
+            .addInterceptor(tokenInterceptor(appSharedPreference))
             .authenticator(authAuthenticator).build()
-
-
-
 
     }
 

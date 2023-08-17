@@ -7,10 +7,14 @@ import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.request.AgeCategoryRequest
 import safeme.uz.data.remote.request.AnnouncementCategoryRequest
 import safeme.uz.data.remote.request.PollAnswerRequest
+import safeme.uz.data.remote.request.AgeCatRequest
+import safeme.uz.data.remote.request.GameBookmarkRequest
 import safeme.uz.data.remote.request.RecommendationRequest
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.data.remote.response.AgeCategoryResponse
+import safeme.uz.data.remote.response.AllBookmarkGame
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
+import safeme.uz.data.remote.response.GameBookmarkResponse
 import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.data.remote.response.PollAnswerResponse
 import safeme.uz.data.remote.response.PollDetailResponse
@@ -46,4 +50,20 @@ interface AnnouncementRepository {
     suspend fun getPollById(id:Int):Response<ApiResponse<PollDetailResponse>>
 
     suspend fun givePollAnswer(pollAnswerRequest: PollAnswerRequest):Response<ApiResponse<PollAnswerResponse>>
+
+    suspend fun getRecAgeCat(recAgeCatRequest: AgeCatRequest): Response<ApiResponse<ArrayList<RecommendationInfo>>>
+
+    suspend fun getGameAgeCat(gameAgeCatRequest: AgeCatRequest):Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
+
+    suspend fun gameItemBookmark(gameBookmarkRequest: GameBookmarkRequest):Response<ApiResponse<GameBookmarkResponse>>
+
+    suspend fun gameItemDeleteBookmark(gameBookmarkRequest: GameBookmarkRequest):Response<ApiResponse<Nothing>>
+
+    suspend fun allBookmarkGame(agecategory:Int,category:Int):Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
+
+    suspend fun allUnBookmarkGame(ageCatRequest: AgeCatRequest):Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
+
+    suspend fun allBookmarkGameByAgeCategory(agecategory:Int): Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
+
+    suspend fun allUnBookmarkGameByAgeCategory(ageCategoryRequest: AgeCategoryRequest):Response<ApiResponse<ArrayList<GameRecommendationResponse>>>
 }
