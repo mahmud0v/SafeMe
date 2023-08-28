@@ -41,6 +41,7 @@ class LanguageScreen : Fragment(R.layout.select_lang_screen){
             appSharedPreference.languageSaved = true
             initObservers()
             LocalHelper.changeLanguage("uz",requireContext())
+
         }
 
         binding.russianLayout.setOnClickListener {

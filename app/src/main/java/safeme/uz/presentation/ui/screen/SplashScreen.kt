@@ -32,7 +32,6 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkLang()
         if (isConnected()) {
             initObservers()
         } else {
@@ -46,14 +45,6 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
         openNextScreenLiveData.observe(this@SplashScreen, openNextScreenObserver)
     }
 
-    private fun checkLang(){
-        when(appSharedPreference.locale){
-            "uz"-> LocalHelper.changeLanguage("uz-rUZ",requireContext())
-            "en"-> LocalHelper.changeLanguage("en",requireContext())
-            "sr"-> LocalHelper.changeLanguage("uz",requireContext())
-            "ru"-> LocalHelper.changeLanguage("ru",requireContext())
-        }
-    }
 
 
     private val openNextScreenObserver = Observer<String> {

@@ -130,7 +130,6 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
             if (resultDateOfBirth) {
                 hideKeyboard()
             }
-            customToast(binding.etDateOfBirth.text.toString())
             checkAllFields()
         }
 

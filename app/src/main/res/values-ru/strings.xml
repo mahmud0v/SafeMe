@@ -34,7 +34,10 @@
     <string name="phone_number">Номер телефона</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="confirmation_code">Код подтверждения</string>
+    <string name="prominent_disclosure">Safeme использует данные о местоположении для включения функции SOS при запросе помощи с помощью кнопки sos, используемой для определения фонового местоположения пользователя, даже когда приложение закрыто или не используется и не используется для поддержки рекламы.</string>
     <string name="enter_confirmation_code_for_phone_number">%s введите секретный код, отправленный на номер</string>
+    <string name="deny">Oтказывать</string>
+    <string name="allow">Разрешать</string>
     <string name="continuee">Продолжать</string>
     <string name="enter_personal_info">Введите вашу личную информацию</string>
     <string name="first_name">Имя</string>
@@ -128,7 +131,7 @@
     <string name="date_of_birth_title">Дата рождения:</string>
     <string name="neighborhood">Район:</string>
     <string name="edit_profile">Редактировать профиль</string>
-    <string name="my_profile">Мой профайл</string>
+    <string name="my_profile">Мой профиль</string>
     <string name="edit_password">Изменить пароль</string>
     <string name="change_password">Изменить пароль</string>
     <string name="who_are_you_this_baby">Кем ты стал для этого ребенка?</string>
@@ -205,7 +208,7 @@
     <string name="start_poll">Начинать</string>
     <string name="no_data">Нет информации </string>
     <string name="error_enter_old_password">Старый пароль был введен неверно</string>
-    <string name="phone">тел:</string>
+    <string name="phone">tel:</string>
     <string name="before_select_region">Сначала выберите регион</string>
     <string name="before_select_district">Сначала выберите район</string>
     <string name="uzbekcha">O\'zbekcha</string>

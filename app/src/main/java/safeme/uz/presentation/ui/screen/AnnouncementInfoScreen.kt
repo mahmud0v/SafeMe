@@ -12,6 +12,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.NewsData
 import safeme.uz.data.remote.response.AnnouncementCategoryResponse
@@ -23,6 +24,7 @@ import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.announcement.AnnouncementInfoViewModel
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.utils.Keys
+import safeme.uz.utils.LocalHelper
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
@@ -35,11 +37,13 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
     private val viewModel: AnnouncementInfoViewModel by viewModels()
     private val remindViewModel: RemindListenerViewModel by viewModels()
     private val mySafeArgs: AnnouncementInfoScreenArgs by navArgs()
+    private val appSharedPreference by lazy { AppSharedPreference(requireContext()) }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeData()
         backClickEvent()
+        checkLang()
     }
 
     private fun backClickEvent() {
@@ -121,6 +125,7 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
         }
     }
 
+
     private val gameObserver =
         Observer<RemoteApiResult<ApiResponse<GameRecommendationResponse>>> {
             when (it) {
@@ -147,13 +152,22 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
             Glide.with(root).load(newsData.image).into(imageId)
             newsTitle.text = newsData.title
             newsData.content?.let {
-                newsDesc.loadDataWithBaseURL(null,it,"text/html","UTF-8","about:blank")
+                newsDesc.loadDataWithBaseURL(null, it, "text/html", "UTF-8", "about:blank")
             }
             dateLayout.visible()
             viewedLayout.visible()
-            dateText.text = newsData.created_date.trimDate()?:""
+            dateText.text = newsData.created_date.trimDate() ?: ""
             viewedText.text = newsData.views.toString()
 
+        }
+    }
+
+    private fun checkLang() {
+        when (appSharedPreference.locale) {
+            "uz" -> LocalHelper.changeLanguage("uz-rUz", requireContext())
+            "ru" -> LocalHelper.changeLanguage("ru", requireContext())
+            "sr" -> LocalHelper.changeLanguage("uz", requireContext())
+            "en" -> LocalHelper.changeLanguage("en", requireContext())
         }
     }
 
@@ -163,7 +177,7 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
             Glide.with(root).load(recommendationInfo.image).into(imageId)
             newsTitle.text = recommendationInfo.title ?: ""
             recommendationInfo.text?.let {
-                newsDesc.loadDataWithBaseURL(null,it,"text/html","UTF-8","about:blank")
+                newsDesc.loadDataWithBaseURL(null, it, "text/html", "UTF-8", "about:blank")
             }
             dateLayout.gone()
             viewedLayout.gone()
@@ -177,7 +191,13 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
                 Glide.with(binding.root).load(url).into(binding.imageId)
                 binding.newsTitle.text = gameRecommendationResponse.name ?: ""
                 gameRecommendationResponse.description?.let {
-                    binding.newsDesc.loadDataWithBaseURL(null,it,"text/html","UTF-8","about:blank")
+                    binding.newsDesc.loadDataWithBaseURL(
+                        null,
+                        it,
+                        "text/html",
+                        "UTF-8",
+                        "about:blank"
+                    )
                 }
             }
         }

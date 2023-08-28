@@ -426,7 +426,6 @@ class ProfileInfoScreen : Fragment(R.layout.screen_profile_info), OnClickListene
                     messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
                 }
 
-
                 }
             }
         }

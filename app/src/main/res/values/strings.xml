@@ -35,6 +35,8 @@
     <string name="confirmation_code">Tasdiqlash kodi</string>
     <string name="enter_confirmation_code_for_phone_number">%s raqamga yuborilgan maxfiy kodni kiriting</string>
     <string name="continuee">Davom etish</string>
+    <string name="deny">Rad etish</string>
+    <string name="allow">Ruxsat berish</string>
     <string name="enter_personal_info">Shaxsiy ma\'lumotlaringizni kiriting</string>
     <string name="first_name">Ism</string>
     <string name="last_name">Familiya</string>
@@ -196,7 +198,7 @@
     <string name="share_text">Ulashish</string>
     <string name="save_text">Saqlash</string>
     <string name="game_title">Ijtimoiy-emotsional</string>
-    <string name="game_title2">Birgalikda tomosha qilish va o\'ynash</string>
+    <string name="game_title2">Birgalikda tomosha qilish va o\'ynash kabi yaxshi hislatlarning davomiyligini</string>
     <string name="suspicious">shubhali</string>
     <string name="dangerous_area">xavli_hudud</string>
     <string name="danger">danger</string>
@@ -204,6 +206,7 @@
     <string name="start_poll">Boshlash</string>
     <string name="no_data">Ma\'lumot yo\'q </string>
     <string name="error_enter_old_password">Eski parol noto\'g\'ri kiritilgan</string>
+    <string name="prominent_disclosure">Safeme sos holatda yordam berish uchun foydalanuvchini fondagi lokatsiya ishlatgan holda joylashuv ma\’lumotlaridan foydalanadi, ilova yopiq yoki ishlatilmayotgan bo\’lsa ham va reklamani qo\’llab quvvatlamaydi</string>
     <string name="phone">tel:</string>
     <string name="before_select_region">Avval viloyatni tanlang</string>
     <string name="before_select_district">Avval tumanni tanlang</string>

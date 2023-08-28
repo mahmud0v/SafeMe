@@ -148,18 +148,17 @@ class MainActivity : AppCompatActivity() {
         })
 
         checkUpdate()
+        checkLanguage()
 
 
     }
-
-
 
 
     private fun checkUpdate() {
         val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
             ) {
                 startUpdateFlow(appUpdateInfo)
             } else if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
@@ -172,7 +171,7 @@ class MainActivity : AppCompatActivity() {
         try {
             appUpdateManager?.startUpdateFlowForResult(
                 appUpdateInfo,
-                AppUpdateType.IMMEDIATE,
+                AppUpdateType.FLEXIBLE,
                 this,
                 MY_REQUEST_CODE
             )
@@ -181,6 +180,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkLanguage() {
+        when (appSharedPreference.locale) {
+            "uz" -> LocalHelper.changeLanguage("uz-rUz", this)
+            "en" -> LocalHelper.changeLanguage("en", this)
+            "ru" -> LocalHelper.changeLanguage("ru", this)
+            "sr" -> LocalHelper.changeLanguage("uz", this)
+        }
+    }
 
 
     @Deprecated("Deprecated in Java")

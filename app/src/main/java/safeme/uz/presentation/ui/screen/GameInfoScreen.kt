@@ -12,12 +12,14 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import safeme.uz.R
+import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.response.GameRecommendationResponse
 import safeme.uz.databinding.GamingInfoScreenBinding
 import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.game.GameInfoScreenViewModel
 import safeme.uz.utils.Keys
+import safeme.uz.utils.LocalHelper
 import safeme.uz.utils.RemoteApiResult
 import safeme.uz.utils.gone
 import safeme.uz.utils.isConnected
@@ -29,10 +31,13 @@ class GameInfoScreen : Fragment(R.layout.gaming_info_screen) {
     private val binding: GamingInfoScreenBinding by viewBinding()
     private val viewModel: GameInfoScreenViewModel by viewModels()
     private val navArgs: GameInfoScreenArgs by navArgs()
+    private val appSharedPreference by lazy { AppSharedPreference(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         loadGaming()
         backClickEvent()
+        checkLang()
+
 
     }
 
@@ -90,6 +95,15 @@ class GameInfoScreen : Fragment(R.layout.gaming_info_screen) {
         }
 
 
+    }
+
+    private fun checkLang() {
+        when (appSharedPreference.locale) {
+            "uz" -> LocalHelper.changeLanguage("uz-rUz", requireContext())
+            "ru" -> LocalHelper.changeLanguage("ru", requireContext())
+            "sr" -> LocalHelper.changeLanguage("uz", requireContext())
+            "en" -> LocalHelper.changeLanguage("en", requireContext())
+        }
     }
 
     private fun backClickEvent() {

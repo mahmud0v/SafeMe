@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/poll_image"
                 tools:src="@drawable/cyber"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 />
 
 

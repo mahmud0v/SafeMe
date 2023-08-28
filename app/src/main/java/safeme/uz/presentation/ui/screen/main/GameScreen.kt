@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +65,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         if (ageCategoryList != null) {
             val adapter = GameViewPagerAdapter(this, ageCategoryList)
             binding.viewPager2.adapter = adapter
-            TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            TabLayoutMediator(binding.tabLayout, binding.viewPager2 ) { tab, position ->
                 tab.text = ageCategoryList[position].title
             }.attach()
 

@@ -12,6 +12,7 @@ import safeme.uz.data.model.ManageScreen
 import safeme.uz.databinding.SettingsScreenBinding
 import safeme.uz.presentation.viewmodel.announcement.RemindListenerViewModel
 import safeme.uz.utils.Keys
+import safeme.uz.utils.backPressDispatcher
 
 @AndroidEntryPoint
 class SettingsScreen : Fragment(R.layout.settings_screen) {
@@ -23,6 +24,7 @@ class SettingsScreen : Fragment(R.layout.settings_screen) {
         drawerClickEvent()
         moveToSOS()
         btnClick()
+        backPressDispatcher()
 
     }
 
@@ -61,7 +63,7 @@ class SettingsScreen : Fragment(R.layout.settings_screen) {
 
     private fun moveToSOS() {
         binding.ivSOS.setOnClickListener {
-            val action = AboutUsScreenDirections.actionAboutUsToSosScreen()
+            val action = SettingsScreenDirections.actionSettingsScreenToSosScreen()
             findNavController().navigate(action)
         }
 

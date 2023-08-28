@@ -100,9 +100,10 @@ class PollDetailScreen : Fragment(R.layout.screen_poll_detail) {
                 i.pollId?.let { id ->
                     radioButton.id = id
                 }
+                radioButton.maxLines = 2
                 radioButton.setTextColor(Color.parseColor(Keys.radioButtonLabelColor))
+                radioButton.setPadding(12, 12, 12, 12)
                 binding.radioGroup.addView(radioButton)
-                radioButton.setPadding(22, 0, 0, 0)
                 val typeFace = Typeface.createFromAsset(requireActivity().assets, Keys.fontDrawable)
                 radioButton.typeface = typeFace
             }
@@ -124,7 +125,7 @@ class PollDetailScreen : Fragment(R.layout.screen_poll_detail) {
         binding.btnSave.setOnClickListener {
             val questionId = navArgs.pollId
             val optionId = binding.radioGroup.checkedRadioButtonId
-            if (isConnected()){
+            if (isConnected()) {
                 viewModel.giveAnswerPoll(
                     PollAnswerRequest(
                         question = questionId.toString(),
@@ -132,9 +133,9 @@ class PollDetailScreen : Fragment(R.layout.screen_poll_detail) {
                     )
                 )
                 viewModel.pollAnswerLiveData.observe(viewLifecycleOwner, pollAnswerObserver)
-            }else {
+            } else {
                 val messageDialog = MessageDialog(getString(R.string.internet_not_connected))
-                messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
+                messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
             }
 
         }

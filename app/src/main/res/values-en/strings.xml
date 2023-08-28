@@ -44,8 +44,11 @@
     <string name="new_password">New Password</string>
     <string name="re_new_password">Confirm new password</string>
     <string name="not_same_new_old_password">The new password is different from the old password</string>
+    <string name="prominent_disclosure">Safeme use location data to enable SOS feature, when requesting help via the sos button used to identify the user\'s background location even when the app is closed or not in use and is not used to support advertising</string>
     <string name="same_new_renew_password">The new password fields must be the same</string>
     <string name="edit_password_desc">Enter your phone number to change the password</string>
+    <string name="deny">Deny</string>
+    <string name="allow">Allow</string>
     <string name="skip">SKIP</string>
     <string name="pin_code">PIN code</string>
     <string name="create_pin">Enter a new PIN</string>
@@ -206,7 +209,7 @@
     <string name="start_poll">Start</string>
     <string name="no_data">No Data</string>
     <string name="error_enter_old_password">The old password was entered incorrectly</string>
-    <string name="phone">phone:</string>
+    <string name="phone">tel:</string>
     <string name="before_select_region">First select the region</string>
     <string name="before_select_district">First select the district</string>
     <string name="uzbekcha">O\'zbekcha</string>

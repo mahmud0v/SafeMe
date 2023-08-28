@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import safeme.uz.data.remote.response.AgeCategoryInfo
 import safeme.uz.presentation.ui.screen.GamerPagerScreen
-import safeme.uz.presentation.ui.screen.RecommendationPagerScreen
 
 class GameViewPagerAdapter(
-    fm:Fragment,
+    fm: Fragment,
     private val ageList: ArrayList<AgeCategoryInfo>
-) : FragmentStateAdapter(fm){
-
+) : FragmentStateAdapter(fm) {
 
     override fun getItemCount() = ageList.size
 
@@ -23,4 +21,5 @@ class GameViewPagerAdapter(
         fragment.arguments = bundle
         return fragment
     }
+
 }

@@ -106,7 +106,6 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
                     .into(ivProfile)
 
             }
-            binding.littleProgress.hide()
             tvName.text = "${userInfo.firstName} ${userInfo.lastName}"
             tvDateOfBirth.text = userInfo.birthDay?.formatBirthDay() ?: ""
             tvRegion.text = userInfo.region ?: ""

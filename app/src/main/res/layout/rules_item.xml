@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:id="@+id/rule_img"
             android:src="@drawable/cyber"
             />
@@ -35,7 +35,7 @@
         style="@style/TitleTextViewStyle.RulesText"
         tools:text="@string/about_us_desc"
         android:textAlignment="center"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_gravity="center"
         android:maxLines="2"
         android:id="@+id/rules_text"

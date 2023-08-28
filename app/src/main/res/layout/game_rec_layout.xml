@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/game_image"
                 tools:src="@drawable/cyber"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 />
 
 
@@ -57,7 +57,7 @@
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:text="@string/game_title2"
             android:textColor="@color/black"

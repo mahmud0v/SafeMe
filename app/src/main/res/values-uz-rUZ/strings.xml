@@ -45,6 +45,7 @@
     <string name="not_same_new_old_password">Янги парол ески паролдан фарқ қилсин</string>
     <string name="same_new_renew_password">Янги парол майдонларни бир хил бўлиши керак</string>
     <string name="edit_password_desc">Паролни ўзгартириш учун телефон рақамингизни киритинг</string>
+    <string name="prominent_disclosure">Сафеме сос ҳолатда ёрдам бериш учун фойдаланувчини фондаги локация ишлатган ҳолда жойлашув маълумотларидан фойдаланади, илова ёпиқ ёки ишлатилмаётган бўлса ҳам ва рекламани қўллаб қувватламайди</string>
     <string name="skip">ЎТКAЗИҲШ</string>
     <string name="pin_code">ПИН-код</string>
     <string name="create_pin">Янги ПИН-код киритинг</string>
@@ -162,6 +163,8 @@
     <string name="open_gallery">Галереяни очиш</string>
     <string name="open_camera">Камерани очиш</string>
     <string name="permission_is_required">Ушбу ойнада тўлиқ ишлаш учун махсус рухсатлар керак. Ушбу илова созламаларидан махсус рухсатларни беринг.</string>
+    <string name="deny">Рад етмоқ</string>
+    <string name="allow">Рухсат бермоқ</string>
     <string name="permission_required_title">Рухсат</string>
     <string name="go_to_settings">Созламалар</string>
     <string name="permission_denied">Рухсат берилмаган</string>

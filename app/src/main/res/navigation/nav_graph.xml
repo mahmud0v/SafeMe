@@ -463,6 +463,12 @@
         <action
             android:id="@+id/action_settingsScreen_to_changeLangScreen"
             app:destination="@id/changeLangScreen" />
+        <action
+            android:id="@+id/action_settingsScreen_to_sosScreen"
+            app:destination="@id/sosScreen" />
+        <action
+            android:id="@+id/action_settingsScreen_to_profileScreen"
+            app:destination="@id/profileScreen" />
     </fragment>
 
 

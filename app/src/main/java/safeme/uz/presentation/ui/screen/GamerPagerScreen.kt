@@ -77,7 +77,6 @@ class GamerPagerScreen : Fragment(R.layout.game_pager_screen) {
             when (it) {
                 is RemoteApiResult.Success -> {
                     binding.progress.hide()
-                    binding.placeHolder.gone()
                     recommendationAdapter.differ.submitList(it.data?.body)
 
                 }
@@ -90,7 +89,6 @@ class GamerPagerScreen : Fragment(R.layout.game_pager_screen) {
                     binding.progress.hide()
                     binding.placeHolder.visible()
                     if (it.message != getString(R.string.not_found)) {
-                        Toast.makeText(requireContext(),"${it.message}, ${getString(R.string.not_found)}",Toast.LENGTH_SHORT).show()
                         val messageDialog = MessageDialog(getString(R.string.some_error_occurred))
                         messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
                     }

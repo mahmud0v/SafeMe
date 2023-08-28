@@ -12,6 +12,7 @@ class AppSharedPreference(@ApplicationContext context: Context) : SharedPreferen
     var pinCode: String by StringPreference("")
     var locale: String by StringPreference("uz")
     var sessionId: String by StringPreference("")
+    var prominentDisclosureResult:Boolean by BooleanPreference()
     var bookmarkGame:Boolean by BooleanPreference()
     var languageSaved:Boolean by BooleanPreference()
 }
