@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -35,7 +34,7 @@ import safeme.uz.utils.visible
 class ProfileScreen : Fragment(R.layout.screen_profile) {
     private val binding: ScreenProfileBinding by viewBinding()
     private val viewModel: ProfileScreenViewModel by viewModels()
-    private lateinit var userInfoDetail:UserInfo
+    private lateinit var userInfoDetail: UserInfo
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,7 +79,7 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
                 Glide
                     .with(ivProfile)
                     .load(it)
-                    .listener(object :RequestListener<Drawable>{
+                    .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
                             e: GlideException?,
                             model: Any?,
@@ -118,7 +117,8 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
 
     private fun moveToProfileEditScreen() {
         binding.btnEditProfile.setOnClickListener {
-            val action = ProfileScreenDirections.actionProfileScreenToEditProfileScreen(userInfoDetail)
+            val action =
+                ProfileScreenDirections.actionProfileScreenToEditProfileScreen(userInfoDetail)
             findNavController().navigate(action)
         }
     }

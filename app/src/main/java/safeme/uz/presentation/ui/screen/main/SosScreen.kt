@@ -8,6 +8,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -46,7 +47,7 @@ class SosScreen : Fragment(R.layout.screen_sos) {
         backEvent()
     }
 
-    private fun makeLocationRequest() {
+    private fun locationRequest() {
         ActivityCompat.requestPermissions(
             requireActivity(),
             arrayOf(
@@ -63,7 +64,7 @@ class SosScreen : Fragment(R.layout.screen_sos) {
             val prominentDialog = ProminentDisclosureDialog()
             prominentDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
             prominentDialog.allowBtnClick = {
-                makeLocationRequest()
+                locationRequest()
             }
             prominentDialog.isCancelable = false
         }
@@ -118,6 +119,15 @@ class SosScreen : Fragment(R.layout.screen_sos) {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Toast.makeText(requireContext(),"Zatarang",Toast.LENGTH_SHORT).show()
+    }
+
 
 
     private fun giveCurrentLocation(type: String) {
@@ -158,7 +168,7 @@ class SosScreen : Fragment(R.layout.screen_sos) {
 
             }
         } else {
-            makeLocationRequest()
+            locationRequest()
         }
 
 

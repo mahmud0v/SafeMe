@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar_blue_color"
         app:tabIndicatorColor="@color/white"
-        app:tabMode="scrollable"
+        app:tabMode="auto"
         android:paddingStart="@dimen/padding_very_small2"
         app:tabTextAppearance="@style/TabTextAppearance"
         app:tabSelectedTextColor="@color/white"

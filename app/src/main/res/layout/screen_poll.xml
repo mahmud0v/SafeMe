@@ -111,7 +111,7 @@
         android:paddingStart="@dimen/padding_very_small2"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:tabIndicatorColor="@color/white"
-        app:tabMode="scrollable"
+        app:tabMode="auto"
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabTextAppearance"
         app:tabTextColor="@color/white74" />
