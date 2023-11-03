@@ -20,7 +20,6 @@ class ResetPinCodeUseCaseImpl @Inject constructor(
     override fun resetPinCode() = flow {
         if (isConnected()) {
             val response = authRepository.resetPinCode()
-            Log.e("TAG", "resetPinCode: response$response", )
             if (response.success) {
                 response.body?.let {
                     emit(ResultData.Success(it))
@@ -38,10 +37,12 @@ class ResetPinCodeUseCaseImpl @Inject constructor(
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
         }
     }.catch {
-        Log.e("TAG", "resetPinCode: message${it.message}", )
-        if (it is HttpException) {
-            if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-            else if (it.code() in 500..599) emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-        } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
+        emit(
+            ResultData.Fail(
+                message = MessageData.Resource(
+                    R.string.internal_server_error
+                )
+            )
+        )
     }.flowOn(Dispatchers.IO)
 }

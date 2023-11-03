@@ -31,7 +31,9 @@ class GivePollAnswerUseCaseImpl @Inject constructor(
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
 
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 }

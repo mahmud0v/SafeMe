@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.HttpException
 import safeme.uz.R
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
@@ -54,16 +53,13 @@ class ForgetPasswordUseCaseImpl @Inject constructor(
                 emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
             }
         }.catch {
-            if (it is HttpException) {
-                if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-                else if (it.code() in 500..599) emit(
-                    ResultData.Fail(
-                        message = MessageData.Resource(
-                            R.string.internal_server_error
-                        )
+            emit(
+                ResultData.Fail(
+                    message = MessageData.Resource(
+                        R.string.internal_server_error
                     )
                 )
-            } else emit(ResultData.Fail(message = MessageData.Resource(R.string.user_not_found)))
+            )
         }.flowOn(Dispatchers.IO)
 
     override fun sendSms(phone: String): Flow<RemoteApiResult<ApiResponse<RegisterResponse>>> {
@@ -73,14 +69,16 @@ class ForgetPasswordUseCaseImpl @Inject constructor(
                 in 200..209 -> {
                     emit(RemoteApiResult.Success(response.body()))
                     appSharedPreference.sessionId = response.body()?.body?.session_id.toString()
-
                 }
+
                 400 -> emit(RemoteApiResult.Error(application.getString(R.string.bad_request)))
                 404 -> emit(RemoteApiResult.Error(application.getString(R.string.user_not_found)))
                 in 500..599 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 

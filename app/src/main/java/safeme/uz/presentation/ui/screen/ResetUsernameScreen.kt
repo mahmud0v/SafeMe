@@ -15,6 +15,7 @@ import safeme.uz.R
 import safeme.uz.data.model.ManageScreen
 import safeme.uz.data.model.VerifyModel
 import safeme.uz.databinding.ScreenResetUsernameBinding
+import safeme.uz.presentation.ui.dialog.MessageDialog
 import safeme.uz.presentation.viewmodel.resetusername.ResetUserNameViewModel
 import safeme.uz.presentation.viewmodel.resetusername.ResetUserNameViewModelImpl
 import safeme.uz.utils.Keys
@@ -60,7 +61,8 @@ class ResetUsernameScreen : Fragment(R.layout.screen_reset_username) {
     }
 
     private val errorObserver = Observer<Int> {
-        binding.etPhoneNumberLayout.error = getString(it)
+        val messageDialog = MessageDialog(getString(it), getString(R.string.close))
+        messageDialog.show(requireActivity().supportFragmentManager,"Dialog")
     }
 
     private fun initViews() = with(binding) {

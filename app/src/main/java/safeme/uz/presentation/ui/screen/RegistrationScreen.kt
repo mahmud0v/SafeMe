@@ -62,12 +62,13 @@ class RegistrationScreen : Fragment(R.layout.screen_registration), OnClickListen
 
     private val messageObserver = Observer<String> {
         hideKeyboard()
-        val messageDialog = MessageDialog(it)
+        val messageDialog = MessageDialog(it,getString(R.string.close))
         messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
     }
 
     private val errorObserver = Observer<Int> {
-        binding.etPhoneNumberLayout.error = getString(it)
+        val messageDialog = MessageDialog(getString(it),getString(R.string.close))
+        messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
     }
 
 

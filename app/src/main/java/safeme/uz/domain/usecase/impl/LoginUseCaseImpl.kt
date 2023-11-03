@@ -46,12 +46,7 @@ class LoginUseCaseImpl @Inject constructor(
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
         }
     }.catch {
-        Log.e("TAG", "LoginUseCase: ${it.message}", )
-        if (it is HttpException) {
-            if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-            else if (it.code() in 500..599) emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-        }
-        else emit(ResultData.Fail(message = MessageData.Resource(R.string.wrong_phone_password)))
+        emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
     }.flowOn(Dispatchers.IO)
 
 }

@@ -1,6 +1,5 @@
 package safeme.uz.domain.usecase.impl
 
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -36,17 +35,12 @@ class ResetPasswordUseCaseImpl @Inject constructor(
                 emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
             }
         }.catch {
-            Log.e("TAG", "resetPassword: ${it.message}", )
-            if (it is HttpException) {
-                if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-                else if (it.code() in 500..599) emit(
-                    ResultData.Fail(
-                        message = MessageData.Resource(
-                            R.string.internal_server_error
-                        )
+            emit(
+                ResultData.Fail(
+                    message = MessageData.Resource(
+                        R.string.internal_server_error
                     )
                 )
-            }
-            else emit(ResultData.Fail(message = MessageData.Resource(R.string.user_not_found)))
+            )
         }.flowOn(Dispatchers.IO)
 }

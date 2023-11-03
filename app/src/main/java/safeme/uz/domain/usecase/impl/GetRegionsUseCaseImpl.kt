@@ -29,7 +29,7 @@ class GetRegionsUseCaseImpl @Inject constructor(
     private val appealRepository: AppealRepository,
     private val application: Application
 ) : GetRegionsUseCase {
-    override fun invoke() = flow<ResultData<ArrayList<Address>>> {
+    override fun invoke() = flow {
         if (isConnected()) {
             val response = repository.getRegions()
             when(response.code()){
@@ -45,13 +45,12 @@ class GetRegionsUseCaseImpl @Inject constructor(
 
         } else {
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
-        }}
-//    }.catch {
-//        if (it is HttpException) {
-//            if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-//            else if (it.code() in 500..599) emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-//        } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
-//    }.flowOn(Dispatchers.IO)
+        }
+    }.catch {
+        emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
+    }.flowOn(Dispatchers.IO)
+
+
 
     override fun getRegions(): Flow<RemoteApiResult<ApiResponse<ArrayList<RegionInfo>>>> {
         return flow {
@@ -62,6 +61,8 @@ class GetRegionsUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 }

@@ -1,9 +1,11 @@
 package safeme.uz.domain.usecase.impl
 
 import android.app.Application
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import safeme.uz.R
 import safeme.uz.data.local.sharedpreference.AppSharedPreference
 import safeme.uz.data.model.ApiResponse
@@ -36,9 +38,8 @@ class TokenUpdateUseCaseImpl @Inject constructor(
               }
 
           }
-      }
-//          .catch {
-//          it.printStackTrace()
-//      }
+      }.catch {
+          emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+      }.flowOn(Dispatchers.IO)
     }
 }

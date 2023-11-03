@@ -3,8 +3,11 @@ package safeme.uz.domain.usecase.impl
 import android.app.Application
 import android.content.res.Resources
 import android.provider.ContactsContract.DisplayPhoto
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import safeme.uz.R
@@ -33,7 +36,9 @@ class UserUpdateUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 

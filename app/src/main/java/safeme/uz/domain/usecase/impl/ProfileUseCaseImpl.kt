@@ -2,8 +2,11 @@ package safeme.uz.domain.usecase.impl
 
 import android.app.Application
 import android.content.res.Resources
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.remote.request.PasswordRecoverRequest
@@ -35,7 +38,9 @@ class ProfileUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun passwordRecover(passwordRecoverRequest: PasswordRecoverRequest): Flow<RemoteApiResult<PasswordRecoverResponse>> {
@@ -47,7 +52,9 @@ class ProfileUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun passwordVerification(verifyRegisterRequest: VerifyRegisterRequest): Flow<RemoteApiResult<PasswordRecoverResponse>> {
@@ -59,7 +66,9 @@ class ProfileUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun passwordUpdate(resetPasswordRequest: ResetPasswordRequest): Flow<RemoteApiResult<ApiResponse<PasswordUpdateBody>>> {
@@ -72,7 +81,9 @@ class ProfileUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun remindPasswordChange(remindChangePasswordRequest: RemindChangePasswordRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<String>>>> {
@@ -86,7 +97,9 @@ class ProfileUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 

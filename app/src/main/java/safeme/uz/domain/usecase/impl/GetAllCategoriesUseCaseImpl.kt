@@ -1,7 +1,10 @@
 package safeme.uz.domain.usecase.impl
 import android.app.Application
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import safeme.uz.R
 import safeme.uz.data.model.ApiResponse
 import safeme.uz.data.model.CategoriesData
@@ -39,7 +42,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 
@@ -53,7 +58,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 
@@ -67,7 +74,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getAgeCategory(): Flow<RemoteApiResult<AgeCategoryResponse<AgeCategoryInfo>>> {
@@ -79,7 +88,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<RemoteApiResult<AgeCategoryResponse<RecommendationInfo>>> {
@@ -92,7 +103,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getRecommendationInfoByCategory(ageCategoryRequest: AgeCategoryRequest): Flow<RemoteApiResult<RecommendationInfoResponse>> {
@@ -105,7 +118,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getRecommendationById(id: Int): Flow<RemoteApiResult<RecommendationResponse>> {
@@ -118,7 +133,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getGameRecommendationByAge(ageCategoryRequest: AgeCategoryRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
@@ -131,7 +148,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getGameRecommendationByCategory(recommendationRequest: RecommendationRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
@@ -145,8 +164,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getGameById(id: Int): Flow<RemoteApiResult<ApiResponse<GameRecommendationResponse>>> {
@@ -159,7 +179,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getRecAgeCat(recAgeCatRequest: AgeCatRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<RecommendationInfo>>>> {
@@ -173,7 +195,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
 
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getGameAgeCat(gameAgeCatRequest: AgeCatRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
@@ -186,7 +210,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun gameItemBookmark(gameBookmarkRequest: GameBookmarkRequest): Flow<RemoteApiResult<ApiResponse<GameBookmarkResponse>>> {
@@ -198,7 +224,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun gameItemDeleteBookmark(gameBookmarkRequest: GameBookmarkRequest): Flow<RemoteApiResult<ApiResponse<Nothing>>> {
@@ -210,7 +238,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun allBookmarkGame(agecategory:Int,category:Int): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>>{
@@ -223,7 +253,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun allUnBookmarkedGame(ageCatRequest: AgeCatRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
@@ -236,7 +268,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun allBookmarkGameByAgeCategory(agecategory: Int): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
@@ -249,7 +283,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun allUnBookmarkedGameByAgeCategory(ageCategoryRequest: AgeCategoryRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<GameRecommendationResponse>>>> {
@@ -262,7 +298,9 @@ class GetAllCategoriesUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 

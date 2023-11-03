@@ -47,10 +47,13 @@ class GetMFYsByIdUseCaseImpl @Inject constructor(
             emit(ResultData.Fail(message = MessageData.Resource(R.string.internet_not_connected)))
         }
     }.catch {
-        if (it is HttpException) {
-            if (it.code() == 400) emit(ResultData.Fail(message = MessageData.Resource(R.string.bad_request)))
-            else if (it.code() in 500..599) emit(ResultData.Fail(message = MessageData.Resource(R.string.internal_server_error)))
-        } else emit(ResultData.Fail(message = MessageData.Resource(R.string.some_error_occurred)))
+        emit(
+            ResultData.Fail(
+                message = MessageData.Resource(
+                    R.string.internal_server_error
+                )
+            )
+        )
     }.flowOn(Dispatchers.IO)
 
     override fun getNeighborhoodByDistrict(neighborhoodRequest: NeighborhoodRequest): Flow<RemoteApiResult<ApiResponse<ArrayList<NeighborhoodInfo>>>> {
@@ -62,7 +65,9 @@ class GetMFYsByIdUseCaseImpl @Inject constructor(
                 in 500..509 -> emit(RemoteApiResult.Error(application.getString(R.string.internal_server_error)))
                 else -> emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
             }
-        }
+        }.catch {
+            emit(RemoteApiResult.Error(application.getString(R.string.some_error_occurred)))
+        }.flowOn(Dispatchers.IO)
     }
 
 }

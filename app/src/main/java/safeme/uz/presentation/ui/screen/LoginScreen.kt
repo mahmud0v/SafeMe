@@ -69,13 +69,14 @@ class LoginScreen : Fragment(R.layout.screen_login), View.OnClickListener {
         if(it==R.string.user_not_found){
             binding.etPhoneNumberLayout.error = getString(it)
         }else{
-            binding.etPasswordLayout.error = getString(it)
+            val messageDialog = MessageDialog(getString(it), getString(R.string.close))
+            messageDialog.show(requireActivity().supportFragmentManager,"Dialog")
         }
     }
 
     private val messageObserver = Observer<String> {
         hideKeyboard()
-        val messageDialog = MessageDialog(it)
+        val messageDialog = MessageDialog(it, getString(R.string.close))
         messageDialog.show(requireActivity().supportFragmentManager,Keys.DIALOG)
     }
 
