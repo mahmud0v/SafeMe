@@ -36,6 +36,7 @@
         tools:text="@string/about_us_desc"
         android:textAlignment="center"
         android:layout_width="160dp"
+        android:ellipsize="end"
         android:layout_gravity="center"
         android:maxLines="2"
         android:id="@+id/rules_text"

@@ -86,16 +86,16 @@ class EditProfileScreen : Fragment(R.layout.screen_edit_profile) {
 
     private fun attachUserInfo() {
         val userInfo = navArgs.userInfo
-        userInfo.firstName?.let {
+        userInfo?.firstName?.let {
             binding.etFirstName.setText(it)
             resultEtFirstName = true
         }
-        userInfo.lastName?.let {
+        userInfo?.lastName?.let {
             binding.etLastName.setText(it)
             resultEtLastname = true
         }
 
-        userInfo.birthDay?.let {
+        userInfo?.birthDay?.let {
             binding.etDateOfBirth.setTextKeepState(it.reFormatBirthDay())
             resultDateOfBirth = true
         }

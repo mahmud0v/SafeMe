@@ -34,7 +34,7 @@ import safeme.uz.utils.visible
 class ProfileScreen : Fragment(R.layout.screen_profile) {
     private val binding: ScreenProfileBinding by viewBinding()
     private val viewModel: ProfileScreenViewModel by viewModels()
-    private lateinit var userInfoDetail: UserInfo
+    private var userInfoDetail: UserInfo? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +62,8 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         when (it) {
             is RemoteApiResult.Success -> initView(it.data?.body!!)
             is RemoteApiResult.Error -> {
+                binding.progress.hide()
+                binding.littleProgress.hide()
                 val messageDialog = MessageDialog(it.message)
                 messageDialog.show(requireActivity().supportFragmentManager, Keys.DIALOG)
             }
@@ -146,7 +148,7 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
     private fun editPassword() {
         binding.btnEditPassword.setOnClickListener {
             val manageScreen = arguments?.getSerializable(Keys.BUNDLE_KEY) as ManageScreen
-            manageScreen.phoneNumber = userInfoDetail.phone
+            manageScreen.phoneNumber = userInfoDetail?.phone ?: ""
             val bundle = Bundle().apply {
                 putSerializable(Keys.BUNDLE_KEY, manageScreen)
             }

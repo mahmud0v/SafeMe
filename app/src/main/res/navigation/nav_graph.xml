@@ -336,7 +336,8 @@
         tools:layout="@layout/screen_edit_profile" >
         <argument
             android:name="userInfo"
-            app:argType="safeme.uz.data.remote.response.UserInfo" />
+            app:argType="safeme.uz.data.remote.response.UserInfo"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/prevention_inspector"

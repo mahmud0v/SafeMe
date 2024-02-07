@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -187,6 +188,11 @@ class MainActivity : AppCompatActivity() {
             "ru" -> LocalHelper.changeLanguage("ru", this)
             "sr" -> LocalHelper.changeLanguage("uz", this)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.d("MMM", "onBackPressed: true")
     }
 
 
