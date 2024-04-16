@@ -78,6 +78,7 @@ class AnnouncementInfoScreen : Fragment(R.layout.screen_announcements_info) {
                     viewModel.getGameByIdLiveData.observe(viewLifecycleOwner, gameObserver)
                 }
             }
+
         } else {
             binding.progress.gone()
             val messageDialog = MessageDialog(getString(R.string.no_data))
