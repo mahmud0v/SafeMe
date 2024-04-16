@@ -51,6 +51,13 @@ android {
         }
     }
 
+    /**
+     *    release =>
+     Key store path: “../SafeMe/keystore/safe_me_keystore.jks
+     Key store password : Ded@2552
+     Key alias : upload
+     Key password : Ded@2552
+     */
 
 
 }
